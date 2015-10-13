@@ -204,6 +204,11 @@ vector<string> getPermutations(string s) {
 }
 
 void testStrings() {
+	cout << endl;
+	cout << "=============================================" << endl;
+	cout << "                   STRINGS                   " << endl;
+	cout << "=============================================" << endl;
+	cout << endl;
     const char* testStrings[] = {
         "",
         "Hello, world!",

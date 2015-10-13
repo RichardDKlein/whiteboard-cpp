@@ -243,7 +243,13 @@ void printIntervals(const vector<pair<size_t,size_t>>& intervals) {
 }
 
 void testArrays() {
-    // Test search()
+	cout << endl;
+	cout << "=============================================" << endl;
+	cout << "                   ARRAYS                    " << endl;
+	cout << "=============================================" << endl;
+	cout << endl;
+
+	// Test search()
     {
         cout << endl << "Test search():" << endl;
         int a[] = {15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14};
