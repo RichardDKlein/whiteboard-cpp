@@ -242,7 +242,7 @@ void printIntervals(const vector<pair<size_t,size_t>>& intervals) {
     printf("\n");
 }
 
-int main(int argc, char* argv[]) {
+void testArrays() {
     // Test search()
     {
         cout << endl << "Test search():" << endl;
@@ -416,7 +416,5 @@ int main(int argc, char* argv[]) {
                                    &heights[i][0]));
         }
     }
-
-    return 0;
 }
 
