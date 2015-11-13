@@ -237,7 +237,7 @@ string arrayToString(size_t count, int values[]) {
 void printIntervals(const vector<pair<size_t,size_t>>& intervals) {
     printf("intervals = ");
     for (auto& interval : intervals) {
-        printf("[%ld, %ld] ", interval.first, interval.second);
+        printf("[%d, %d] ", interval.first, interval.second);
     }
     printf("\n");
 }
