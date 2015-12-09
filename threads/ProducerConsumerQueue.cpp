@@ -41,25 +41,25 @@ static void consumer(int id, ProducerConsumerQueue<int>* jobQueue);
 static void producer(int id, ProducerConsumerQueue<int>* jobQueue);
 
 void testProducerConsumerQueue() {
-	printf("\n");
+    printf("\n");
     printf("Test ProducerConsumerQueue():\n");
     printf("=============================\n");
 
     ProducerConsumerQueue<int> jobQueue(5);
 
-	thread c1(consumer, 1, &jobQueue);
-	thread c2(consumer, 2, &jobQueue);
-	thread c3(consumer, 3, &jobQueue);
-	thread p1(producer, 1, &jobQueue);
-	thread p2(producer, 2, &jobQueue);
-	thread p3(producer, 3, &jobQueue);
+    thread c1(consumer, 1, &jobQueue);
+    thread c2(consumer, 2, &jobQueue);
+    thread c3(consumer, 3, &jobQueue);
+    thread p1(producer, 1, &jobQueue);
+    thread p2(producer, 2, &jobQueue);
+    thread p3(producer, 3, &jobQueue);
 
-	c1.join();
-	c2.join();
-	c3.join();
-	p1.join();
-	p2.join();
-	p3.join();
+    c1.join();
+    c2.join();
+    c3.join();
+    p1.join();
+    p2.join();
+    p3.join();
 }
 
 static void consumer(int id, ProducerConsumerQueue<int>* jobQueue) {

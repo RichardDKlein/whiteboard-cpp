@@ -19,7 +19,7 @@ void printBits(unsigned int n);
 unsigned int toggleBit(unsigned int n, int b);
 
 void testCountOneBits() {
-	printf("\n");
+    printf("\n");
     printf("Test countOneBits():\n");
     printf("====================\n");
     unsigned int n = 0;

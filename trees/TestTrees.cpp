@@ -13,15 +13,15 @@ void testTraverseBstPostOrder();
 void testTraverseBstPreOrder();
 
 void testTrees() {
-	printf("\n");
-	printf("=============================================\n");
-	printf("                    TREES                    \n");
-	printf("=============================================\n");
+    printf("\n");
+    printf("=============================================\n");
+    printf("                    TREES                    \n");
+    printf("=============================================\n");
 
-	testCreateBstFromSortedArray();
-	testIsBst();
-	testTraverseBstBreadthFirst();
-	testTraverseBstInOrder();
-	testTraverseBstPostOrder();
-	testTraverseBstPreOrder();
+    testCreateBstFromSortedArray();
+    testIsBst();
+    testTraverseBstBreadthFirst();
+    testTraverseBstInOrder();
+    testTraverseBstPostOrder();
+    testTraverseBstPreOrder();
 }

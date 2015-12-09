@@ -3,10 +3,10 @@
 void testProducerConsumerQueue();
 
 void testThreads() {
-	printf("\n");
-	printf("=============================================\n");
-	printf("                   THREADS                   \n");
-	printf("=============================================\n");
+    printf("\n");
+    printf("=============================================\n");
+    printf("                   THREADS                   \n");
+    printf("=============================================\n");
 
-	testProducerConsumerQueue();
+    testProducerConsumerQueue();
 }

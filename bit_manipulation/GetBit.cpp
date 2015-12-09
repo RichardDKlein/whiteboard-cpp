@@ -14,7 +14,7 @@ int getBit(unsigned int n, int b) {
 void printBits(unsigned int n);
 
 void testGetBit() {
-	printf("\n");
+    printf("\n");
     printf("Test getBit():\n");
     printf("==============\n");
     unsigned int n = 0xAAAAAAAA;

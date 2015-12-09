@@ -24,7 +24,7 @@ unsigned int reverseBits(unsigned int n) {
 void printBits(unsigned int n);
 
 void testReverseBits() {
-	printf("\n");
+    printf("\n");
     printf("Test reverseBits():\n");
     printf("===================\n");
     unsigned int n = 0xB77BEFDF;

@@ -45,19 +45,19 @@ static int random(int min, int max) {
 string arrayToString(int count, int array[]);
 
 void testShuffleArray() {
-	printf("\n");
-	printf("Test shuffleArray():\n");
-	printf("====================\n");
-	#define NUM_CARDS 52
-	int deck[NUM_CARDS];
-	for (int i = 0; i < NUM_CARDS; i++) {
-		deck[i] = i;
-	}
-	printf("Unshuffled deck = %s\n",
-		arrayToString(NUM_CARDS, deck).c_str());
-	for (int i = 0; i < 10; i++) {
-		shuffleArray(NUM_CARDS, deck);
-		printf("Shuffled   deck = %s\n",
-			arrayToString(NUM_CARDS, deck).c_str());
-	}
+    printf("\n");
+    printf("Test shuffleArray():\n");
+    printf("====================\n");
+    #define NUM_CARDS 52
+    int deck[NUM_CARDS];
+    for (int i = 0; i < NUM_CARDS; i++) {
+        deck[i] = i;
+    }
+    printf("Unshuffled deck = %s\n",
+        arrayToString(NUM_CARDS, deck).c_str());
+    for (int i = 0; i < 10; i++) {
+        shuffleArray(NUM_CARDS, deck);
+        printf("Shuffled   deck = %s\n",
+            arrayToString(NUM_CARDS, deck).c_str());
+    }
 }

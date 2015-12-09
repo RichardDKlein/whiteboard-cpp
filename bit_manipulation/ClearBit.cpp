@@ -14,7 +14,7 @@ unsigned int clearBit(unsigned int n, int b) {
 void printBits(unsigned int n);
 
 void testClearBit() {
-	printf("\n");
+    printf("\n");
     printf("Test clearBit():\n");
     printf("================\n");
     unsigned int n = (unsigned) -1;

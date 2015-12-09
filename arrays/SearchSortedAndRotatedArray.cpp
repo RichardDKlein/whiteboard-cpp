@@ -43,23 +43,23 @@ int searchSortedAndRotatedArray(vector<int> v, int target) {
 }
 
 void testSearchSortedAndRotatedArray() {
-	printf("\n");
-	printf("Test searchSortedAndRotatedArray():\n");
-	printf("===================================\n");
-	int a[] = {15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14};
-	size_t len = sizeof(a) / sizeof(int);
-	vector<int> v;
-	for (size_t i = 0; i < len; ++i) {
-		v.push_back(a[i]);
-		printf("%d ", a[i]);
-	}
-	printf("\n");
-	for (size_t i = 0; i < v.size(); ++i) {
-		int target = v[i];
-		printf("target = %d, index = %d\n",
-			target, searchSortedAndRotatedArray(v, target));
-	}
-	int target = 999;
-	printf("target = %d, index = %d\n",
-		target, searchSortedAndRotatedArray(v, target));
+    printf("\n");
+    printf("Test searchSortedAndRotatedArray():\n");
+    printf("===================================\n");
+    int a[] = {15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14};
+    size_t len = sizeof(a) / sizeof(int);
+    vector<int> v;
+    for (size_t i = 0; i < len; ++i) {
+        v.push_back(a[i]);
+        printf("%d ", a[i]);
+    }
+    printf("\n");
+    for (size_t i = 0; i < v.size(); ++i) {
+        int target = v[i];
+        printf("target = %d, index = %d\n",
+            target, searchSortedAndRotatedArray(v, target));
+    }
+    int target = 999;
+    printf("target = %d, index = %d\n",
+        target, searchSortedAndRotatedArray(v, target));
 }

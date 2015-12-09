@@ -26,20 +26,20 @@ vector<pair<int, int>> findPairsUsingHashTable(vector<int> v, int sum) {
 }
 
 void testFindPairsUsingHashTable() {
-	printf("\n");
-	printf("Test findPairsUsingHashTable():\n");
-	printf("===============================\n");
-	int a[] = {-2, -1, 0, 3, 5, 6, 7, 9, 13, 14};
-	vector<int> v;
-	for (auto& elt : a) {
-		v.push_back(elt);
-		printf("%d ", elt);
-	}
-	printf("\n");
-	int sum = 12;
-	vector<pair<int, int>> pairs = findPairsUsingHashTable(v, sum);
-	for (auto& thePair : pairs) {
-		printf("%d + %d = %d\n", thePair.first, thePair.second,
-			thePair.first + thePair.second);
-	}
+    printf("\n");
+    printf("Test findPairsUsingHashTable():\n");
+    printf("===============================\n");
+    int a[] = {-2, -1, 0, 3, 5, 6, 7, 9, 13, 14};
+    vector<int> v;
+    for (auto& elt : a) {
+        v.push_back(elt);
+        printf("%d ", elt);
+    }
+    printf("\n");
+    int sum = 12;
+    vector<pair<int, int>> pairs = findPairsUsingHashTable(v, sum);
+    for (auto& thePair : pairs) {
+        printf("%d + %d = %d\n", thePair.first, thePair.second,
+            thePair.first + thePair.second);
+    }
 }

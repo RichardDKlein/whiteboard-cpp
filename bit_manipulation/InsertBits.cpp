@@ -25,7 +25,7 @@ unsigned int insertBits(unsigned int n, int msb, int lsb,
 void printBits(unsigned int n);
 
 void testInsertBits() {
-	printf("\n");
+    printf("\n");
     printf("Test insertBits():\n");
     printf("==================\n");
     unsigned int n = 0;

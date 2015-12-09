@@ -11,10 +11,10 @@ void testSetBit();
 void testToggleBit();
 
 void testBitManipulation() {
-	printf("\n");
-	printf("=============================================\n");
-	printf("               BIT MANIPULATION              \n");
-	printf("=============================================\n");
+    printf("\n");
+    printf("=============================================\n");
+    printf("               BIT MANIPULATION              \n");
+    printf("=============================================\n");
 
     testBitDiff();
     testClearBit();

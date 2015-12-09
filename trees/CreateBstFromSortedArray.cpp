@@ -31,17 +31,17 @@ vector<int> traverseBstInOrder(BstNode* root);
 string vectorToString(vector<int> v);
 
 void testCreateBstFromSortedArray() {
-	printf("\n");
-	printf("Test createBstFromSortedArray():\n");
-	printf("================================\n");
+    printf("\n");
+    printf("Test createBstFromSortedArray():\n");
+    printf("================================\n");
     int data[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17};
     printf("sorted array = [ ");
     for (auto& elt : data) {
-    	printf("%d ", elt);
+        printf("%d ", elt);
     }
     printf("]\n");
     BstNode* root = createBstFromSortedArray(
-    	sizeof(data)/sizeof(data[0]), data);
+        sizeof(data)/sizeof(data[0]), data);
     vector<int> v = traverseBstInOrder(root);
     string s = vectorToString(v);
     printf("traverse BST inorder = %s\n", s.c_str());

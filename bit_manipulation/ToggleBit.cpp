@@ -14,7 +14,7 @@ unsigned int toggleBit(unsigned int n, int b) {
 void printBits(unsigned int n);
 
 void testToggleBit() {
-	printf("\n");
+    printf("\n");
     printf("Test toggleBit():\n");
     printf("=================\n");
     unsigned int n = 0;

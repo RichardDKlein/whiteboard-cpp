@@ -7,14 +7,14 @@
  * @return |true| if the unsigned int is a power of 2, otherwise |false|.
  */
 bool isPowerOfTwo(unsigned int n) {
-	return n && !(n & (n - 1));
+    return n && !(n & (n - 1));
 }
 
 void printBits(unsigned int n);
 unsigned int setBit(unsigned int n, int b);
 
 void testIsPowerOfTwo() {
-	printf("\n");
+    printf("\n");
     printf("Test isPowerOfTwo():\n");
     printf("====================\n");
     for (int i = 0; i < 32; ++i) {

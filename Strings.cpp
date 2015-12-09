@@ -90,22 +90,22 @@ strstr(char* str, char* sub) {
 
     b = sub;
     if (*b == 0) {
-	return str;
+    return str;
     }
     for ( ; *str != 0; str++) {
-	if (*str != *b) {
-	    continue;
-	}
-	a = str;
-	while (1) {
-	    if (*b == 0) {
-		return str;
-	    }
-	    if (*a++ != *b++) {
-		break;
-	    }
-	}
-	b = sub;
+    if (*str != *b) {
+        continue;
+    }
+    a = str;
+    while (1) {
+        if (*b == 0) {
+        return str;
+        }
+        if (*a++ != *b++) {
+        break;
+        }
+    }
+    b = sub;
     }
     return (char *) 0;
 }
@@ -204,11 +204,11 @@ vector<string> getPermutations(string s) {
 }
 
 void testStrings() {
-	cout << endl;
-	cout << "=============================================" << endl;
-	cout << "                   STRINGS                   " << endl;
-	cout << "=============================================" << endl;
-	cout << endl;
+    cout << endl;
+    cout << "=============================================" << endl;
+    cout << "                   STRINGS                   " << endl;
+    cout << "=============================================" << endl;
+    cout << endl;
     const char* testStrings[] = {
         "",
         "Hello, world!",

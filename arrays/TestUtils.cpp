@@ -48,9 +48,9 @@ string vectorToString(vector<int> v) {
  * @return A vector equivalent to |array|.
  */
 vector<int> arrayToVector(int count, int array[]) {
-	vector<int> result;
-	for (int i = 0; i < count; ++i) {
-		result.push_back(array[i]);
-	}
-	return result;
+    vector<int> result;
+    for (int i = 0; i < count; ++i) {
+        result.push_back(array[i]);
+    }
+    return result;
 }

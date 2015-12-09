@@ -71,20 +71,20 @@ int calcWaterCollected(int count, int heights[]) {
 string arrayToString(int count, int array[]);
 
 void testComputeHistogramWater() {
-	printf("\n");
-	printf("Test computeHistogramWater():\n");
-	printf("=============================\n");
-	#define NUM_HILLS 17
-	int heights[][NUM_HILLS] = {
-			{1,0,2,0,3,0,4,0,5,0,4,0,3,0,2,0,1},
-			{1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1},
-			{1,3,0,7,2,0,9,0,4,3,0,5,6,0,8,0,3}
-	};
-	int numTests = sizeof(heights) / sizeof(int) / NUM_HILLS;
-	for (int i = 0; i < numTests; i++) {
-		printf("heights = %s\n",
-			arrayToString(NUM_HILLS, &heights[i][0]).c_str());
-		printf("water collected = %d\n",
-			calcWaterCollected(NUM_HILLS, &heights[i][0]));
-	}
+    printf("\n");
+    printf("Test computeHistogramWater():\n");
+    printf("=============================\n");
+    #define NUM_HILLS 17
+    int heights[][NUM_HILLS] = {
+            {1,0,2,0,3,0,4,0,5,0,4,0,3,0,2,0,1},
+            {1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1},
+            {1,3,0,7,2,0,9,0,4,3,0,5,6,0,8,0,3}
+    };
+    int numTests = sizeof(heights) / sizeof(int) / NUM_HILLS;
+    for (int i = 0; i < numTests; i++) {
+        printf("heights = %s\n",
+            arrayToString(NUM_HILLS, &heights[i][0]).c_str());
+        printf("water collected = %d\n",
+            calcWaterCollected(NUM_HILLS, &heights[i][0]));
+    }
 }

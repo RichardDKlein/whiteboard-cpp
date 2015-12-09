@@ -14,7 +14,7 @@ unsigned int setBit(unsigned int n, int b) {
 void printBits(unsigned int n);
 
 void testSetBit() {
-	printf("\n");
+    printf("\n");
     printf("Test setBit():\n");
     printf("==============\n");
     unsigned int n = 0;

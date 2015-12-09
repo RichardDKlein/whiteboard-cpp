@@ -18,7 +18,7 @@ int bitDiff(unsigned int m, unsigned int n) {
 void printBits(unsigned int n);
 
 void testBitDiff() {
-	printf("\n");
+    printf("\n");
     printf("Test bitDiff():\n");
     printf("===============\n");
     unsigned int m = 0xAAAAAAAA;
