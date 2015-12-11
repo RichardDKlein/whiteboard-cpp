@@ -19,7 +19,7 @@ ListNode* findKthToLast(ListNode* list, int k) {
         count++;
     }
     if (count < k) {
-        return NULL;
+        return nullptr;
     }
     ListNode* lag = list;
     while (lead) {
@@ -60,6 +60,6 @@ void testFindKthToLastInList() {
         ListNode* kthToLastNode = findKthToLast(&list, k);
         printf("kth to last element (k = %d) is %s\n",
             k, (kthToLastNode) ?
-            (char*) kthToLastNode->data : "NULL");
+            (char*) kthToLastNode->data : "nullptr");
     }
 }

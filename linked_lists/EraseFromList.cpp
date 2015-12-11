@@ -12,7 +12,7 @@
  */
 bool eraseFromList(ListNode* list, ListNode* toErase) {
     ListNode* curr = list;
-    ListNode* prev = NULL;
+    ListNode* prev = nullptr;
     while (curr && (curr != toErase)) {
         prev = curr;
         curr = curr->next;

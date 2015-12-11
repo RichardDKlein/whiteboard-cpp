@@ -36,7 +36,7 @@ void shuffleArray(int count, int deck[]) {
 static int random(int min, int max) {
     static bool firstTime = true;
     if (firstTime) {
-        srand((time(NULL)));
+        srand((time(nullptr)));
         firstTime = false;
     }
     return rand() % (max - min + 1) + min;

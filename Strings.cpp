@@ -270,7 +270,7 @@ void testStrings() {
     printf(fmt, s1, s2, findSubstring(s1, s2));
     s2 = "";
     printf(fmt, s1, s2, findSubstring(s1, s2));
-    s2 = NULL;
+    s2 = nullptr;
     printf(fmt, s1, s2, findSubstring(s1, s2));
 #endif
 

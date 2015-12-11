@@ -16,7 +16,7 @@ vector<ListNode*> removeDupsFromList(ListNode* list) {
     vector<ListNode*> result;
     set<void*> seen;
     ListNode* curr = list;
-    ListNode* prev = NULL;
+    ListNode* prev = nullptr;
     while (curr) {
         if (seen.count(curr->data) > 0) {
             // delete curr, don't advance prev
