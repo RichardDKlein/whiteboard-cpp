@@ -26,7 +26,7 @@ using namespace std;
  * @return The amount, in inches, of water collected between
  * the histogram bars.
  */
-int calcWaterCollected(int count, int heights[]) {
+int histogramWater(int count, int heights[]) {
     int* waterLine = new int[count];
     memcpy(waterLine, heights, count * sizeof(int));
     int left = 0;
@@ -70,10 +70,10 @@ int calcWaterCollected(int count, int heights[]) {
 
 string arrayToString(int count, int array[]);
 
-void testComputeHistogramWater() {
+void testHistogramWater() {
     printf("\n");
-    printf("Test computeHistogramWater():\n");
-    printf("=============================\n");
+    printf("Test histogramWater():\n");
+    printf("======================\n");
     #define NUM_HILLS 17
     int heights[][NUM_HILLS] = {
             {1,0,2,0,3,0,4,0,5,0,4,0,3,0,2,0,1},
@@ -85,6 +85,6 @@ void testComputeHistogramWater() {
         printf("heights = %s\n",
             arrayToString(NUM_HILLS, &heights[i][0]).c_str());
         printf("water collected = %d\n",
-            calcWaterCollected(NUM_HILLS, &heights[i][0]));
+            histogramWater(NUM_HILLS, &heights[i][0]));
     }
 }
