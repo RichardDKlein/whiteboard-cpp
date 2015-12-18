@@ -1,7 +1,7 @@
 #include <cstdio>
 
 void testAppendToList();
-void testEraseFromList();
+void testDeleteFromList();
 void testFindKthToLastInList();
 void testInsertInList();
 void testListHasCycle();
@@ -15,7 +15,7 @@ void testLinkedLists() {
     printf("=============================================\n");
 
     testAppendToList();
-    testEraseFromList();
+    testDeleteFromList();
     testFindKthToLastInList();
     testInsertInList();
     testListHasCycle();

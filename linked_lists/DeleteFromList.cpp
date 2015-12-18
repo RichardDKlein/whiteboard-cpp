@@ -2,37 +2,34 @@
 #include "ListNode.h"
 
 /**
- * @brief Erase a data item from a linked list.
+ * @brief Delete a data item from a linked list,
+ * given only a pointer to the item to be deleted.
  *
- * @param list Ptr to the head of the list.
- * @param after Ptr to the list node containing the data item
- * to be erased.
- * @return |true| if the data item was successfully erased,
- * |false| otherwise.
+ * @param toDelete Ptr to the list node containing the
+ * data item to be deleted.
+ * @return |true| if the node was successfully deleted,
+ * |false| otherwise. (Will return |false| only if the
+ * node is at the end of the list.)
  */
-bool eraseFromList(ListNode* list, ListNode* toErase) {
-    ListNode* curr = list;
-    ListNode* prev = nullptr;
-    while (curr && (curr != toErase)) {
-        prev = curr;
-        curr = curr->next;
-    }
-    if (curr == toErase) {
-        prev->next = curr->next;
-        return true;
-    } else {
+bool deleteFromList(ListNode* toErase) {
+    ListNode* next = toErase->next;
+    if (next == nullptr) {
         return false;
     }
+    toErase->data = next->data;
+    toErase->next = next->next;
+    delete next;
+    return true;
 }
 
 ListNode* appendToList(ListNode* list, void* data);
 ListNode* insertInList(ListNode* list, ListNode* after, void* data);
 void printList(ListNode* list);
 
-void testEraseFromList() {
+void testDeleteFromList() {
     printf("\n");
-    printf("Test eraseFromList():\n");
-    printf("=====================\n");
+    printf("Test deleteFromList():\n");
+    printf("======================\n");
 
     char a[] = "a";
     char b[] = "b";
@@ -57,6 +54,6 @@ void testEraseFromList() {
     ListNode* xNode = insertInList(&list, dNode, x);
     printList(&list);
 
-    eraseFromList(&list, xNode);
+    deleteFromList(xNode);
     printList(&list);
 }
