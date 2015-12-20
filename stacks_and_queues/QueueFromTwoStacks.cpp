@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cstring>
 #include <stack>
 
 using namespace std;
@@ -6,21 +7,21 @@ using namespace std;
 template<typename T>
 class QueueFromTwoStacks {
 public:
-    void enqueue(const T& p) {
-        main_.push(p);
+    void enqueue(const T& item) {
+        main_.push(item);
     }
     T dequeue() {
         if (main_.empty()) {
-            return nullptr;
+            return T();
         }
-        while (!main_.empty()) {
+        while (main_.size() > 1) {
             T& top = main_.top();
             main_.pop();
             spare_.push(top);
         }
 
-        T& result = spare_.top();
-        spare_.pop();
+        T result = main_.top();
+        main_.pop();
 
         while (!spare_.empty()) {
             T& top = spare_.top();
