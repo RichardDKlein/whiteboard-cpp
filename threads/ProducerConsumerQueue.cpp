@@ -8,13 +8,6 @@ using namespace std;
 
 template <class J>
 class ProducerConsumerQueue {
-private:
-    queue<J> m_jobQueue;
-    size_t m_maxJobs;
-    mutex m_mutex;
-    condition_variable m_notFull;
-    condition_variable m_notEmpty;
-
 public:
     ProducerConsumerQueue(int maxJobs) : m_maxJobs(maxJobs) {}
 
@@ -35,6 +28,12 @@ public:
         m_notFull.notify_all();
         return job;
     }
+private:
+    queue<J> m_jobQueue;
+    size_t m_maxJobs;
+    mutex m_mutex;
+    condition_variable m_notFull;
+    condition_variable m_notEmpty;
 };
 
 static void consumer(int id, ProducerConsumerQueue<int>* jobQueue);
