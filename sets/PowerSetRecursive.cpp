@@ -1,6 +1,6 @@
 #include <cstdio>
-#include <iostream>
 #include <set>
+#include "TestUtils.h"
 
 using namespace std;
 
@@ -13,63 +13,41 @@ using namespace std;
  */
 template<typename T>
 set<set<T>> powerSetRecursive(const set<T>& s) {
-	set<set<T>> result;
-	if (s.empty()) {
-		set<T> emptySet;
-		result.insert(emptySet);
-		return result;
-	}
-	set<T> s1 = s;
-	T first = *s1.begin();
-	s1.erase(s1.begin());
-	set<set<T>> remPowerSet = powerSetRecursive(s1);
-	result = remPowerSet;
-	for (auto subset : remPowerSet) {
-		subset.insert(first);
-		result.insert(subset);
-	}
-	return result;
+    set<set<T>> result;
+    if (s.empty()) {
+        set<T> emptySet;
+        result.insert(emptySet);
+        return result;
+    }
+    set<T> s1 = s;
+    T first = *s1.begin();
+    s1.erase(s1.begin());
+    set<set<T>> remPowerSet = powerSetRecursive(s1);
+    result = remPowerSet;
+    for (auto subset : remPowerSet) {
+        subset.insert(first);
+        result.insert(subset);
+    }
+    return result;
 }
-
-template<typename T> void printSet(set<T> s);
-template<typename T> void printPowerSet(set<set<T>> p);
 
 void testPowerSetRecursive() {
-	printf("\n");
-	printf("Test powerSetRecursive():\n");
-	printf("=========================\n");
+    printf("\n");
+    printf("Test powerSetRecursive():\n");
+    printf("=========================\n");
 
-	set<char> s;
+    set<char> s;
 
-	s.insert('a');
-	s.insert('b');
-	s.insert('c');
-	s.insert('d');
-	s.insert('e');
+    s.insert('a');
+    s.insert('b');
+    s.insert('c');
+    s.insert('d');
+    s.insert('e');
 
-	cout << "s = ";
-	printSet(s);
+    printf("s = ");
+    printSet(s);
 
-	set<set<char>> p = powerSetRecursive(s);
-	cout << "powerSetRecursive(s) = " << p.size() << " subsets:" << endl;
-	printPowerSet(p);
-}
-
-template<typename T>
-void printSet(set<T> s) {
-	cout << "{ ";
-	for (const auto& elt : s) {
-		cout << elt << " ";
-	}
-	cout << "}" << endl;
-}
-
-template<typename T>
-void printPowerSet(set<set<T>> p) {
-	cout << "{" << endl;
-	for (const auto& s : p) {
-		cout << "\t";
-		printSet(s);
-	}
-	cout << "}" << endl;
+    set<set<char>> p = powerSetRecursive(s);
+    printf("powerSetRecursive(s) = %d subsets:\n", p.size());
+    printPowerSet(p);
 }

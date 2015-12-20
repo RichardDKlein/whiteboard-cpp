@@ -1,5 +1,6 @@
 #include <cstdio>
 
+void testPowerSetIterative();
 void testPowerSetRecursive();
 
 /**
@@ -11,5 +12,6 @@ void testSets() {
     printf("                    SETS                     \n");
     printf("=============================================\n");
 
+    testPowerSetIterative();
     testPowerSetRecursive();
 }
