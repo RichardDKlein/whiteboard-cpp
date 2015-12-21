@@ -1,6 +1,7 @@
 #include <cstdio>
 
 void testFindSubstring();
+void testLongestPalindromicSubstring();
 void testPermutationsOfString();
 void testReverseStringInPlace();
 void testReverseWordsInSentence();
@@ -16,6 +17,7 @@ void testStrings() {
     printf("=============================================\n");
 
     testFindSubstring();
+    testLongestPalindromicSubstring();
     testPermutationsOfString();
     testReverseStringInPlace();
     testReverseWordsInSentence();
