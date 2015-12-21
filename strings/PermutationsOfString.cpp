@@ -38,8 +38,8 @@ string insertCharAt(string s, char c, size_t index) {
 
 void testPermutationsOfString() {
     printf("\n");
-    printf("Test permutationsOfString()\n");
-    printf("===========================\n");
+    printf("Test permutationsOfString():\n");
+    printf("============================\n");
 
     const char* testString = "crab";
     vector<string> perms = permutationsOfString(testString);

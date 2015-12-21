@@ -8,6 +8,7 @@ longestPalindromeWithCenter(const string& s, int center, bool lengthIsOdd);
 
 /**
  * @brief Find the longest palindromic substring in a string.
+ *
  * @param s String of interest.
  * @return Pair of indices in |s| representing longest palindromic
  * substring.
@@ -38,7 +39,7 @@ pair<int, int> longestPalindromicSubstring(string s) {
  * having a given center.
  *
  * @param s String of interest.
- * @param center Index in |s| of palindromic substring.
+ * @param center Index in |s| of center of palindromic substring.
  * @param lengthIsOdd |true| if the palindrome length is to be odd,
  * |false| if even.
  * @return Pair of indices in |s| representing the longest such
@@ -63,8 +64,8 @@ longestPalindromeWithCenter(const string& s, int center, bool lengthIsOdd) {
 
 void testLongestPalindromicSubstring() {
     printf("\n");
-    printf("Test longestPalindromicSubstring()\n");
-    printf("==================================\n");
+    printf("Test longestPalindromicSubstring():\n");
+    printf("===================================\n");
 
     string testStrings[] = {
         "now is the time",

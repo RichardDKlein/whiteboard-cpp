@@ -2,6 +2,7 @@
 
 void testFindSubstring();
 void testLongestPalindromicSubstring();
+void testParseStringIntoWords();
 void testPermutationsOfString();
 void testReverseStringInPlace();
 void testReverseWordsInSentence();
@@ -18,6 +19,7 @@ void testStrings() {
 
     testFindSubstring();
     testLongestPalindromicSubstring();
+    testParseStringIntoWords();
     testPermutationsOfString();
     testReverseStringInPlace();
     testReverseWordsInSentence();

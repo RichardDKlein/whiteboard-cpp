@@ -22,8 +22,8 @@ char* stringCopy(const char* s);
 
 void testReverseStringInPlace() {
     printf("\n");
-    printf("Test reverseStringInPlace()\n");
-    printf("===========================\n");
+    printf("Test reverseStringInPlace():\n");
+    printf("============================\n");
 
     const char* testStrings[] = {
         "",

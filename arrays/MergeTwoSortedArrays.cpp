@@ -45,7 +45,7 @@ string vectorToString(vector<int> v);
 void testMergeTwoSortedArrays() {
     printf("\n");
     printf("Test mergeTwoSortedArrays():\n");
-    printf("=========================\n");
+    printf("============================\n");
     #define COUNT1 sizeof(a1)/sizeof(int)
     #define COUNT2 sizeof(a2)/sizeof(int)
     {

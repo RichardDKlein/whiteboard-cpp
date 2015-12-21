@@ -37,8 +37,8 @@ size_t findSubstring(const char* s, const char* sub) {
 
 void testFindSubstring() {
     printf("\n");
-    printf("Test findSubstring()\n");
-    printf("====================\n");
+    printf("Test findSubstring():\n");
+    printf("=====================\n");
 
     const char* testString = "alfalfa romeo";
     const char* testSubstrings[] = {

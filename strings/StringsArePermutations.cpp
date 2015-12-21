@@ -39,8 +39,8 @@ bool stringsArePermutations(const char* s1, const char* s2) {
 
 void testStringsArePermutations() {
     printf("\n");
-    printf("Test stringsArePermutations()\n");
-    printf("=============================\n");
+    printf("Test stringsArePermutations():\n");
+    printf("==============================\n");
 
     const char* testStrings[] = {
         "Hello, world",

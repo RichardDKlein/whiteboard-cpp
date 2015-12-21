@@ -20,8 +20,8 @@ char* stringCopy(const char* s) {
 
 void testStringCopy() {
     printf("\n");
-    printf("Test stringCopy()\n");
-    printf("=================\n");
+    printf("Test stringCopy():\n");
+    printf("==================\n");
 
     const char* testStrings[] = {
         "",

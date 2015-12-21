@@ -35,8 +35,8 @@ int stringCompare(const char* s1, const char* s2) {
 
 void testStringCompare() {
     printf("\n");
-    printf("Test stringCompare()\n");
-    printf("====================\n");
+    printf("Test stringCompare():\n");
+    printf("=====================\n");
 
     const char* testStrings1[] = {
         "abc",

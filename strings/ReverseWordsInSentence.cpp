@@ -32,8 +32,8 @@ char* reverseWordsInSentence(const char* s) {
 
 void testReverseWordsInSentence() {
     printf("\n");
-    printf("Test reverseWordsInSentence()\n");
-    printf("=============================\n");
+    printf("Test reverseWordsInSentence():\n");
+    printf("==============================\n");
 
     const char* testStrings[] = {
         "Now is the time",

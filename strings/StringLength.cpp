@@ -16,8 +16,8 @@ size_t stringLength(const char* s) {
 
 void testStringLength() {
     printf("\n");
-    printf("Test stringLength()\n");
-    printf("===================\n");
+    printf("Test stringLength():\n");
+    printf("====================\n");
 
     const char* testStrings[] = {
         "",
