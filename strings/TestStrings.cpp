@@ -10,6 +10,7 @@ void testStringCompare();
 void testStringCopy();
 void testStringLength();
 void testStringsArePermutations();
+void testTopKStrings();
 
 void testStrings() {
     printf("\n");
@@ -27,4 +28,5 @@ void testStrings() {
     testStringCopy();
     testStringLength();
     testStringsArePermutations();
+    testTopKStrings();
 }
