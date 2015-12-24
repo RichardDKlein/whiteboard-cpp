@@ -6,6 +6,7 @@
 using namespace std;
 
 void testCreateBstFromSortedArray();
+void testCreateNestedFolders();
 void testIsBst();
 void testTraverseBstBreadthFirst();
 void testTraverseBstInOrder();
@@ -19,6 +20,7 @@ void testTrees() {
     printf("=============================================\n");
 
     testCreateBstFromSortedArray();
+    testCreateNestedFolders();
     testIsBst();
     testTraverseBstBreadthFirst();
     testTraverseBstInOrder();
