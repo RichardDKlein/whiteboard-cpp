@@ -4,6 +4,7 @@ void testHistogramWater();
 void testMergeTwoSortedArrays();
 void testSearchSorted2dArray();
 void testSearchSortedAndRotatedArray();
+void testShortestClosure();
 void testShuffleArray();
 void testSumPairsInSortedArray();
 void testSumPairsInUnsortedArray();
@@ -21,6 +22,7 @@ void testArrays() {
     testMergeTwoSortedArrays();
     testSearchSorted2dArray();
     testSearchSortedAndRotatedArray();
+    testShortestClosure();
     testShuffleArray();
     testSumPairsInSortedArray();
     testSumPairsInUnsortedArray();
