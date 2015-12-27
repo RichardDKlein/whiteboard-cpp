@@ -1,6 +1,11 @@
 #include <cstdio>
 
 class Singleton {
+private:
+    static Singleton* m_instance;
+    Singleton() {
+        // construction logic
+    }
 public:
     static Singleton* getInstance() {
         if (m_instance == nullptr) {
@@ -8,11 +13,6 @@ public:
         }
         return m_instance;
     }
-private:
-    Singleton() {
-        // construction logic
-    }
-    static Singleton* m_instance;
 };
 
 Singleton* Singleton::m_instance = nullptr;

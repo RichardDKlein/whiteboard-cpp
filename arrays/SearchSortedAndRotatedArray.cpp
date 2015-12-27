@@ -1,42 +1,37 @@
 #include <cstdio>
 #include <string>
+#include <vector>
 
 using namespace std;
 
 /**
  * @brief Search a sorted and rotated array of ints.
  *
- * @param count Number of ints in the array.
- * @param a The sorted and rotated array to be searched.
+ * @param v The sorted and rotated array to be searched.
  * @param target The int to search for.
- * @return The index, in |a|, of |target| (or -1 if |a|
+ * @return The index, in |v|, of |target| (or -1 if |v|
  * does not contain |target|).
  */
 
-int searchSortedAndRotatedArray(int count, int a[], int target) {
+int searchSortedAndRotatedArray(vector<int> v, int target) {
     int left = 0;
-    int right = count - 1;
+    int right = v.size() - 1;
     while (left <= right) {
         int mid = (left + right) / 2;
-        if (a[mid] == target) {
+        if (v[mid] == target) {
             return mid;
-        } else if (a[left] < a[mid]) {
-            // left half is normally ordered
-            if (a[left] <= target && target <= a[mid]) {
-                // search left
-                right = mid - 1;
+        }
+        if (v[left] < v[mid]) { // if left half is normally ordered
+            if (v[left] <= target && target <= v[mid]) {
+                right = mid - 1; // search left
             } else {
-                // search right
-                left = mid + 1;
+                left = mid + 1; // search right
             }
-        } else {
-            // right half is normally ordered
-            if (a[mid] <= target && target <= a[right]) {
-                // search right
-                left = mid + 1;
+        } else { // right half is normally ordered
+            if (v[mid] <= target && target <= v[right]) {
+                left = mid + 1; // search right
             } else {
-                // search left
-                right = mid - 1;
+                right = mid - 1; // search left
             }
         }
     }
@@ -54,13 +49,17 @@ void testSearchSortedAndRotatedArray() {
 
     printf("%s\n", arrayToString(len, a).c_str());
 
-    for (size_t i = 0; i < len; ++i) {
-        int target = a[i];
+    vector<int> v;
+    for (auto& i : a) {
+        v.push_back(i);
+    }
+
+    for (auto& target : v) {
         printf("target = %d, index = %d\n",
-            target, searchSortedAndRotatedArray(len, a, target));
+            target, searchSortedAndRotatedArray(v, target));
     }
 
     int target = 999;
     printf("target = %d, index = %d\n",
-        target, searchSortedAndRotatedArray(len, a, target));
+        target, searchSortedAndRotatedArray(v, target));
 }

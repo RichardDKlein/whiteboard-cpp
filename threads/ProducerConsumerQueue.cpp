@@ -6,34 +6,34 @@
 
 using namespace std;
 
-template <class J>
+template <typename T>
 class ProducerConsumerQueue {
-public:
-    ProducerConsumerQueue(int maxJobs) : m_maxJobs(maxJobs) {}
-
-    void putJob(J job) {
-        unique_lock<mutex> lock(m_mutex);
-        m_notFull.wait(lock,
-            [this](){return m_jobQueue.size() < m_maxJobs;});
-        m_jobQueue.push(job);
-        m_notEmpty.notify_all();
-    }
-
-    int getJob() {
-        unique_lock<mutex> lock(m_mutex);
-        m_notEmpty.wait(lock,
-            [this](){return m_jobQueue.size() > 0;});
-        J job = m_jobQueue.front();
-        m_jobQueue.pop();
-        m_notFull.notify_all();
-        return job;
-    }
 private:
-    queue<J> m_jobQueue;
-    size_t m_maxJobs;
-    mutex m_mutex;
-    condition_variable m_notFull;
-    condition_variable m_notEmpty;
+    queue<T> queue_;
+    size_t capacity_;
+    mutex mutex_;
+    condition_variable notFull_;
+    condition_variable notEmpty_;
+public:
+    ProducerConsumerQueue(int capacity) : capacity_(capacity) {}
+
+    void put(T item) {
+        unique_lock<mutex> lock(mutex_);
+        notFull_.wait(lock,
+            [this](){return queue_.size() < capacity_;});
+        queue_.push(item);
+        notEmpty_.notify_all();
+    }
+
+    T get() {
+        unique_lock<mutex> lock(mutex_);
+        notEmpty_.wait(lock,
+            [this](){return !queue_.empty();});
+        T item = queue_.front();
+        queue_.pop();
+        notFull_.notify_all();
+        return item;
+    }
 };
 
 static void consumer(int id, ProducerConsumerQueue<int>* jobQueue);
@@ -63,7 +63,7 @@ void testProducerConsumerQueue() {
 
 static void consumer(int id, ProducerConsumerQueue<int>* jobQueue) {
     for (int i = 0; i < 10; ++i) {
-        int job = jobQueue->getJob();
+        int job = jobQueue->get();
         printf("Consumer %d consumed %d\n", id, job);
         this_thread::sleep_for(chrono::milliseconds(250));
     }
@@ -72,7 +72,7 @@ static void consumer(int id, ProducerConsumerQueue<int>* jobQueue) {
 static void producer(int id, ProducerConsumerQueue<int>* jobQueue) {
     for (int i = 0; i < 10; ++i) {
         int job = (id * 100) + i;
-        jobQueue->putJob(job);
+        jobQueue->put(job);
         printf("Producer %d produced %d\n", id, job);
         this_thread::sleep_for(chrono::milliseconds(100));
     }

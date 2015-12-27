@@ -1,24 +1,23 @@
 #include <cstdio>
-#include <utility>
+#include <vector>
 
 using namespace std;
+
+typedef pair<int, int> RowCol;
+typedef vector<vector<int>> Array2d;
 
 /**
  * @brief Search a 2D array of ints in which all rows
  * and columns are sorted in ascending order.
  *
- * @param rows Number of rows in the array.
- * @param cols Number of columns in the array.
- * @param p Ptr to sorted 2D array to be searched.
+ * @param v Sorted 2D array to be searched.
  * @param target The int to search for.
  * @return The (row, col) of |target|, or (-1, -1) if
- * |*p| does not contain |target|.
+ * |v| does not contain |target|.
  */
-
-pair<int, int>
-searchSorted2dArray(int rows, int cols, int** p, int target) {
-    typedef int array2d[rows][cols];
-    array2d& a = *(array2d*) p;
+RowCol searchSorted2dArray(const Array2d& v, int target) {
+    int rows = v.size();
+    int cols = v[0].size();
 
     int top = 0;
     int bottom = rows - 1;
@@ -28,16 +27,16 @@ searchSorted2dArray(int rows, int cols, int** p, int target) {
     int row = bottom;
     int col = left;
     while (row >= top && col <= right) {
-        int curr = a[row][col];
+        int curr = v[row][col];
         if (curr > target) {
             --row;
         } else if (curr < target) {
             ++col;
         } else {
-            return pair<int, int>(row, col);
+            return RowCol(row, col);
         }
     }
-    return pair<int, int>(-1, -1);
+    return RowCol(-1, -1);
 }
 
 void testSearchSorted2dArray() {
@@ -47,7 +46,7 @@ void testSearchSorted2dArray() {
 
     #define ROWS 4
     #define COLS 5
-    int a[][COLS] = {
+    int a[ROWS][COLS] = {
         { 15, 20, 40, 60, 63 },
         { 25, 35, 65, 70, 74 },
         { 30, 55, 75, 80, 82 },
@@ -62,19 +61,24 @@ void testSearchSorted2dArray() {
         printf("]\n");
     }
 
+    Array2d v(ROWS);
     for (int row = 0; row < ROWS; ++row) {
         for (int col = 0; col < COLS; ++col) {
-            int target = a[row][col];
-            pair<int, int> loc =
-                searchSorted2dArray(ROWS, COLS, (int**)a, target);
+            v[row].push_back(a[row][col]);
+        }
+    }
+
+    for (int row = 0; row < ROWS; ++row) {
+        for (int col = 0; col < COLS; ++col) {
+            int target = v[row][col];
+            RowCol loc = searchSorted2dArray(v, target);
             printf("target = %d, row = %d, col = %d\n",
                 target, loc.first, loc.second);
         }
     }
 
     int target = 16;
-    pair<int, int> loc =
-        searchSorted2dArray(ROWS, COLS, (int**)a, target);
+    RowCol loc = searchSorted2dArray(v, target);
     printf("target = %d, row = %d, col = %d\n",
         target, loc.first, loc.second);
 }

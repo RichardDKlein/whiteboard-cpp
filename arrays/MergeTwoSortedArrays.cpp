@@ -15,25 +15,19 @@ vector<int> mergeTwoSortedArrays(vector<int>& v1, vector<int>& v2) {
     vector<int> result;
     for (;;) {
         if (v1.empty()) {
-            for (auto& element : v2) {
-                result.push_back(element);
-            }
-            v2.clear();
-            break;
-        } else if (v2.empty()) {
-            for (auto& element : v1) {
-                result.push_back(element);
-            }
-            v1.clear();
-        } else {
-            if (v1.front() < v2.front()) {
-                result.push_back(v1.front());
-                v1.erase(v1.begin());
-            } else {
-                result.push_back(v2.front());
-                v2.erase(v2.begin());
-            }
+            result.insert(result.end(), v2.begin(), v2.end());
+            return result;
         }
+        if (v2.empty()) {
+            result.insert(result.end(), v1.begin(), v1.end());
+            return result;
+        }
+        if (v1.front() < v2.front()) {
+            result.push_back(v1.front());
+            v1.erase(v1.begin());
+        }
+        result.push_back(v2.front());
+        v2.erase(v2.begin());
     }
     return result;
 }

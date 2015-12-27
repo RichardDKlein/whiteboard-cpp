@@ -19,7 +19,9 @@ vector<int> traverseBstPostOrder(BstNode* root) {
     }
     result = traverseBstPostOrder(root->left);
     vector<int> right = traverseBstPostOrder(root->right);
-    result.insert(result.end(), right.begin(), right.end());
+    for (auto& i : right) {
+        result.push_back(i);
+    }
     result.push_back(root->data);
     return result;
 }

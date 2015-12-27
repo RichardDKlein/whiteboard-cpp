@@ -19,9 +19,13 @@ vector<int> traverseBstPreOrder(BstNode* root) {
     }
     result.push_back(root->data);
     vector<int> left = traverseBstPreOrder(root->left);
-    result.insert(result.end(), left.begin(), left.end());
+    for (auto& i : left) {
+        result.push_back(i);
+    }
     vector<int> right = traverseBstPreOrder(root->right);
-    result.insert(result.end(), right.begin(), right.end());
+    for (auto& i : right) {
+        result.push_back(i);
+    }
     return result;
 }
 

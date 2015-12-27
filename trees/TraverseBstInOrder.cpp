@@ -20,7 +20,9 @@ vector<int> traverseBstInOrder(BstNode* root) {
     result = traverseBstInOrder(root->left);
     result.push_back(root->data);
     vector<int> right = traverseBstInOrder(root->right);
-    result.insert(result.end(), right.begin(), right.end());
+    for (auto& i : right) {
+        result.push_back(i);
+    }
     return result;
 }
 

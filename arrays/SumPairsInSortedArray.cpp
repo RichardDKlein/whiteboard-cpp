@@ -3,6 +3,8 @@
 
 using namespace std;
 
+typedef pair<int, int> Pair;
+
 /**
  * @brief In a sorted array, find pairs of array elements
  * that sum to a given value.
@@ -11,24 +13,26 @@ using namespace std;
  * @param sum The value to which each pair of elements should sum.
  * @return A vector of pairs that sum to the specified value.
  */
-vector<pair<int, int>>
-sumPairsInSortedArray(vector<int> v, int sum) {
-    vector<pair<int, int>> pairs;
-    int first = 0;
-    int last = v.size() - 1;
-    while (first < last) {
-        if (v[first] + v[last] > sum) {
-            last--;
-        } else if (v[first] + v[last] < sum) {
-            first++;
+vector<Pair> sumPairsInSortedArray(vector<int> v, int sum) {
+    vector<Pair> result;
+    int left = 0;
+    int right = v.size() - 1;
+    while (left < right) {
+        int v1 = v[left];
+        int v2 = v[right];
+        int s = v1 + v2;
+        if (s > sum) {
+            --right;
+        } else if (s < sum) {
+            ++left;
         } else {
-            pair<int, int> thePair(v[first], v[last]);
-            pairs.push_back(thePair);
-            first++;
-            last--;
+            Pair p(v1, v2);
+            result.push_back(p);
+            ++left;
+            --right;
         }
     }
-    return pairs;
+    return result;
 }
 
 void testSumPairsInSortedArray() {
@@ -46,7 +50,7 @@ void testSumPairsInSortedArray() {
     printf("\n");
 
     int sum = 12;
-    vector<pair<int, int>> pairs = sumPairsInSortedArray(v, sum);
+    vector<Pair> pairs = sumPairsInSortedArray(v, sum);
 
     for (auto& thePair : pairs) {
         printf("%d + %d = %d\n", thePair.first, thePair.second,

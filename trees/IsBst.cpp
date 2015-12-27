@@ -16,10 +16,6 @@ vector<int> traverseBstInOrder(BstNode* root);
  */
 bool isBst(BstNode* root) {
     vector<int> inorder = traverseBstInOrder(root);
-    int count = inorder.size();
-    if (count == 0 || count ==1) {
-        return true;
-    }
     int prev = INT_MIN;
     for (auto& curr : inorder) {
         if (curr <= prev) {

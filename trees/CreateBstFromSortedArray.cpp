@@ -17,8 +17,8 @@ BstNode* createBstFromSortedArray(int count, int a[]) {
     if (count == 0) {
         return nullptr;
     }
-    int mid = (count - 1) / 2;
     BstNode* root = new BstNode;
+    int mid = (count - 1) / 2;
     root->data = a[mid];
     int countLeft = mid;
     int countRight = count - 1 - mid;
