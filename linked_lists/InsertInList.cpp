@@ -1,33 +1,30 @@
 #include <cstdio>
-#include "ListNode.h"
+#include "LinkedLists.h"
 
 /**
- * @brief Append a data item to a linked list.
+ * @brief Append an item to a linked list.
  *
- * @param list Ptr to the head of the list.
- * @param after Ptr to the list node after which the data item
- * is to be inserted.
- * @param data Ptr to the data item to be inserted.
- * @return Ptr to the new list node containing the inserted data item.
+ * @param list Head of list.
+ * @param after List node after which the item is to be inserted.
+ * @param data Item to be inserted.
+ * @return New list node containing inserted data item.
  */
-ListNode* insertInList(ListNode* list, ListNode* after, void* data) {
-    ListNode* curr = list;
+template<typename T>
+Node<T>* insertInList(Node<T>* list, Node<T>* after, T data) {
+    Node<T>* curr = list;
     while (curr && (curr != after)) {
         curr = curr->next;
     }
-    if (curr == after) {
-        ListNode* node = new ListNode;
-        node->data = data;
-        node->next = curr->next;
-        curr->next = node;
-        return node;
-    } else {
+    if (!curr) {
         return nullptr;
     }
-}
+    Node<T>* node = new Node<T>;
+    node->data = data;
+    node->next = curr->next;
+    curr->next = node;
 
-ListNode* appendToList(ListNode* list, void* data);
-void printList(ListNode* list);
+    return node;
+}
 
 void testInsertInList() {
     printf("\n");
@@ -43,12 +40,12 @@ void testInsertInList() {
     char g[] = "g";
     char x[] = "x";
 
-    ListNode list;
+    Node<char*> list;
     list.data = a;
     list.next = nullptr;
     appendToList(&list, b);
     appendToList(&list, c);
-    ListNode* dNode = appendToList(&list, d);
+    Node<char*>* dNode = appendToList(&list, d);
     appendToList(&list, e);
     appendToList(&list, f);
     appendToList(&list, g);

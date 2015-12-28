@@ -1,29 +1,26 @@
 #include <cstdio>
-
-#include "ListNode.h"
+#include "LinkedLists.h"
 
 using namespace std;
 
 /**
  * @brief Reverse a linked list.
  *
- * @param list Ptr to head of list to be reversed.
- * @return Ptr to head of reversed list.
+ * @param list Head of list to be reversed.
+ * @return Head of reversed list.
  */
-ListNode* reverseList(ListNode* list) {
-    ListNode* curr = list;
-    ListNode* rev = nullptr;
+template<typename T>
+Node<T>* reverseList(Node<T>* list) {
+    Node<T>* curr = list;
+    Node<T>* rev = nullptr;
     while (curr) {
-        ListNode* tmp = curr;
+        Node<T>* tmp = curr;
         curr = curr->next;
         tmp->next = rev;
         rev = tmp;
     }
     return rev;
 }
-
-ListNode* appendToList(ListNode* list, void* data);
-void printList(ListNode* list);
 
 void testReverseList() {
     printf("\n");
@@ -38,7 +35,7 @@ void testReverseList() {
     char f[] = "f";
     char g[] = "g";
 
-    ListNode list;
+    Node<char*> list;
     list.data = a;
     list.next = nullptr;
     appendToList(&list, b);
@@ -49,9 +46,9 @@ void testReverseList() {
     appendToList(&list, g);
     printList(&list);
 
-    ListNode* rev = reverseList(&list);
+    Node<char*>* rev = reverseList(&list);
     printList(rev);
 
-    ListNode* orig = reverseList(rev);
+    Node<char*>* orig = reverseList(rev);
     printList(orig);
 }

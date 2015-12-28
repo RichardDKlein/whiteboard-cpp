@@ -1,39 +1,33 @@
 #include <cstdio>
 #include <set>
 #include <vector>
-
-#include "ListNode.h"
+#include "LinkedLists.h"
 
 using namespace std;
 
 /**
  * @brief Remove duplicates from a linked list.
  *
- * @param list Ptr to the head of the list.
- * @return Vector of ptrs to the removed list nodes.
+ * @param list Head of list.
  */
-vector<ListNode*> removeDupsFromList(ListNode* list) {
-    vector<ListNode*> result;
-    set<void*> seen;
-    ListNode* curr = list;
-    ListNode* prev = nullptr;
+template<typename T>
+void removeDupsFromList(Node<T>* list) {
+    set<T> seen;
+    Node<T>* curr = list;
+    Node<T>* prev = nullptr;
     while (curr) {
         if (seen.count(curr->data) > 0) {
-            // delete curr, don't advance prev
-            result.push_back(curr);
-            prev->next = curr->next;
+            Node<T>* tmp = curr;
+            curr = curr->next;
+            prev->next = curr;
+            delete tmp;
         } else {
             seen.insert(curr->data);
             prev = curr;
+            curr = curr->next;
         }
-        curr = curr->next;
     }
-    return result;
 }
-
-ListNode* appendToList(ListNode* list, void* data);
-ListNode* insertInList(ListNode* list, ListNode* after, void* data);
-void printList(ListNode* list);
 
 void testRemoveDupsFromList() {
     printf("\n");
@@ -48,14 +42,14 @@ void testRemoveDupsFromList() {
     char f[] = "f";
     char g[] = "g";
 
-    ListNode list;
+    Node<char*> list;
     list.data = a;
     list.next = nullptr;
     appendToList(&list, b);
-    ListNode* cNode = appendToList(&list, c);
+    Node<char*>* cNode = appendToList(&list, c);
     appendToList(&list, d);
-    ListNode* eNode = appendToList(&list, e);
-    ListNode* fNode = appendToList(&list, f);
+    Node<char*>* eNode = appendToList(&list, e);
+    Node<char*>* fNode = appendToList(&list, f);
     appendToList(&list, g);
     printList(&list);
 
@@ -67,11 +61,7 @@ void testRemoveDupsFromList() {
     appendToList(&list, g);
     printList(&list);
 
-    vector<ListNode*> dups = removeDupsFromList(&list);
-    printf("Removing duplicates: ");
-    for (auto& dup : dups) {
-        printf("%s ", (char*) dup->data);
-    }
-    printf("\n");
+    removeDupsFromList(&list);
+    printf("Removing duplicates:\n");
     printList(&list);
 }

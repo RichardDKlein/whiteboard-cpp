@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <cstring>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -8,50 +9,42 @@ using namespace std;
  * @brief Compute the water collected between the bars of
  * a histogram.
  *
- * @param count The number of histogram bars.
- * @param heights An array specifying the height, in inches,
+ * @param v An array specifying the height, in inches,
  * of each histogram bar.
  * @return The amount, in inches, of water collected between
  * the histogram bars.
  */
-int histogramWater(int count, int heights[]) {
+int histogramWater(const vector<int>& v) {
+    int count = v.size();
     int left = 0;
     int right = count - 1;
 
-    int* leftTallest = new int[count];
+    vector<int> leftTallest(count);
     int leftMax = -1;
     for (int i = left; i <= right; ++i) {
-        if (heights[i] > leftMax) {
-            leftMax = heights[i];
-        }
+        leftMax = max(leftMax, v[i]);
         leftTallest[i] = leftMax;
     }
-    int* rightTallest = new int[count];
+    vector<int> rightTallest(count);
     int rightMax = -1;
     for (int i = right; i >= left; --i) {
-        if (heights[i] > rightMax) {
-            rightMax = heights[i];
-        }
+        rightMax = max(rightMax, v[i]);
         rightTallest[i] = rightMax;
     }
-    int* waterline = new int[count];
+    vector<int> waterline(count);
     for (int i = left; i <= right; ++i) {
         waterline[i] = min(leftTallest[i], rightTallest[i]);
     }
     int waterCollected = 0;
     for (int i = left; i <= right; i++) {
-        if (waterline[i] > heights[i]) {
-            waterCollected += (waterline[i] - heights[i]);
+        if (waterline[i] > v[i]) {
+            waterCollected += (waterline[i] - v[i]);
         }
     }
-    delete[] waterline;
-    delete[] rightTallest;
-    delete[] leftTallest;
-
     return waterCollected;
 }
 
-string arrayToString(int count, int array[]);
+string vectorToString(vector<int> v);
 
 void testHistogramWater() {
     printf("\n");
@@ -65,9 +58,11 @@ void testHistogramWater() {
     };
     int numTests = sizeof(heights) / sizeof(int) / NUM_BARS;
     for (int i = 0; i < numTests; i++) {
-        printf("heights = %s\n",
-            arrayToString(NUM_BARS, &heights[i][0]).c_str());
-        printf("water collected = %d\n",
-            histogramWater(NUM_BARS, &heights[i][0]));
+        vector<int> v;
+        for (auto n : heights[i]) {
+            v.push_back(n);
+        }
+        printf("heights = %s\n", vectorToString(v).c_str());
+        printf("water collected = %d\n", histogramWater(v));
     }
 }

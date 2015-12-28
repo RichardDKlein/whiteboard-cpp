@@ -1,12 +1,5 @@
 #include <cstdio>
-
-void testAppendToList();
-void testDeleteFromList();
-void testFindKthToLastInList();
-void testInsertInList();
-void testListHasCycle();
-void testRemoveDupsFromList();
-void testReverseList();
+#include "LinkedLists.h"
 
 void testLinkedLists() {
     printf("\n");

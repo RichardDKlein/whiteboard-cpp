@@ -1,28 +1,28 @@
 #include <cstdio>
-#include "ListNode.h"
+#include "LinkedLists.h"
 
 /**
  * @brief Append a data item to a linked list.
  *
- * @param list Ptr to the head of the list.
- * @param data Ptr to the data item.
- * @return Ptr to the new list node containing the appended data item.
+ * @param list Head of list.
+ * @param data Data item.
+ * @return New list node containing appended data item.
  */
-ListNode* appendToList(ListNode* list, void* data) {
-    ListNode* curr = list;
-    ListNode* prev = nullptr;
+template<typename T>
+Node<T>* appendToList(Node<T>* list, T data) {
+    Node<T>* curr = list;
+    Node<T>* prev = nullptr;
     while (curr) {
         prev = curr;
         curr = curr->next;
     }
-    ListNode* node = new ListNode;
+    Node<T>* node = new Node<T>;
     node->data = data;
     node->next = nullptr;
     prev->next = node;
+
     return node;
 }
-
-void printList(ListNode* list);
 
 void testAppendToList() {
     printf("\n");
@@ -37,7 +37,7 @@ void testAppendToList() {
     char f[] = "f";
     char g[] = "g";
 
-    ListNode list;
+    Node<char*> list;
     list.data = a;
     list.next = nullptr;
     printList(&list);

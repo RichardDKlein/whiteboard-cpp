@@ -5,47 +5,52 @@
 
 using namespace std;
 
+class ParseResults {
+private:
+    bool success_;
+    vector<string> words_;
+public:
+    ParseResults(bool success, const vector<string>& words) :
+        success_(success), words_(words) {}
+    bool success() {return success_;}
+    vector<string> words() {return words_;}
+};
+
+#define EMPTY_VECTOR vector<string>()
+#define FAILURE ParseResults(false, EMPTY_VECTOR)
+#define EMPTY_STRING ParseResults(true, EMPTY_VECTOR)
+
 /**
  * @brief Parse a string containing no whitespace into its
  * constituent words.
  *
  * @param dict Dictionary of legal words.
  * @param s String to be parsed.
- * @return A pair showing the result of the parse. The first
- * component is a flag indicating whether the parse was successful.
- * The second component is a vector containing the constituent
- * strings of |s|.
+ * @return Parse results.
  */
-pair<bool, vector<string>>
+ParseResults
 parseStringIntoWords(const set<string>& dict, const string& s) {
-    pair<bool, vector<string>> result;
-    vector<string> emptyVector;
-    pair<bool, vector<string>> failure(false, emptyVector);
-    pair<bool, vector<string>> emptyString(true, emptyVector);
-
     int stringLen = s.size();
     if (stringLen == 0) {
-        return emptyString;
+        return EMPTY_STRING;
     }
     for (int i = 0; i < stringLen; ++i) {
         string firstWord = s.substr(0, i + 1);
-        if (dict.count(firstWord) > 0) {
-            string rem = s.substr(i + 1, string::npos);
-            pair<bool, vector<string>> remWords =
-                parseStringIntoWords(dict, rem);
-            if (!remWords.first) {
-                return failure;
-            } else {
-                result.first = true;
-                result.second.push_back(firstWord);
-                for (const auto& remWord : remWords.second) {
-                    result.second.push_back(remWord);
-                }
-                return result;
-            }
+        if (dict.count(firstWord) == 0) {
+            continue;
         }
+        string rem = s.substr(i + 1, string::npos);
+        ParseResults remParse = parseStringIntoWords(dict, rem);
+        if (!remParse.success()) {
+            return FAILURE;
+        }
+        vector<string> remWords = remParse.words();
+        vector<string> words;
+        words.push_back(firstWord);
+        words.insert(words.end(), remWords.begin(), remWords.end());
+        return ParseResults(true, words);
     }
-    return failure;
+    return FAILURE;
 }
 
 void testParseStringIntoWords() {
@@ -75,10 +80,10 @@ void testParseStringIntoWords() {
     };
 
     for (const auto& s : testStrings) {
-        pair<bool, vector<string>> words = parseStringIntoWords(dict, s);
+        ParseResults parse = parseStringIntoWords(dict, s);
         printf("parseStringIntoWords(\"%s\"):\n", s.c_str());
         printf("{\n");
-        for (const auto& word : words.second) {
+        for (const auto& word : parse.words()) {
             printf("\t\"%s\"\n", word.c_str());
         }
         printf("}\n");

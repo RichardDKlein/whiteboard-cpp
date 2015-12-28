@@ -1,18 +1,17 @@
 #include <cstdio>
-
-#include "ListNode.h"
+#include "LinkedLists.h"
 
 using namespace std;
 
 /**
- * @brief Find the kth to last item in a linked list.
+ * @brief Find the kth to last node in a linked list.
  *
- * @param list Ptr to head of list.
- * @return Ptr to kth to last node in list, or nullptr
- * if k is too big.
+ * @param list Head of list.
+ * @return Kth to last node in list, or nullptr if k is too big.
  */
-ListNode* findKthToLast(ListNode* list, int k) {
-    ListNode* lead = list;
+template<typename T>
+Node<T>* findKthToLast(Node<T>* list, int k) {
+    Node<T>* lead = list;
     int count = 0;
     while (lead && (count < k)) {
         lead = lead->next;
@@ -21,16 +20,13 @@ ListNode* findKthToLast(ListNode* list, int k) {
     if (count < k) {
         return nullptr;
     }
-    ListNode* lag = list;
+    Node<T>* lag = list;
     while (lead) {
         lead = lead->next;
         lag = lag->next;
     }
     return lag;
 }
-
-ListNode* appendToList(ListNode* list, void* data);
-void printList(ListNode* list);
 
 void testFindKthToLastInList() {
     printf("\n");
@@ -45,7 +41,7 @@ void testFindKthToLastInList() {
     char f[] = "f";
     char g[] = "g";
 
-    ListNode list;
+    Node<char*> list;
     list.data = a;
     list.next = nullptr;
     appendToList(&list, b);
@@ -57,9 +53,8 @@ void testFindKthToLastInList() {
     printList(&list);
 
     for (int k = 1; k <= 8; ++k) {
-        ListNode* kthToLastNode = findKthToLast(&list, k);
+        Node<char*>* kthToLastNode = findKthToLast(&list, k);
         printf("kth to last element (k = %d) is %s\n",
-            k, (kthToLastNode) ?
-            (char*) kthToLastNode->data : "nullptr");
+            k, kthToLastNode ? kthToLastNode->data : "nullptr");
     }
 }

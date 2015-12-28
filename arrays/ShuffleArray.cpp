@@ -11,15 +11,12 @@ static int random(int min, int max);
 /**
  * @brief Shuffle an array, as if it represented a deck of cards.
  *
- * @param deck The array to be shuffled.
+ * @param v The array to be shuffled.
  */
 void shuffleArray(vector<int>& v) {
     int count = v.size();
     for (int i = 0; i < count - 1; i++) {
-        int min = i + 1;
-        int max = count - 1;
-        int j = random(min, max);
-
+        int j = random(i + 1, count - 1);
         int tmp = v[i];
         v[i] = v[j];
         v[j] = tmp;
@@ -39,7 +36,8 @@ static int random(int min, int max) {
         srand((time(nullptr)));
         firstTime = false;
     }
-    return rand() % (max - min + 1) + min;
+    int range = max - min + 1;
+    return (rand() % range) + min;
 }
 
 string vectorToString(vector<int> v);
