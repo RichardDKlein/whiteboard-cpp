@@ -14,12 +14,15 @@ bool listHasCycle(Node<T>* list) {
     Node<T>* slow = list;
     if (!list) return false;
     Node<T>* fast = list->next;
-    while (fast && (fast != slow)) {
+    while (fast) {
         if (!fast->next) return false;
         fast = fast->next->next;
         slow = slow->next;
+        if (fast == slow) {
+            return true;
+        }
     }
-    return (fast == slow);
+    return false;
 }
 
 void testListHasCycle() {
