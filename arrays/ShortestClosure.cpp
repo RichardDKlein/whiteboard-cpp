@@ -1,18 +1,13 @@
-#include <climits>
-#include <cstdio>
-#include <list>
-#include <vector>
-
-using namespace std;
+#include "Arrays.h"
 
 typedef pair<int, int> Closure;
 typedef list<int> LocationList;
 typedef vector<LocationList> LocationLists;
 
-template<typename T> LocationLists buildLocationLists(
+template<typename T> static LocationLists buildLocationLists(
     const vector<T>& needles, const vector<T>& haystack);
-int closureLength(const Closure& closure);
-Closure nextCandidate(LocationLists& locLists);
+static int closureLength(const Closure& closure);
+static Closure nextCandidate(LocationLists& locLists);
 
 /**
  * @brief Find the shortest closure of needles in a haystack,
@@ -57,6 +52,8 @@ template<typename T> LocationLists buildLocationLists(
 Closure nextCandidate(LocationLists& locLists) {
     int min = INT_MAX;
     int max = -1;
+    LocationList* minLocList;
+
     for (auto& locList : locLists) {
         if (locList.empty()) {
             return Closure(-1, -1);
@@ -64,17 +61,13 @@ Closure nextCandidate(LocationLists& locLists) {
         int front = locList.front();
         if (front < min) {
             min = front;
+            minLocList = &locList;
         }
         if (front > max) {
             max = front;
         }
     }
-    for (auto& locList : locLists) {
-        if (locList.front() == min) {
-            locList.pop_front();
-            break;
-        }
-    }
+    minLocList->pop_front();
     return Closure(min, max);
 }
 
@@ -83,9 +76,9 @@ int closureLength(const Closure& closure) {
 }
 
 void testShortestClosure() {
-    printf("\n");
-    printf("Test shortestClosure():\n");
-    printf("=======================\n");
+    cout << endl;
+    cout << "Test shortestClosure():" << endl;
+    cout << "=======================" << endl;
 
     int testNeedles[] = {
         1, 5, 9
@@ -107,25 +100,25 @@ void testShortestClosure() {
 
     Closure shortest = shortestClosure(needles, haystack);
 
-    printf("needles: { ");
+    cout << "needles: { ";
     for (auto& needle : needles) {
-        printf("%d ", needle);
+        cout << needle << " ";
     }
-    printf("}\n");
+    cout << "}" << endl;
 
-    printf("haystack: { ");
+    cout << "haystack: { ";
     int haystackLen = haystack.size();
     for (int i = 0; i < haystackLen; ++i) {
         if (i == shortest.first) {
-            printf("[** ");
+            cout << "[** ";
         }
-        printf("%d ", haystack[i]);
+        cout << haystack[i] << " ";
         if (i == shortest.second) {
-            printf("**] ");
+            cout << "**] ";
         }
     }
-    printf("}\n");
+    cout << "}" << endl;
 
-    printf("shortest closure: [%d, %d]\n",
-        shortest.first, shortest.second);
+    cout << "shortest closure: [" << shortest.first << ", "
+         << shortest.second << "]" << endl;
 }

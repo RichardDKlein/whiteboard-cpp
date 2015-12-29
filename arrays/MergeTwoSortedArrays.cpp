@@ -1,8 +1,4 @@
-#include <cstdio>
-#include <string>
-#include <vector>
-
-using namespace std;
+#include "Arrays.h"
 
 /**
  * @brief Merge two sorted arrays into a single sorted array.
@@ -11,8 +7,9 @@ using namespace std;
  * @param v2 The other sorted array.
  * @return The merged array.
  */
-vector<int> mergeTwoSortedArrays(vector<int>& v1, vector<int>& v2) {
-    vector<int> result;
+template<typename T>
+vector<T> mergeTwoSortedArrays(vector<T>& v1, vector<T>& v2) {
+    vector<T> result;
     for (;;) {
         if (v1.empty()) {
             result.insert(result.end(), v2.begin(), v2.end());
@@ -32,54 +29,51 @@ vector<int> mergeTwoSortedArrays(vector<int>& v1, vector<int>& v2) {
     return result;
 }
 
-string arrayToString(int count, int array[]);
-vector<int> arrayToVector(int count, int array[]);
-string vectorToString(vector<int> v);
-
 void testMergeTwoSortedArrays() {
-    printf("\n");
-    printf("Test mergeTwoSortedArrays():\n");
-    printf("============================\n");
+    cout << endl;
+    cout << "Test mergeTwoSortedArrays():" << endl;
+    cout << "============================" << endl;
+
     #define COUNT1 sizeof(a1)/sizeof(int)
     #define COUNT2 sizeof(a2)/sizeof(int)
     {
         int a1[] = {1, 3, 5, 7, 9};
         int a2[] = {2, 4, 6, 8, 10};
-        printf("a1 = %s\n", arrayToString(COUNT1, a1).c_str());
-        printf("a2 = %s\n", arrayToString(COUNT2, a2).c_str());
         vector<int> v1 = arrayToVector(COUNT1, a1);
         vector<int> v2 = arrayToVector(COUNT2, a2);
+        cout << "v1 = " << vectorToString(v1) << endl;
+        cout << "v2 = " << vectorToString(v2) << endl;
         vector<int> merged = mergeTwoSortedArrays(v1, v2);
-        printf("merged = %s\n", vectorToString(merged).c_str());
+        cout << "merged = " << vectorToString(merged) << endl;
     }
     {
         int a1[] = {1, 3, 5, 7, 9};
         int a2[] = {2, 4, 6, 8, 10, 12, 14, 16};
-        printf("a1 = %s\n", arrayToString(COUNT1, a1).c_str());
-        printf("a2 = %s\n", arrayToString(COUNT2, a2).c_str());
         vector<int> v1 = arrayToVector(COUNT1, a1);
         vector<int> v2 = arrayToVector(COUNT2, a2);
+        cout << "v1 = " << vectorToString(v1) << endl;
+        cout << "v2 = " << vectorToString(v2) << endl;
         vector<int> merged = mergeTwoSortedArrays(v1, v2);
-        printf("merged = %s\n", vectorToString(merged).c_str());
+        cout << "merged = " << vectorToString(merged) << endl;
     }
     {
         int a1[] = {1, 3, 5, 7, 9, 11, 13, 15};
         int a2[] = {2, 4, 6, 8, 10};
-        printf("a1 = %s\n", arrayToString(COUNT1, a1).c_str());
-        printf("a2 = %s\n", arrayToString(COUNT2, a2).c_str());
         vector<int> v1 = arrayToVector(COUNT1, a1);
         vector<int> v2 = arrayToVector(COUNT2, a2);
+        cout << "v1 = " << vectorToString(v1) << endl;
+        cout << "v2 = " << vectorToString(v2) << endl;
         vector<int> merged = mergeTwoSortedArrays(v1, v2);
-        printf("merged = %s\n", vectorToString(merged).c_str());
+        cout << "merged = " << vectorToString(merged) << endl;
     }
     {
         int a1[] = {1, 2, 3, 4, 5};
         int a2[] = {1, 2, 3, 4, 5};
-        printf("a1 = %s\n", arrayToString(COUNT1, a1).c_str());
-        printf("a2 = %s\n", arrayToString(COUNT2, a2).c_str());
         vector<int> v1 = arrayToVector(COUNT1, a1);
         vector<int> v2 = arrayToVector(COUNT2, a2);
+        cout << "v1 = " << vectorToString(v1) << endl;
+        cout << "v2 = " << vectorToString(v2) << endl;
         vector<int> merged = mergeTwoSortedArrays(v1, v2);
-        printf("merged = %s\n", vectorToString(merged).c_str());
+        cout << "merged = " << vectorToString(merged) << endl;
     }
     }

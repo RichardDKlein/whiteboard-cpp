@@ -12,7 +12,7 @@ struct Node {
     Node* right;
 };
 
-#include "TestUtils.h"
+#include "../arrays/TestUtils.h"
 
 template<typename T> Node<T>* createBstFromSortedArray(const vector<T>& v);
 template<typename T> bool isBst(Node<T>* root);

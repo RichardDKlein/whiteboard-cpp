@@ -12,7 +12,8 @@ struct Node {
 template<typename T> Node<T>* appendToList(Node<T>* list, T data);
 template<typename T> bool deleteFromList(Node<T>* toDelete);
 template<typename T> Node<T>* findKthToLast(Node<T>* list, int k);
-template<typename T> Node<T>* insertInList(Node<T>*, Node<T>*, T data);
+template<typename T> Node<T>* insertInList(Node<T>* list,
+    Node<T>* after, T data);
 template<typename T> bool listHasCycle(Node<T>* list);
 template<typename T> void removeDupsFromList(Node<T>* list);
 template<typename T> Node<T>* reverseList(Node<T>* list);

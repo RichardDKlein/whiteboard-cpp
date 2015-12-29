@@ -1,7 +1,4 @@
-#include <cstdio>
-#include <vector>
-
-using namespace std;
+#include "Arrays.h"
 
 typedef pair<int, int> Pair;
 
@@ -36,24 +33,26 @@ vector<Pair> sumPairsInSortedArray(vector<int> v, int sum) {
 }
 
 void testSumPairsInSortedArray() {
-    printf("\n");
-    printf("Test sumPairsInSortedArray():\n");
-    printf("=============================\n");
+    cout << endl;
+    cout << "Test sumPairsInSortedArray():" << endl;
+    cout << "=============================" << endl;
 
     int a[] = {-2, -1, 0, 3, 5, 6, 7, 9, 13, 14};
 
     vector<int> v;
-    for (auto& elt : a) {
-        v.push_back(elt);
-        printf("%d ", elt);
+    for (auto n : a) {
+        v.push_back(n);
+        cout << n << " ";
     }
-    printf("\n");
+    cout << endl;
 
     int sum = 12;
     vector<Pair> pairs = sumPairsInSortedArray(v, sum);
 
-    for (auto& thePair : pairs) {
-        printf("%d + %d = %d\n", thePair.first, thePair.second,
-            thePair.first + thePair.second);
+    for (auto& p : pairs) {
+        int p1 = p.first;
+        int p2 = p.second;
+        int sum = p1 + p2;
+        cout << p1 << " + " << p2 << " = " << sum << endl;
     }
 }

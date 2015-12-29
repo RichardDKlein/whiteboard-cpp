@@ -1,9 +1,4 @@
-#include <cstdio>
-#include <cstring>
-#include <string>
-#include <vector>
-
-using namespace std;
+#include "Arrays.h"
 
 /**
  * @brief Compute the water collected between the bars of
@@ -44,22 +39,20 @@ int histogramWater(const vector<int>& v) {
     return waterCollected;
 }
 
-string vectorToString(vector<int> v);
-
 void testHistogramWater() {
-    printf("\n");
-    printf("Test histogramWater():\n");
-    printf("======================\n");
+    cout << endl;
+    cout << "Test histogramWater():" << endl;
+    cout << "======================" << endl;
+
     #define NUM_BARS 17
     int heights[][NUM_BARS] = {
             {1,0,2,0,3,0,4,0,5,0,4,0,3,0,2,0,1},
             {1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1},
             {1,3,0,7,2,0,9,0,4,3,0,5,6,0,8,0,3}
     };
-    int numTests = sizeof(heights) / sizeof(int) / NUM_BARS;
-    for (int i = 0; i < numTests; i++) {
+    for (auto& testArray : heights) {
         vector<int> v;
-        for (auto n : heights[i]) {
+        for (auto n : testArray) {
             v.push_back(n);
         }
         printf("heights = %s\n", vectorToString(v).c_str());

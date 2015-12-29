@@ -1,13 +1,4 @@
-#include <cstdio>
-
-void testHistogramWater();
-void testMergeTwoSortedArrays();
-void testSearchSorted2dArray();
-void testSearchSortedAndRotatedArray();
-void testShortestClosure();
-void testShuffleArray();
-void testSumPairsInSortedArray();
-void testSumPairsInUnsortedArray();
+#include "Arrays.h"
 
 /**
  * @brief Test the functions in the "arrays" folder.

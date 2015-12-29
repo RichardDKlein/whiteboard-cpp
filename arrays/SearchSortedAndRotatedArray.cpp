@@ -1,19 +1,17 @@
-#include <cstdio>
-#include <string>
-#include <vector>
+#include "Arrays.h"
 
 using namespace std;
 
 /**
- * @brief Search a sorted and rotated array of ints.
+ * @brief Search a sorted and rotated array.
  *
  * @param v The sorted and rotated array to be searched.
- * @param target The int to search for.
+ * @param target The value to search for.
  * @return The index, in |v|, of |target| (or -1 if |v|
  * does not contain |target|).
  */
-
-int searchSortedAndRotatedArray(vector<int> v, int target) {
+template<typename T>
+int searchSortedAndRotatedArray(const vector<T>& v, T target) {
     int left = 0;
     int right = v.size() - 1;
     while (left <= right) {
@@ -38,28 +36,25 @@ int searchSortedAndRotatedArray(vector<int> v, int target) {
     return -1;
 }
 
-string arrayToString(int count, int array[]);
-
 void testSearchSortedAndRotatedArray() {
-    printf("\n");
-    printf("Test searchSortedAndRotatedArray():\n");
-    printf("===================================\n");
+    cout << endl;
+    cout << "Test searchSortedAndRotatedArray():" << endl;
+    cout << "===================================" << endl;
     int a[] = {15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14};
-    size_t len = sizeof(a) / sizeof(int);
-
-    printf("%s\n", arrayToString(len, a).c_str());
 
     vector<int> v;
     for (auto& i : a) {
         v.push_back(i);
     }
 
+    cout << vectorToString(v) << endl;
+
     for (auto& target : v) {
-        printf("target = %d, index = %d\n",
-            target, searchSortedAndRotatedArray(v, target));
+        int index = searchSortedAndRotatedArray(v, target);
+        cout << "target = " << target << ", index = " << index << endl;
     }
 
     int target = 999;
-    printf("target = %d, index = %d\n",
-        target, searchSortedAndRotatedArray(v, target));
+    int index = searchSortedAndRotatedArray(v, target);
+    cout << "target = " << target << ", index = " << index << endl;
 }

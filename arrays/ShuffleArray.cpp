@@ -1,10 +1,4 @@
-#include <cstdio>
-#include <cstdlib>
-#include <ctime>
-#include <string>
-#include <vector>
-
-using namespace std;
+#include "Arrays.h"
 
 static int random(int min, int max);
 
@@ -13,7 +7,8 @@ static int random(int min, int max);
  *
  * @param v The array to be shuffled.
  */
-void shuffleArray(vector<int>& v) {
+template<typename T>
+void shuffleArray(vector<T>& v) {
     int count = v.size();
     for (int i = 0; i < count - 1; i++) {
         int j = random(i + 1, count - 1);
@@ -40,21 +35,21 @@ static int random(int min, int max) {
     return (rand() % range) + min;
 }
 
-string vectorToString(vector<int> v);
-
 void testShuffleArray() {
-    printf("\n");
-    printf("Test shuffleArray():\n");
-    printf("====================\n");
+    cout << endl;
+    cout << "Test shuffleArray():" << endl;
+    cout << "====================" << endl;
+
     #define NUM_CARDS 52
     vector<int> deck(NUM_CARDS);
     for (int i = 0; i < NUM_CARDS; i++) {
         deck[i] = i;
     }
-    printf("Unshuffled deck = %s\n", vectorToString(deck).c_str());
+
+    cout << "Unshuffled deck = " << vectorToString(deck) << endl;
     for (int i = 0; i < 10; i++) {
         shuffleArray(deck);
-        printf("Shuffled   deck = %s\n",
-            vectorToString(deck).c_str());
+        cout << "Shuffled   deck = "
+             << vectorToString(deck) << endl;
     }
 }

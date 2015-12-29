@@ -1,21 +1,19 @@
-#include <cstdio>
-#include <vector>
-
-using namespace std;
+#include "Arrays.h"
 
 typedef pair<int, int> RowCol;
-typedef vector<vector<int>> Array2d;
+template<typename T> using Array2d = vector<vector<T>>;
 
 /**
- * @brief Search a 2D array of ints in which all rows
+ * @brief Search a 2D array in which all rows
  * and columns are sorted in ascending order.
  *
  * @param v Sorted 2D array to be searched.
- * @param target The int to search for.
+ * @param target The value to search for.
  * @return The (row, col) of |target|, or (-1, -1) if
  * |v| does not contain |target|.
  */
-RowCol searchSorted2dArray(const Array2d& v, int target) {
+template<typename T>
+RowCol searchSorted2dArray(const Array2d<T>& v, T target) {
     int rows = v.size();
     int cols = v[0].size();
 
@@ -40,9 +38,9 @@ RowCol searchSorted2dArray(const Array2d& v, int target) {
 }
 
 void testSearchSorted2dArray() {
-    printf("\n");
-    printf("Test searchSorted2dArray():\n");
-    printf("===========================\n");
+    cout << endl;
+    cout << "Test searchSorted2dArray():" << endl;
+    cout << "===========================" << endl;
 
     #define ROWS 4
     #define COLS 5
@@ -54,14 +52,14 @@ void testSearchSorted2dArray() {
     };
 
     for (int row = 0; row < ROWS; ++row) {
-        printf("[ ");
+        cout << "[ ";
         for (int col = 0; col < COLS; ++col) {
-            printf("%d ", a[row][col]);
+            cout << a[row][col] << " ";
         }
-        printf("]\n");
+        cout << "]" << endl;
     }
 
-    Array2d v(ROWS);
+    Array2d<int> v(ROWS);
     for (int row = 0; row < ROWS; ++row) {
         for (int col = 0; col < COLS; ++col) {
             v[row].push_back(a[row][col]);
@@ -72,13 +70,13 @@ void testSearchSorted2dArray() {
         for (int col = 0; col < COLS; ++col) {
             int target = v[row][col];
             RowCol loc = searchSorted2dArray(v, target);
-            printf("target = %d, row = %d, col = %d\n",
-                target, loc.first, loc.second);
+            cout << "target = " << target << ", row = " <<
+                loc.first << ", col = " << loc.second << endl;
         }
     }
 
     int target = 16;
     RowCol loc = searchSorted2dArray(v, target);
-    printf("target = %d, row = %d, col = %d\n",
-        target, loc.first, loc.second);
+    cout << "target = " << target << ", row = " <<
+        loc.first << ", col = " << loc.second << endl;
 }
