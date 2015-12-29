@@ -1,48 +1,50 @@
 #include <cstdio>
 #include <string>
 #include <vector>
-
-#include "BstNode.h"
+#include "Trees.h"
 
 using namespace std;
 
 /**
- * @brief Create a BST from a sorted array of ints.
+ * @brief Create a BST from a sorted array.
  *
- * @param count The number of ints in the sorted array.
- * @param a The sorted array of ints.
- * @return Ptr to the root of the created BST.
+ * @param v The sorted array.
+ * @return Root of created BST.
  */
-BstNode* createBstFromSortedArray(int count, int a[]) {
+template<typename T>
+Node<T>* createBstFromSortedArray(const vector<T>& v) {
+    int count = v.size();
     if (count == 0) {
         return nullptr;
     }
-    BstNode* root = new BstNode;
     int mid = (count - 1) / 2;
-    root->data = a[mid];
-    int countLeft = mid;
-    int countRight = count - 1 - mid;
-    root->left = createBstFromSortedArray(countLeft, &a[0]);
-    root->right = createBstFromSortedArray(countRight, &a[mid + 1]);
+    vector<T> left;
+    for (int i = 0; i < mid; ++i) {
+        left.push_back(v[i]);
+    }
+    vector<T> right;
+    for (int i = mid + 1; i < count; ++i) {
+        right.push_back(v[i]);
+    }
+    Node<T>* root = new Node<T>;
+    root->data = v[mid];
+    root->left = createBstFromSortedArray(left);
+    root->right = createBstFromSortedArray(right);
+
     return root;
 }
-
-vector<int> traverseBstInOrder(BstNode* root);
-string vectorToString(vector<int> v);
 
 void testCreateBstFromSortedArray() {
     printf("\n");
     printf("Test createBstFromSortedArray():\n");
     printf("================================\n");
     int data[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17};
-    printf("sorted array = [ ");
-    for (auto& elt : data) {
-        printf("%d ", elt);
+    vector<int> v;
+    for (auto n : data) {
+        v.push_back(n);
     }
-    printf("]\n");
-    BstNode* root = createBstFromSortedArray(
-        sizeof(data)/sizeof(data[0]), data);
-    vector<int> v = traverseBstInOrder(root);
-    string s = vectorToString(v);
-    printf("traverse BST inorder = %s\n", s.c_str());
+    printf("sorted array = %s\n", vectorToString(v).c_str());
+    Node<int>* root = createBstFromSortedArray(v);
+    vector<int> t = traverseBstInOrder(root);
+    printf("traverse BST inorder = %s\n", vectorToString(t).c_str());
 }

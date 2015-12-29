@@ -1,12 +1,9 @@
 #include <climits>
 #include <cstdio>
 #include <vector>
-
-#include "BstNode.h"
+#include "Trees.h"
 
 using namespace std;
-
-vector<int> traverseBstInOrder(BstNode* root);
 
 /**
  * @brief Determine whether a binary tree is a BST.
@@ -14,8 +11,9 @@ vector<int> traverseBstInOrder(BstNode* root);
  * @param root Ptr to the root node of the BST.
  * @return |true| if BST, |false| otherwise.
  */
-bool isBst(BstNode* root) {
-    vector<int> inorder = traverseBstInOrder(root);
+template<typename T>
+bool isBst(Node<T>* root) {
+    vector<T> inorder = traverseBstInOrder(root);
     int prev = INT_MIN;
     for (auto& curr : inorder) {
         if (curr <= prev) {
@@ -32,13 +30,13 @@ void testIsBst() {
     printf("Test isBst():\n");
     printf("=============\n");
 
-    BstNode node1 = { 1, nullptr, nullptr };
-    BstNode node2 = { 2, nullptr, nullptr };
-    BstNode node3 = { 3, nullptr, nullptr };
-    BstNode node4 = { 4, nullptr, nullptr };
-    BstNode node5 = { 5, nullptr, nullptr };
-    BstNode node6 = { 6, nullptr, nullptr };
-    BstNode node7 = { 7, nullptr, nullptr };
+    Node<int> node1 = { 1, nullptr, nullptr };
+    Node<int> node2 = { 2, nullptr, nullptr };
+    Node<int> node3 = { 3, nullptr, nullptr };
+    Node<int> node4 = { 4, nullptr, nullptr };
+    Node<int> node5 = { 5, nullptr, nullptr };
+    Node<int> node6 = { 6, nullptr, nullptr };
+    Node<int> node7 = { 7, nullptr, nullptr };
 
     printf("        4      \n");
     printf("     2     6   \n");

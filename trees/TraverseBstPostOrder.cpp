@@ -2,32 +2,29 @@
 #include <string>
 #include <vector>
 
-#include "BstNode.h"
+#include "Trees.h"
 
 using namespace std;
 
 /**
  * @brief Perform a postorder traversal of a BST.
  *
- * @param root Ptr to the root node of the BST.
- * @return Vector containing the data obtained during the traversal.
+ * @param root Root node of BST.
+ * @return Vector containing results of traversal.
  */
-vector<int> traverseBstPostOrder(BstNode* root) {
-    vector<int> result;
+template<typename T>
+vector<T> traverseBstPostOrder(Node<T>* root) {
+    vector<T> result;
     if (root == nullptr) {
         return result;
     }
     result = traverseBstPostOrder(root->left);
-    vector<int> right = traverseBstPostOrder(root->right);
-    for (auto& i : right) {
-        result.push_back(i);
-    }
+    vector<T> right = traverseBstPostOrder(root->right);
+    result.insert(result.end(), right.begin(), right.end());
     result.push_back(root->data);
+
     return result;
 }
-
-BstNode* createBstFromSortedArray(int count, int a[]);
-string vectorToString(vector<int> v);
 
 void testTraverseBstPostOrder() {
     printf("\n");
@@ -42,9 +39,12 @@ void testTraverseBstPostOrder() {
     printf("\n");
 
     int data[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17};
-    BstNode* root = createBstFromSortedArray(
-        sizeof(data)/sizeof(data[0]), data);
-    vector<int> v = traverseBstPostOrder(root);
-    string s = vectorToString(v);
-    printf("traverse BST postorder = %s\n", s.c_str());
+    vector<int> v;
+    for (auto n : data) {
+        v.push_back(n);
+    }
+    Node<int>* root = createBstFromSortedArray(v);
+    vector<int> t = traverseBstPostOrder(root);
+    printf("traverse BST postorder = %s\n",
+        vectorToString(t).c_str());
 }

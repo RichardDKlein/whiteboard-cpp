@@ -3,25 +3,26 @@
 #include <string>
 #include <vector>
 
-#include "BstNode.h"
+#include "Trees.h"
 
 using namespace std;
 
 /**
  * @brief Perform a breadth-first traversal of a BST.
  *
- * @param root Ptr to the root node of the BST.
- * @return Vector containing the data obtained during the traversal.
+ * @param root Root node of BST.
+ * @return Vector containing results of traversal.
  */
-vector<int> traverseBstBreadthFirst(BstNode* root) {
-    vector<int> result;
+template<typename T>
+vector<T> traverseBstBreadthFirst(Node<T>* root) {
+    vector<T> result;
     if (root == nullptr) {
         return result;
     }
-    queue<BstNode*> q;
+    queue<Node<T>*> q;
     q.push(root);
     while (!q.empty()) {
-        BstNode* node = q.front();
+        Node<T>* node = q.front();
         q.pop();
         result.push_back(node->data);
         if (node->left) {
@@ -33,9 +34,6 @@ vector<int> traverseBstBreadthFirst(BstNode* root) {
     }
     return result;
 }
-
-BstNode* createBstFromSortedArray(int count, int a[]);
-string vectorToString(vector<int> v);
 
 void testTraverseBstBreadthFirst() {
     printf("\n");
@@ -50,9 +48,12 @@ void testTraverseBstBreadthFirst() {
     printf("\n");
 
     int data[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17};
-    BstNode* root = createBstFromSortedArray(
-        sizeof(data)/sizeof(data[0]), data);
-    vector<int> v = traverseBstBreadthFirst(root);
-    string s = vectorToString(v);
-    printf("traverse BST breadth-first = %s\n", s.c_str());
+    vector<int> v;
+    for (auto n : data) {
+        v.push_back(n);
+    }
+    Node<int>* root = createBstFromSortedArray(v);
+    vector<int> t = traverseBstBreadthFirst(root);
+    printf("traverse BST breadth-first = %s\n",
+        vectorToString(t).c_str());
 }
