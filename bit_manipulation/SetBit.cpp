@@ -1,4 +1,4 @@
-#include <cstdio>
+#include "BitManipulation.h"
 
 /**
  * @brief Sets the specified bit in an unsigned int.
@@ -11,12 +11,11 @@ unsigned int setBit(unsigned int n, int b) {
     return n | (1 << b);
 }
 
-void printBits(unsigned int n);
-
 void testSetBit() {
-    printf("\n");
-    printf("Test setBit():\n");
-    printf("==============\n");
+    cout << endl;
+    cout << "Test setBit():" << endl;
+    cout << "==============" << endl;
+
     unsigned int n = 0;
     for (int i = 0; i < 32; ++i) {
         n = setBit(n, i);

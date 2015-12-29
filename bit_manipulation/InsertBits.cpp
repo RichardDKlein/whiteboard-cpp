@@ -1,6 +1,4 @@
-#include <cstdio>
-
-int countOneBits(unsigned int n);
+#include "BitManipulation.h"
 
 /**
  * @brief Insert a contiguous segment of bits into an unsigned int.
@@ -16,22 +14,23 @@ int countOneBits(unsigned int n);
  * make the intention clear).
  */
 unsigned int insertBits(unsigned int n, int msb, int lsb,
-                        unsigned int bits) {
+    unsigned int bits) {
+
     int len = msb - lsb + 1;
     unsigned int mask = ((1 << len) - 1) << lsb;
     return (n & ~mask) | (bits << lsb);
 }
 
-void printBits(unsigned int n);
-
 void testInsertBits() {
-    printf("\n");
-    printf("Test insertBits():\n");
-    printf("==================\n");
+    cout << endl;
+    cout << "Test insertBits():" << endl;
+    cout << "==================" << endl;
+
     unsigned int n = 0;
-    printf("Destination bits:\n");
+
+    cout << "Destination bits:" << endl;
     printBits(n);
-    printf("Bits to insert:\n");
+    cout << "Bits to insert:" << endl;
     unsigned int m = 0x3F;
     printBits(m);
     n = insertBits(n, 29, 24, m);

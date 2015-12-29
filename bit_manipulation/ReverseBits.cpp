@@ -1,6 +1,4 @@
-#include <cstdio>
-
-int countOneBits(unsigned int n);
+#include "BitManipulation.h"
 
 /**
  * @brief Reverse the bits in an unsigned int.
@@ -21,13 +19,13 @@ unsigned int reverseBits(unsigned int n) {
     return rev;
 }
 
-void printBits(unsigned int n);
-
 void testReverseBits() {
-    printf("\n");
-    printf("Test reverseBits():\n");
-    printf("===================\n");
+    cout << endl;
+    cout << "Test reverseBits():" << endl;
+    cout << "===================" << endl;
+
     unsigned int n = 0xB77BEFDF;
+
     printBits(n);
     n = reverseBits(n);
     printf("Reversed:\n");

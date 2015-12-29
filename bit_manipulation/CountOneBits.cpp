@@ -1,4 +1,4 @@
-#include <cstdio>
+#include "BitManipulation.h"
 
 /**
  * @brief Count the number of '1' bits in an unsigned int.
@@ -15,22 +15,22 @@ int countOneBits(unsigned int n) {
     return count;
 }
 
-void printBits(unsigned int n);
-unsigned int toggleBit(unsigned int n, int b);
-
 void testCountOneBits() {
-    printf("\n");
-    printf("Test countOneBits():\n");
-    printf("====================\n");
+    cout << endl;
+    cout << "Test countOneBits():" << endl;
+    cout << "====================" << endl;
+
     unsigned int n = 0;
+
     for (int i = 0; i < 32; ++i) {
         n = toggleBit(n, i);
         printBits(n);
-        printf("Number of 1 bits = %d\n", countOneBits(n));
+        cout << "Number of 1 bits = " << countOneBits(n) << endl;
     }
+
     for (int i = 0; i < 32; ++i) {
         n = toggleBit(n, i);
         printBits(n);
-        printf("Number of 1 bits = %d\n", countOneBits(n));
+        cout << "Number of 1 bits = " << countOneBits(n) << endl;
     }
 }

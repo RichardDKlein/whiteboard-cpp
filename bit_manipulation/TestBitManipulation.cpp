@@ -1,20 +1,10 @@
-#include <cstdio>
-
-void testBitDiff();
-void testClearBit();
-void testCountOneBits();
-void testGetBit();
-void testInsertBits();
-void testIsPowerOfTwo();
-void testReverseBits();
-void testSetBit();
-void testToggleBit();
+#include "BitManipulation.h"
 
 void testBitManipulation() {
-    printf("\n");
-    printf("=============================================\n");
-    printf("               BIT MANIPULATION              \n");
-    printf("=============================================\n");
+    cout << endl;
+    cout << "=============================================" << endl;
+    cout << "               BIT MANIPULATION              " << endl;
+    cout << "=============================================" << endl;
 
     testBitDiff();
     testClearBit();

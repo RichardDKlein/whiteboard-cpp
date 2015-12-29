@@ -1,4 +1,4 @@
-#include <cstdio>
+#include "BitManipulation.h"
 
 /**
  * @brief Toggles the specified bit in an unsigned int.
@@ -11,13 +11,13 @@ unsigned int toggleBit(unsigned int n, int b) {
     return n ^ (1 << b);
 }
 
-void printBits(unsigned int n);
-
 void testToggleBit() {
-    printf("\n");
-    printf("Test toggleBit():\n");
-    printf("=================\n");
+    cout << endl;
+    cout << "Test toggleBit():" << endl;
+    cout << "=================" << endl;
+
     unsigned int n = 0;
+
     for (int i = 0; i < 32; ++i) {
         n = toggleBit(n, i);
         printBits(n);

@@ -1,4 +1,4 @@
-#include <cstdio>
+#include "BitManipulation.h"
 
 /**
  * @brief Gets the specified bit in an unsigned int.
@@ -11,15 +11,14 @@ int getBit(unsigned int n, int b) {
     return n & (1 << b) ? 1 : 0;
 }
 
-void printBits(unsigned int n);
-
 void testGetBit() {
-    printf("\n");
-    printf("Test getBit():\n");
-    printf("==============\n");
+    cout << endl;
+    cout << "Test getBit():" << endl;
+    cout << "==============" << endl;
+
     unsigned int n = 0xAAAAAAAA;
     printBits(n);
     for (int i = 0; i < 32; ++i) {
-        printf("Bit %d = %d\n", i, getBit(n, i));
+        cout<< "Bit " << i << " = " << getBit(n, i) << endl;
     }
 }

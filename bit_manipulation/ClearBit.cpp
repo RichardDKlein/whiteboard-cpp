@@ -1,4 +1,4 @@
-#include <cstdio>
+#include "BitManipulation.h"
 
 /**
  * @brief Clears the specified bit in an unsigned int.
@@ -11,12 +11,11 @@ unsigned int clearBit(unsigned int n, int b) {
     return n & ~(1 << b);
 }
 
-void printBits(unsigned int n);
-
 void testClearBit() {
-    printf("\n");
-    printf("Test clearBit():\n");
-    printf("================\n");
+    cout << endl;
+    cout << "Test clearBit():" << endl;
+    cout << "================" << endl;
+
     unsigned int n = (unsigned) -1;
     for (int i = 0; i < 32; ++i) {
         n = clearBit(n, i);

@@ -1,6 +1,4 @@
-#include <cstdio>
-
-int countOneBits(unsigned int n);
+#include "BitManipulation.h"
 
 /**
  * @brief Determines the bit difference between two unsigned ints,
@@ -15,15 +13,15 @@ int bitDiff(unsigned int m, unsigned int n) {
     return countOneBits(m ^ n);
 }
 
-void printBits(unsigned int n);
-
 void testBitDiff() {
-    printf("\n");
-    printf("Test bitDiff():\n");
-    printf("===============\n");
+    cout << endl;
+    cout << "Test bitDiff():" << endl;
+    cout << "===============" << endl;
+
     unsigned int m = 0xAAAAAAAA;
     unsigned int n = 0xAAABAACA;
+
     printBits(m);
     printBits(n);
-    printf("Bit diff = %d\n", bitDiff(m, n));
+    cout << "Bit diff = " << bitDiff(m, n) << endl;
 }
