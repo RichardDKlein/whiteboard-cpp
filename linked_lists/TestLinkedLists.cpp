@@ -9,8 +9,8 @@ void testLinkedLists() {
 
     testAppendToList();
     testDeleteFromList();
-    testFindKthToLastInList();
     testInsertInList();
+    testKthToLastInList();
     testListHasCycle();
     testRemoveDupsFromList();
     testReverseList();

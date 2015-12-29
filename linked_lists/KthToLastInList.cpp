@@ -10,7 +10,7 @@ using namespace std;
  * @return Kth to last node in list, or nullptr if k is too big.
  */
 template<typename T>
-Node<T>* findKthToLast(Node<T>* list, int k) {
+Node<T>* kthToLastInList(Node<T>* list, int k) {
     Node<T>* lead = list;
     int count = 0;
     while (lead && (count < k)) {
@@ -28,10 +28,10 @@ Node<T>* findKthToLast(Node<T>* list, int k) {
     return lag;
 }
 
-void testFindKthToLastInList() {
+void testKthToLastInList() {
     printf("\n");
-    printf("Test findKthToLastInList():\n");
-    printf("===========================\n");
+    printf("Test kthToLastInList():\n");
+    printf("=======================\n");
 
     char a[] = "a";
     char b[] = "b";
@@ -53,7 +53,7 @@ void testFindKthToLastInList() {
     printList(&list);
 
     for (int k = 1; k <= 8; ++k) {
-        Node<char*>* kthToLastNode = findKthToLast(&list, k);
+        Node<char*>* kthToLastNode = kthToLastInList(&list, k);
         printf("kth to last element (k = %d) is %s\n",
             k, kthToLastNode ? kthToLastNode->data : "nullptr");
     }

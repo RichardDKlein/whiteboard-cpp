@@ -19,8 +19,8 @@ template<typename T> Node<T>* reverseList(Node<T>* list);
 
 void testAppendToList();
 void testDeleteFromList();
-void testFindKthToLastInList();
 void testInsertInList();
+void testKthToLastInList();
 void testLinkedLists();
 void testListHasCycle();
 void testRemoveDupsFromList();
