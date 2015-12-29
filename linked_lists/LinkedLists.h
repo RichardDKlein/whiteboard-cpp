@@ -1,6 +1,10 @@
 #ifndef LINKED_LISTS_H
 #define LINKED_LISTS_H
 
+#include <set>
+
+using namespace std;
+
 template<typename T>
 struct Node {
     T data;

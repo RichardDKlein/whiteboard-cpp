@@ -1,7 +1,4 @@
-#include <cstdio>
 #include "LinkedLists.h"
-
-using namespace std;
 
 /**
  * @brief Reverse a linked list.
@@ -23,9 +20,9 @@ Node<T>* reverseList(Node<T>* list) {
 }
 
 void testReverseList() {
-    printf("\n");
-    printf("Test reverseList():\n");
-    printf("===================\n");
+    cout << endl;
+    cout << "Test reverseList():" << endl;
+    cout << "===================" << endl;
 
     char a[] = "a";
     char b[] = "b";

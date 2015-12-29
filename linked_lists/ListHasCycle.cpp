@@ -1,7 +1,4 @@
-#include <cstdio>
 #include "LinkedLists.h"
-
-using namespace std;
 
 /**
  * @brief Determines whether a linked list contains a cycle.
@@ -26,9 +23,9 @@ bool listHasCycle(Node<T>* list) {
 }
 
 void testListHasCycle() {
-    printf("\n");
-    printf("Test listHasCycle():\n");
-    printf("====================\n");
+    cout << endl;
+    cout << "Test listHasCycle():" << endl;
+    cout << "====================" << endl;
 
     char a[] = "a";
     char b[] = "b";
@@ -48,11 +45,11 @@ void testListHasCycle() {
     appendToList(&list, f);
     Node<char*>* gNode = appendToList(&list, g);
     printList(&list);
-    printf("Has cycle = %s\n", listHasCycle(&list) ?
-        "true" : "false");
+    cout << "Has cycle = "
+         << (listHasCycle(&list) ? "true" : "false") << endl;
 
     gNode->next = cNode;
     printList(&list, 22);
-    printf("Has cycle = %s\n", listHasCycle(&list) ?
-        "true" : "false");
+    cout << "Has cycle = "
+         << (listHasCycle(&list) ? "true" : "false") << endl;
 }

@@ -1,7 +1,4 @@
-#include <cstdio>
 #include "LinkedLists.h"
-
-using namespace std;
 
 /**
  * @brief Find the kth to last node in a linked list.
@@ -29,9 +26,9 @@ Node<T>* kthToLastInList(Node<T>* list, int k) {
 }
 
 void testKthToLastInList() {
-    printf("\n");
-    printf("Test kthToLastInList():\n");
-    printf("=======================\n");
+    cout << endl;
+    cout << "Test kthToLastInList():" << endl;
+    cout << "=======================" << endl;
 
     char a[] = "a";
     char b[] = "b";
@@ -54,7 +51,8 @@ void testKthToLastInList() {
 
     for (int k = 1; k <= 8; ++k) {
         Node<char*>* kthToLastNode = kthToLastInList(&list, k);
-        printf("kth to last element (k = %d) is %s\n",
-            k, kthToLastNode ? kthToLastNode->data : "nullptr");
+        cout << "kth to last element (k = " << k << ") is "
+             << (kthToLastNode ? kthToLastNode->data : "nullptr")
+             << endl;
     }
 }

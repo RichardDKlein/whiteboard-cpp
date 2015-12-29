@@ -1,4 +1,3 @@
-#include <cstdio>
 #include "LinkedLists.h"
 
 /**
@@ -23,9 +22,9 @@ bool deleteFromList(Node<T>* toDelete) {
 }
 
 void testDeleteFromList() {
-    printf("\n");
-    printf("Test deleteFromList():\n");
-    printf("======================\n");
+    cout << endl;
+    cout << "Test deleteFromList():" << endl;
+    cout << "======================" << endl;
 
     char a[] = "a";
     char b[] = "b";

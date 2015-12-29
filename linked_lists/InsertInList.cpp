@@ -1,4 +1,3 @@
-#include <cstdio>
 #include "LinkedLists.h"
 
 /**
@@ -27,9 +26,9 @@ Node<T>* insertInList(Node<T>* list, Node<T>* after, T data) {
 }
 
 void testInsertInList() {
-    printf("\n");
-    printf("Test insertInList():\n");
-    printf("====================\n");
+    cout << endl;
+    cout << "Test insertInList():" << endl;
+    cout << "====================" << endl;
 
     char a[] = "a";
     char b[] = "b";

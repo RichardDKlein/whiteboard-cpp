@@ -1,9 +1,4 @@
-#include <cstdio>
-#include <set>
-#include <vector>
 #include "LinkedLists.h"
-
-using namespace std;
 
 /**
  * @brief Remove duplicates from a linked list.
@@ -30,9 +25,9 @@ void removeDupsFromList(Node<T>* list) {
 }
 
 void testRemoveDupsFromList() {
-    printf("\n");
-    printf("Test removeDupsFromList():\n");
-    printf("==========================\n");
+    cout << endl;
+    cout << "Test removeDupsFromList():" << endl;
+    cout << "==========================" << endl;
 
     char a[] = "a";
     char b[] = "b";
@@ -62,6 +57,6 @@ void testRemoveDupsFromList() {
     printList(&list);
 
     removeDupsFromList(&list);
-    printf("Removing duplicates:\n");
+    cout << "Removing duplicates:" << endl;
     printList(&list);
 }
