@@ -1,12 +1,5 @@
-#include <cmath>
-#include <cstdio>
-#include <iterator>
-#include <set>
-#include "TestUtils.h"
-
-using namespace std;
-
-int getBit(unsigned int n, int b);
+#include "../bit_manipulation/BitManipulation.h"
+#include "Sets.h"
 
 /**
  * @brief Return the power set of a set, i.e. the set of all subsets
@@ -33,9 +26,9 @@ set<set<T>> powerSetIterative(const set<T>& s) {
 }
 
 void testPowerSetIterative() {
-    printf("\n");
-    printf("Test powerSetIterative():\n");
-    printf("=========================\n");
+    cout << endl;
+    cout << "Test powerSetIterative():" << endl;
+    cout << "=========================" << endl;
 
     set<char> s;
 
@@ -45,10 +38,11 @@ void testPowerSetIterative() {
     s.insert('d');
     s.insert('e');
 
-    printf("s = ");
+    cout << "s = ";
     printSet(s);
 
     set<set<char>> p = powerSetIterative(s);
-    printf("powerSetIterative(s) = %d subsets:\n", p.size());
+    cout << "powerSetIterative(s) = " << p.size()
+         << " subsets:" << endl;
     printPowerSet(p);
 }

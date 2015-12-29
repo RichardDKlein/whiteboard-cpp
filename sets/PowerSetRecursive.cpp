@@ -1,8 +1,4 @@
-#include <cstdio>
-#include <set>
-#include "TestUtils.h"
-
-using namespace std;
+#include "Sets.h"
 
 /**
  * @brief Return the power set of a set, i.e. the set of all subsets
@@ -32,9 +28,9 @@ set<set<T>> powerSetRecursive(const set<T>& s) {
 }
 
 void testPowerSetRecursive() {
-    printf("\n");
-    printf("Test powerSetRecursive():\n");
-    printf("=========================\n");
+    cout << endl;
+    cout << "Test powerSetRecursive():" << endl;
+    cout << "=========================" << endl;
 
     set<char> s;
 
@@ -44,10 +40,11 @@ void testPowerSetRecursive() {
     s.insert('d');
     s.insert('e');
 
-    printf("s = ");
+    cout << "s = ";
     printSet(s);
 
     set<set<char>> p = powerSetRecursive(s);
-    printf("powerSetRecursive(s) = %d subsets:\n", p.size());
+    cout << "powerSetRecursive(s) = " << p.size()
+         << " subsets:" << endl;
     printPowerSet(p);
 }

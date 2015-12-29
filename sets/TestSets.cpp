@@ -1,16 +1,13 @@
-#include <cstdio>
-
-void testPowerSetIterative();
-void testPowerSetRecursive();
+#include "Sets.h"
 
 /**
  * @brief Test the functions in the "sets" folder.
  */
 void testSets() {
-    printf("\n");
-    printf("=============================================\n");
-    printf("                    SETS                     \n");
-    printf("=============================================\n");
+    cout << endl;
+    cout << "=============================================" << endl;
+    cout << "                    SETS                     " << endl;
+    cout << "=============================================" << endl;
 
     testPowerSetIterative();
     testPowerSetRecursive();
