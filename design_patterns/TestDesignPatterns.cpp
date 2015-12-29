@@ -1,4 +1,6 @@
-#include <cstdio>
+#include <iostream>
+
+using namespace std;
 
 void testSingleton();
 
@@ -6,10 +8,10 @@ void testSingleton();
  * @brief Test the classes in the "design_patterns" folder.
  */
 void testDesignPatterns() {
-    printf("\n");
-    printf("=============================================\n");
-    printf("                DESIGN PATTERNS              \n");
-    printf("=============================================\n");
+    cout << endl;
+    cout << "=============================================" << endl;
+    cout << "                DESIGN PATTERNS              " << endl;
+    cout << "=============================================" << endl;
 
     testSingleton();
 }

@@ -1,4 +1,6 @@
-#include <cstdio>
+#include <iostream>
+
+using namespace std;
 
 class Singleton {
 private:
@@ -18,12 +20,15 @@ public:
 Singleton* Singleton::m_instance = nullptr;
 
 void testSingleton() {
-    printf("\n");
-    printf("Test Singleton:\n");
-    printf("===============\n");
+    cout << endl;
+    cout << "Test Singleton:" << endl;
+    cout << "===============" << endl;
 
     Singleton* instance1 = Singleton::getInstance();
     Singleton* instance2 = Singleton::getInstance();
-    printf("1st time: Singleton::getInstance() = %p\n", instance1);
-    printf("2nd time: Singleton::getInstance() = %p\n", instance2);
+
+    cout << "1st time: Singleton::getInstance() = "
+         << instance1 << endl;
+    cout << "2nd time: Singleton::getInstance() = "
+         << instance2 << endl;
 }
