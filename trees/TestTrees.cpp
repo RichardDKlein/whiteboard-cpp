@@ -1,14 +1,10 @@
-#include <cstdio>
-#include <queue>
 #include "Trees.h"
 
-using namespace std;
-
 void testTrees() {
-    printf("\n");
-    printf("=============================================\n");
-    printf("                    TREES                    \n");
-    printf("=============================================\n");
+    cout << endl;
+    cout << "=============================================" << endl;
+    cout << "                    TREES                    " << endl;
+    cout << "=============================================" << endl;
 
     testCreateBstFromSortedArray();
     testCreateNestedFolders();

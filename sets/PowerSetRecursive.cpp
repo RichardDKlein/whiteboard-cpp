@@ -15,10 +15,10 @@ set<set<T>> powerSetRecursive(const set<T>& s) {
         result.insert(emptySet);
         return result;
     }
-    set<T> s1 = s;
-    T first = *s1.begin();
-    s1.erase(s1.begin());
-    set<set<T>> remPowerSet = powerSetRecursive(s1);
+    set<T> rem = s;
+    T first = *rem.begin();
+    rem.erase(rem.begin());
+    set<set<T>> remPowerSet = powerSetRecursive(rem);
     result = remPowerSet;
     for (auto subset : remPowerSet) {
         subset.insert(first);

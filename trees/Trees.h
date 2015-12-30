@@ -1,6 +1,8 @@
 #ifndef TREES_H
 #define TREES_H
 
+#include <climits>
+#include <queue>
 #include <vector>
 
 using namespace std;

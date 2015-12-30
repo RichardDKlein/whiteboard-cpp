@@ -1,4 +1,4 @@
-#include <cstdio>
+#include <iostream>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -10,19 +10,19 @@ struct Folder {
     string parentName;
 };
 
-struct TreeNode {
+struct Node {
     string name;
-    TreeNode* parent;
-    vector<TreeNode*> children;
+    Node* parent;
+    vector<Node*> children;
 };
 
-typedef unordered_map<string, TreeNode*> NodeMap;
-typedef unordered_map<string, TreeNode*>::iterator NodeMapIterator;
+typedef unordered_map<string, Node*> NodeMap;
+typedef unordered_map<string, Node*>::iterator NodeMapIterator;
 
-TreeNode* buildFolderTree(const vector<Folder>& folders);
-TreeNode* createOrFindNode(NodeMap& nodeMap, const string& name);
-void destroyFolderTree(TreeNode* root);
-vector<Folder> traverseFolderTree(TreeNode* root);
+static Node* buildFolderTree(const vector<Folder>& folders);
+static Node* createOrFindNode(NodeMap& nodeMap, const string& name);
+static void destroyFolderTree(Node* root);
+static vector<Folder> traverseFolderTree(Node* root);
 
 /**
  * @brief Create a tree of nested folders.
@@ -37,35 +37,35 @@ vector<Folder> traverseFolderTree(TreeNode* root);
  */
 vector<Folder> createNestedFolders(const vector<Folder>& folders) {
     vector<Folder> result;
-    TreeNode* root = buildFolderTree(folders);
+    Node* root = buildFolderTree(folders);
     result = traverseFolderTree(root);
     destroyFolderTree(root);
     return result;
 }
 
-TreeNode* buildFolderTree(const vector<Folder>& folders) {
-    TreeNode* root = nullptr;
+static Node* buildFolderTree(const vector<Folder>& folders) {
+    Node* root = nullptr;
     NodeMap nodeMap;
     NodeMapIterator iter;
     for (const auto& folder : folders) {
-        TreeNode* folderNode = createOrFindNode(nodeMap, folder.name);
+        Node* folderNode = createOrFindNode(nodeMap, folder.name);
         if (folder.parentName == "") {
             folderNode->parent = nullptr;
             root = folderNode;
             continue;
         }
-        TreeNode* parentNode = createOrFindNode(nodeMap, folder.parentName);
+        Node* parentNode = createOrFindNode(nodeMap, folder.parentName);
         folderNode->parent = parentNode;
         parentNode->children.push_back(folderNode);
     }
     return root;
 }
 
-TreeNode* createOrFindNode(NodeMap& nodeMap, const string& name) {
-    TreeNode* node;
+static Node* createOrFindNode(NodeMap& nodeMap, const string& name) {
+    Node* node;
     NodeMapIterator iter = nodeMap.find(name);
     if (iter == nodeMap.end()) {
-        node = new TreeNode;
+        node = new Node;
         node->name = name;
         nodeMap[name] = node;
     } else {
@@ -74,7 +74,7 @@ TreeNode* createOrFindNode(NodeMap& nodeMap, const string& name) {
     return node;
 }
 
-vector<Folder> traverseFolderTree(TreeNode* root) {
+static vector<Folder> traverseFolderTree(Node* root) {
     vector<Folder> result;
     if (root == nullptr) {
         return result;
@@ -84,15 +84,13 @@ vector<Folder> traverseFolderTree(TreeNode* root) {
     folder.parentName = (root->parent) ? root->parent->name : "";
     result.push_back(folder);
     for (const auto& child : root->children) {
-        vector<Folder> childFolders = traverseFolderTree(child);
-        for (const auto& childFolder : childFolders) {
-            result.push_back(childFolder);
-        }
+        vector<Folder> kids = traverseFolderTree(child);
+        result.insert(result.end(), kids.begin(), kids.end());
     }
     return result;
 }
 
-void destroyFolderTree(TreeNode* root) {
+static void destroyFolderTree(Node* root) {
     if (root == nullptr) {
         return;
     }
@@ -102,9 +100,9 @@ void destroyFolderTree(TreeNode* root) {
 }
 
 void testCreateNestedFolders() {
-    printf("\n");
-    printf("Test createNestedFolders():\n");
-    printf("===========================\n");
+    cout << endl;
+    cout << "Test createNestedFolders():" << endl;
+    cout << "===========================" << endl;
 
     string folderNames[] = {
         "root",
@@ -167,8 +165,8 @@ void testCreateNestedFolders() {
 
     vector<Folder> result = createNestedFolders(folders);
 
-    printf("Creation order:\n");
+    cout << "Creation order:" << endl;
     for (auto& folder : result) {
-        printf("\t%s\n", folder.name.c_str());
+        cout << "\t" << folder.name << endl;
     }
 }

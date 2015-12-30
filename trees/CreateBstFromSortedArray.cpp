@@ -1,9 +1,4 @@
-#include <cstdio>
-#include <string>
-#include <vector>
 #include "Trees.h"
-
-using namespace std;
 
 /**
  * @brief Create a BST from a sorted array.
@@ -35,16 +30,16 @@ Node<T>* createBstFromSortedArray(const vector<T>& v) {
 }
 
 void testCreateBstFromSortedArray() {
-    printf("\n");
-    printf("Test createBstFromSortedArray():\n");
-    printf("================================\n");
+    cout << endl;
+    cout << "Test createBstFromSortedArray():" << endl;
+    cout << "================================" << endl;
     int data[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17};
     vector<int> v;
     for (auto n : data) {
         v.push_back(n);
     }
-    printf("sorted array = %s\n", vectorToString(v).c_str());
+    cout << "sorted array = " << vectorToString(v) << endl;
     Node<int>* root = createBstFromSortedArray(v);
     vector<int> t = traverseBstInOrder(root);
-    printf("traverse BST inorder = %s\n", vectorToString(t).c_str());
+    cout << "traverse BST inorder = " << vectorToString(t) << endl;
 }
