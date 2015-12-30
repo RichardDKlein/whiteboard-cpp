@@ -1,5 +1,4 @@
-#include <cstdio>
-#include <cstring>
+#include <iostream>
 #include <queue>
 
 using namespace std;
@@ -36,9 +35,9 @@ public:
 };
 
 void testStackFromTwoQueues() {
-    printf("\n");
-    printf("Test StackFromTwoQueues:\n");
-    printf("========================\n");
+    cout << endl;
+    cout << "Test StackFromTwoQueues:" << endl;
+    cout << "========================" << endl;
 
     StackFromTwoQueues<char*> s;
 
@@ -48,30 +47,30 @@ void testStackFromTwoQueues() {
     char d[] = "d";
     char e[] = "e";
 
-    printf("Push a\n");
+    cout << "Push a" << endl;
     s.push(a);
-    printf("Push b\n");
+    cout << "Push b" << endl;
     s.push(b);
-    printf("Push c\n");
+    cout << "Push c" << endl;
     s.push(c);
-    printf("Push d\n");
+    cout << "Push d" << endl;
     s.push(d);
-    printf("Push e\n");
+    cout << "Push e" << endl;
     s.push(e);
 
-    printf("\n");
+    cout << endl;
 
     char* p1 = s.pop();
-    printf("Pop: %s\n", p1);
+    cout << "Pop: " << p1 << endl;
     char* p2 = s.pop();
-    printf("Pop: %s\n", p2);
+    cout << "Pop: " << p2 << endl;
     char* p3 = s.pop();
-    printf("Pop: %s\n", p3);
+    cout << "Pop: " << p3 << endl;
     char* p4 = s.pop();
-    printf("Pop: %s\n", p4);
+    cout << "Pop: " << p4 << endl;
     char* p5 = s.pop();
-    printf("Pop: %s\n", p5);
+    cout << "Pop: " << p5 << endl;
 
     char* p6 = s.pop();
-    printf("Pop: %s\n", (p6 == nullptr) ? "<empty>" : p6);
+    cout << "Pop: " << ((p6 == nullptr) ? "<empty>" : p6) << endl;
 }

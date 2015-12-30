@@ -1,4 +1,6 @@
-#include <cstdio>
+#include <iostream>
+
+using namespace std;
 
 void testQueueFromTwoStacks();
 void testStackFromTwoQueues();
@@ -7,10 +9,10 @@ void testStackFromTwoQueues();
  * @brief Test the classes in the "stacks_and_queues" folder.
  */
 void testStacksAndQueues() {
-    printf("\n");
-    printf("=============================================\n");
-    printf("              STACKS AND QUEUES              \n");
-    printf("=============================================\n");
+    cout << endl;
+    cout << "=============================================" << endl;
+    cout << "              STACKS AND QUEUES              " << endl;
+    cout << "=============================================" << endl;
 
     testQueueFromTwoStacks();
     testStackFromTwoQueues();

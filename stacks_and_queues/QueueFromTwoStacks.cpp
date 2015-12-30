@@ -1,5 +1,4 @@
-#include <cstdio>
-#include <cstring>
+#include <iostream>
 #include <stack>
 
 using namespace std;
@@ -36,9 +35,9 @@ public:
 };
 
 void testQueueFromTwoStacks() {
-    printf("\n");
-    printf("Test QueueFromTwoStacks:\n");
-    printf("========================\n");
+    cout << endl;
+    cout << "Test QueueFromTwoStacks:" << endl;
+    cout << "========================" << endl;
 
     QueueFromTwoStacks<char*> q;
 
@@ -48,30 +47,30 @@ void testQueueFromTwoStacks() {
     char d[] = "d";
     char e[] = "e";
 
-    printf("Enqueue a\n");
+    cout << "Enqueue a" << endl;
     q.enqueue(a);
-    printf("Enqueue b\n");
+    cout << "Enqueue b" << endl;
     q.enqueue(b);
-    printf("Enqueue c\n");
+    cout << "Enqueue c" << endl;
     q.enqueue(c);
-    printf("Enqueue d\n");
+    cout << "Enqueue d" << endl;
     q.enqueue(d);
-    printf("Enqueue e\n");
+    cout << "Enqueue e" << endl;
     q.enqueue(e);
 
-    printf("\n");
+    cout << endl;
 
     char* d1 = q.dequeue();
-    printf("Dequeue: %s\n", d1);
+    cout << "Dequeue: " << d1 << endl;
     char* d2 = q.dequeue();
-    printf("Dequeue: %s\n", d2);
+    cout << "Dequeue: " << d2 << endl;
     char* d3 = q.dequeue();
-    printf("Dequeue: %s\n", d3);
+    cout << "Dequeue: " << d3 << endl;
     char* d4 = q.dequeue();
-    printf("Dequeue: %s\n", d4);
+    cout << "Dequeue: " << d4 << endl;
     char* d5 = q.dequeue();
-    printf("Dequeue: %s\n", d5);
+    cout << "Dequeue: " << d5 << endl;
 
     char* d6 = q.dequeue();
-    printf("Dequeue: %s\n", (d6 == nullptr) ? "<empty>" : d6);
+    cout << "Dequeue: " << ((d6 == nullptr) ? "<empty>" : d6) << endl;
 }
