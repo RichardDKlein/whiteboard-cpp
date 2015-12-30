@@ -1,12 +1,14 @@
-#include <cstdio>
+#include <iostream>
+
+using namespace std;
 
 void testProducerConsumerQueue();
 
 void testThreads() {
-    printf("\n");
-    printf("=============================================\n");
-    printf("                   THREADS                   \n");
-    printf("=============================================\n");
+    cout << endl;
+    cout << "=============================================" << endl;
+    cout << "                   THREADS                   " << endl;
+    cout << "=============================================" << endl;
 
     testProducerConsumerQueue();
 }

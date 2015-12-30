@@ -1,5 +1,5 @@
 #include <condition_variable>
-#include <cstdio>
+#include <iostream>
 #include <mutex>
 #include <queue>
 #include <thread>
@@ -40,9 +40,9 @@ static void consumer(int id, ProducerConsumerQueue<int>* jobQueue);
 static void producer(int id, ProducerConsumerQueue<int>* jobQueue);
 
 void testProducerConsumerQueue() {
-    printf("\n");
-    printf("Test ProducerConsumerQueue():\n");
-    printf("=============================\n");
+    cout << endl;
+    cout << "Test ProducerConsumerQueue():" << endl;
+    cout << "=============================" << endl;
 
     ProducerConsumerQueue<int> jobQueue(5);
 
@@ -64,7 +64,7 @@ void testProducerConsumerQueue() {
 static void consumer(int id, ProducerConsumerQueue<int>* jobQueue) {
     for (int i = 0; i < 10; ++i) {
         int job = jobQueue->get();
-        printf("Consumer %d consumed %d\n", id, job);
+        cout << "Consumer " << id << " consumed " << job << endl;
         this_thread::sleep_for(chrono::milliseconds(250));
     }
 }
@@ -73,7 +73,7 @@ static void producer(int id, ProducerConsumerQueue<int>* jobQueue) {
     for (int i = 0; i < 10; ++i) {
         int job = (id * 100) + i;
         jobQueue->put(job);
-        printf("Producer %d produced %d\n", id, job);
+        cout << "Producer " << id << " produced " << job << endl;
         this_thread::sleep_for(chrono::milliseconds(100));
     }
 }
