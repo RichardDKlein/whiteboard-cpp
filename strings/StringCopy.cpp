@@ -1,6 +1,4 @@
-#include <cstdio>
-
-size_t stringLength(const char* s);
+#include "Strings.h"
 
 /**
  * @brief Copy a string.
@@ -19,9 +17,9 @@ char* stringCopy(const char* s) {
 }
 
 void testStringCopy() {
-    printf("\n");
-    printf("Test stringCopy():\n");
-    printf("==================\n");
+    cout << endl;
+    cout << "Test stringCopy():" << endl;
+    cout << "==================" << endl;
 
     const char* testStrings[] = {
         "",
@@ -32,7 +30,8 @@ void testStringCopy() {
 
     for (auto& s : testStrings) {
         char* sCopy = stringCopy(s);
-        printf("stringCopy(\"%s\") = \"%s\"\n", s, sCopy);
+        cout << "stringCopy(\"" << s << "\") = \""
+             << sCopy << "\"" << endl;
         delete[] sCopy;
     }
 }

@@ -1,11 +1,4 @@
-#include <cstdio>
-#include <queue>
-#include <sstream>
-#include <string>
-#include <unordered_map>
-#include <vector>
-
-using namespace std;
+#include "Strings.h"
 
 typedef pair<string, int> Entry;
 
@@ -56,9 +49,9 @@ vector<Entry> topKStrings(const vector<string>& v, int k) {
 }
 
 void testTopKStrings() {
-    printf("\n");
-    printf("Test topKStrings():\n");
-    printf("===================\n");
+    cout << endl;
+    cout << "Test topKStrings():" << endl;
+    cout << "===================" << endl;
 
     string text =
         "four score and seven years ago our fathers brought "
@@ -97,9 +90,9 @@ void testTopKStrings() {
     }
     vector<Entry> topTen = topKStrings(v, 10);
 
-    printf("Top 10 words in Gettysburg Address:\n");
+    cout << "Top 10 words in Gettysburg Address:" << endl;
     for (int i = 0; i < 10; ++i) {
-        printf("%d. %s\t(%d occurrences)\n",
-            i + 1, topTen[i].first.c_str(), topTen[i].second);
+        cout << i + 1 << ". " << topTen[i].first << "\t("
+             << topTen[i].second << " occurrences)" << endl;
     }
 }

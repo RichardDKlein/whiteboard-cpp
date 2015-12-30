@@ -1,6 +1,4 @@
-#include <cstdio>
-
-size_t stringLength(const char* s);
+#include "Strings.h"
 
 /**
  * @brief Reverse each word in a sentence without changing
@@ -31,9 +29,9 @@ char* reverseWordsInSentence(const char* s) {
 }
 
 void testReverseWordsInSentence() {
-    printf("\n");
-    printf("Test reverseWordsInSentence():\n");
-    printf("==============================\n");
+    cout << endl;
+    cout << "Test reverseWordsInSentence():" << endl;
+    cout << "==============================" << endl;
 
     const char* testStrings[] = {
         "Now is the time",
@@ -45,7 +43,8 @@ void testReverseWordsInSentence() {
     for (int i = 0; i < numTestStrings; ++i) {
         const char* s = testStrings[i];
         char* r = reverseWordsInSentence(s);
-        printf("reverseWordsInSentence(\"%s\") = \"%s\"\n", s, r);
+            cout << "reverseWordsInSentence(\"" << s
+                 << "\") = \"" << r << "\"" << endl;
         delete[] r;
     }
 }

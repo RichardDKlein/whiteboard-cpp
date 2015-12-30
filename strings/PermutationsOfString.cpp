@@ -1,8 +1,4 @@
-#include <cstdio>
-#include <string>
-#include <vector>
-
-using namespace std;
+#include "Strings.h"
 
 string insertCharAt(string s, char c, size_t index);
 
@@ -12,7 +8,7 @@ string insertCharAt(string s, char c, size_t index);
  * @param s The string of interest.
  * @return Vector containing all permutations of |s|.
  */
-vector<string> permutationsOfString(string s) {
+vector<string> permutationsOfString(const string& s) {
     vector<string> perms;
     if (s == "") {
         perms.push_back("");
@@ -37,15 +33,16 @@ string insertCharAt(string s, char c, size_t index) {
 }
 
 void testPermutationsOfString() {
-    printf("\n");
-    printf("Test permutationsOfString():\n");
-    printf("============================\n");
+    cout << endl;
+    cout << "Test permutationsOfString():" << endl;
+    cout << "============================" << endl;
 
     const char* testString = "crab";
     vector<string> perms = permutationsOfString(testString);
-    printf("permutationsOfString(\"%s\") returns %d permutations:\n",
-        testString, perms.size());
+    cout << "permutationsOfString(\"" << testString
+         << "\") returns " << perms.size() << " permutations:"
+         << endl;
     for (auto& perm : perms) {
-        printf("\t\"%s\"\n", perm.c_str());
+        cout << "\t\"" << perm << "\"" << endl;
     }
 }

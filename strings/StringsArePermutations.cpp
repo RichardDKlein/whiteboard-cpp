@@ -1,6 +1,4 @@
-#include <cstdio>
-
-size_t stringLength(const char* s);
+#include "Strings.h"
 
 /**
  * @brief Determine whether two strings are permutations
@@ -38,9 +36,9 @@ bool stringsArePermutations(const char* s1, const char* s2) {
 }
 
 void testStringsArePermutations() {
-    printf("\n");
-    printf("Test stringsArePermutations():\n");
-    printf("==============================\n");
+    cout << endl;
+    cout << "Test stringsArePermutations():" << endl;
+    cout << "==============================" << endl;
 
     const char* testStrings[] = {
         "Hello, world",
@@ -54,9 +52,10 @@ void testStringsArePermutations() {
         for (int j = i + 1; j < numTestStrings; ++j) {
             const char* s1 = testStrings[i];
             const char* s2 = testStrings[j];
-            printf("stringsArePermutations(\"%s\", \"%s\") = %s\n",
-                s1, s2,
-                stringsArePermutations(s1, s2) ? "true" : "false");
+            bool p = stringsArePermutations(s1, s2);
+            cout << "stringsArePermutations(\"" << s1
+                 << "\", \"" << s2 << "\") = "
+                 << (p ? "true" : "false") << endl;
         }
     }
 }

@@ -1,4 +1,4 @@
-#include <cstdio>
+#include "Strings.h"
 
 size_t stringLength(const char* s);
 
@@ -18,12 +18,10 @@ void reverseStringInPlace(char* s) {
     }
 }
 
-char* stringCopy(const char* s);
-
 void testReverseStringInPlace() {
-    printf("\n");
-    printf("Test reverseStringInPlace():\n");
-    printf("============================\n");
+    cout << endl;
+    cout << "Test reverseStringInPlace():" << endl;
+    cout << "============================" << endl;
 
     const char* testStrings[] = {
         "",
@@ -35,8 +33,8 @@ void testReverseStringInPlace() {
     for (auto& s : testStrings) {
         char* sCopy = stringCopy(s);
         reverseStringInPlace(sCopy);
-        printf("reverseStringInPlace(\"%s\") = \"%s\"\n",
-            s, sCopy);
+        cout << "reverseStringInPlace(\"" << s
+             << "\") = \"" << sCopy << "\"" << endl;
         delete[] sCopy;
     }
 }

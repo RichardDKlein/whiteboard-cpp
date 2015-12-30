@@ -1,9 +1,4 @@
-#include <algorithm>
-#include <cstdio>
-
-using namespace std;
-
-size_t stringLength(const char* s);
+#include "Strings.h"
 
 /**
  * @brief Compare two strings.
@@ -34,9 +29,9 @@ int stringCompare(const char* s1, const char* s2) {
 }
 
 void testStringCompare() {
-    printf("\n");
-    printf("Test stringCompare():\n");
-    printf("=====================\n");
+    cout << endl;
+    cout << "Test stringCompare():" << endl;
+    cout << "=====================" << endl;
 
     const char* testStrings1[] = {
         "abc",
@@ -58,7 +53,8 @@ void testStringCompare() {
     for (int i = 0; i < numTestStrings; ++i) {
         const char* s1 = testStrings1[i];
         const char* s2 = testStrings2[i];
-        printf("stringCompare(\"%s\", \"%s\") = %d\n",
-            s1, s2, stringCompare(s1, s2));
+        int c = stringCompare(s1, s2);
+        cout << "stringCompare(\"" << s1 << "\", \""
+             << s2 << "\") = " << c << endl;
     }
 }

@@ -1,7 +1,4 @@
-#include <string>
-#include <utility>
-
-using namespace std;
+#include "Strings.h"
 
 pair<int, int>
 longestPalindromeWithCenter(const string& s, int center, bool lengthIsOdd);
@@ -63,9 +60,9 @@ longestPalindromeWithCenter(const string& s, int center, bool lengthIsOdd) {
 }
 
 void testLongestPalindromicSubstring() {
-    printf("\n");
-    printf("Test longestPalindromicSubstring():\n");
-    printf("===================================\n");
+    cout << endl;
+    cout << "Test longestPalindromicSubstring():" << endl;
+    cout << "===================================" << endl;
 
     string testStrings[] = {
         "now is the time",
@@ -77,7 +74,7 @@ void testLongestPalindromicSubstring() {
     for (auto& s : testStrings) {
         pair<int, int> i = longestPalindromicSubstring(s);
         string p = s.substr(i.first, i.second - i.first + 1);
-        printf("longestPalindromicSubstring(\"%s\") = \"%s\"\n",
-            s.c_str(), p.c_str());
+        cout << "longestPalindromicSubstring(\""
+             << s << "\") = \"" << p << "\"" << endl;
     }
 }

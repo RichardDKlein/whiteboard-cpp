@@ -1,4 +1,4 @@
-#include <cstdio>
+#include "Strings.h"
 
 /**
  * @brief Compute the length of a string.
@@ -15,9 +15,9 @@ size_t stringLength(const char* s) {
 }
 
 void testStringLength() {
-    printf("\n");
-    printf("Test stringLength():\n");
-    printf("====================\n");
+    cout << endl;
+    cout << "Test stringLength():" << endl;
+    cout << "====================" << endl;
 
     const char* testStrings[] = {
         "",
@@ -27,6 +27,7 @@ void testStringLength() {
     };
 
     for (auto& s : testStrings) {
-        printf("stringLength(\"%s\") = %d\n", s, stringLength(s));
+        size_t len = stringLength(s);
+        cout << "stringLength(\"" << s << "\") = " << len << endl;
     }
 }

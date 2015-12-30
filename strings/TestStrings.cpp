@@ -1,22 +1,10 @@
-#include <cstdio>
-
-void testFindSubstring();
-void testLongestPalindromicSubstring();
-void testParseStringIntoWords();
-void testPermutationsOfString();
-void testReverseStringInPlace();
-void testReverseWordsInSentence();
-void testStringCompare();
-void testStringCopy();
-void testStringLength();
-void testStringsArePermutations();
-void testTopKStrings();
+#include "Strings.h"
 
 void testStrings() {
-    printf("\n");
-    printf("=============================================\n");
-    printf("                   STRINGS                   \n");
-    printf("=============================================\n");
+    cout << endl;
+    cout << "=============================================" << endl;
+    cout << "                   STRINGS                   " << endl;
+    cout << "=============================================" << endl;
 
     testFindSubstring();
     testLongestPalindromicSubstring();

@@ -1,9 +1,4 @@
-#include <cstdio>
-#include <set>
-#include <string>
-#include <vector>
-
-using namespace std;
+#include "Strings.h"
 
 class ParseResults {
 private:
@@ -54,9 +49,9 @@ parseStringIntoWords(const set<string>& dict, const string& s) {
 }
 
 void testParseStringIntoWords() {
-    printf("\n");
-    printf("Test parseStringIntoWords():\n");
-    printf("============================\n");
+    cout << endl;
+    cout << "Test parseStringIntoWords():" << endl;
+    cout << "============================" << endl;
 
     set<string> dict;
     dict.insert("now");
@@ -81,11 +76,11 @@ void testParseStringIntoWords() {
 
     for (const auto& s : testStrings) {
         ParseResults parse = parseStringIntoWords(dict, s);
-        printf("parseStringIntoWords(\"%s\"):\n", s.c_str());
-        printf("{\n");
+        cout << "parseStringIntoWords(\"" << s << "\"):" << endl;
+        cout << "{" << endl;
         for (const auto& word : parse.words()) {
-            printf("\t\"%s\"\n", word.c_str());
+            cout << "\t\"" << word << "\""  << endl;
         }
-        printf("}\n");
+        cout << "}" << endl;
     }
 }
