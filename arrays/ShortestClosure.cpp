@@ -1,13 +1,11 @@
 #include "Arrays.h"
 
-typedef pair<int, int> Closure;
-typedef list<int> LocationList;
-typedef vector<LocationList> LocationLists;
+using LocationList = list<int>;
+using LocationLists = vector<LocationList>;
 
 template<typename T> static LocationLists buildLocationLists(
     const vector<T>& needles, const vector<T>& haystack);
-static int closureLength(const Closure& closure);
-static Closure nextCandidate(LocationLists& locLists);
+static Interval nextCandidate(LocationLists& locLists);
 
 /**
  * @brief Find the shortest closure of needles in a haystack,
@@ -15,23 +13,24 @@ static Closure nextCandidate(LocationLists& locLists);
  * all the needles.
  */
 template<typename T>
-Closure shortestClosure(vector<T> needles, vector<T> haystack) {
+Interval shortestClosure(vector<T> needles, vector<T> haystack) {
     LocationLists locLists = buildLocationLists(needles, haystack);
     int haystackLen = haystack.size();
-    Closure shortest(0, haystackLen - 1);
+    Interval shortest(0, haystackLen - 1);
     for (;;) {
-        Closure candidate = nextCandidate(locLists);
-        if (candidate.first < 0) {
+        Interval candidate = nextCandidate(locLists);
+        if (!candidate.valid()) {
             break;
         }
-        if (closureLength(candidate) < closureLength(shortest)) {
+        if (candidate.length() < shortest.length()) {
             shortest = candidate;
         }
     }
     return shortest;
 }
 
-template<typename T> LocationLists buildLocationLists(
+template<typename T>
+static LocationLists buildLocationLists(
     const vector<T>& needles, const vector<T>& haystack) {
 
     int numNeedles = needles.size();
@@ -49,14 +48,14 @@ template<typename T> LocationLists buildLocationLists(
     return locLists;
 }
 
-Closure nextCandidate(LocationLists& locLists) {
+static Interval nextCandidate(LocationLists& locLists) {
     int min = INT_MAX;
     int max = -1;
     LocationList* minLocList;
 
     for (auto& locList : locLists) {
         if (locList.empty()) {
-            return Closure(-1, -1);
+            return Interval(-1, -1);
         }
         int front = locList.front();
         if (front < min) {
@@ -68,11 +67,7 @@ Closure nextCandidate(LocationLists& locLists) {
         }
     }
     minLocList->pop_front();
-    return Closure(min, max);
-}
-
-int closureLength(const Closure& closure) {
-    return (closure.second - closure.first + 1);
+    return Interval(min, max);
 }
 
 void testShortestClosure() {
@@ -98,7 +93,7 @@ void testShortestClosure() {
         haystack.push_back(h);
     }
 
-    Closure shortest = shortestClosure(needles, haystack);
+    Interval shortest = shortestClosure(needles, haystack);
 
     cout << "needles: { ";
     for (auto& needle : needles) {
@@ -109,16 +104,16 @@ void testShortestClosure() {
     cout << "haystack: { ";
     int haystackLen = haystack.size();
     for (int i = 0; i < haystackLen; ++i) {
-        if (i == shortest.first) {
+        if (i == shortest.left()) {
             cout << "[** ";
         }
         cout << haystack[i] << " ";
-        if (i == shortest.second) {
+        if (i == shortest.right()) {
             cout << "**] ";
         }
     }
     cout << "}" << endl;
 
-    cout << "shortest closure: [" << shortest.first << ", "
-         << shortest.second << "]" << endl;
+    cout << "shortest closure: [" << shortest.left() << ", "
+         << shortest.right() << "]" << endl;
 }

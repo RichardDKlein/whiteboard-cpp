@@ -5,10 +5,21 @@
 #include <list>
 #include <set>
 #include <vector>
+#include "TestUtils.h"
 
 using namespace std;
 
-#include "TestUtils.h"
+class Interval {
+private:
+    int left_;
+    int right_;
+public:
+    Interval(int left, int right) : left_(left), right_(right) {}
+    int left() {return left_;}
+    int right() {return right_;}
+    int length() {return right_ - left_ + 1;}
+    bool valid() {return left_ > 0 && right_ > 0 && right_ >= left_;}
+};
 
 int histogramWater(const vector<int>& v);
 template<typename T> vector<T> mergeTwoSortedArrays(

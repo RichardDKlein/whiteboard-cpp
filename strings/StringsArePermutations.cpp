@@ -9,23 +9,17 @@
  * @return |true| if the strings are permutations of each
  * other, |false| otherwise.
  */
-bool stringsArePermutations(const char* s1, const char* s2) {
-    size_t len1 = stringLength(s1);
-    size_t len2 = stringLength(s2);
-    if (len1 != len2) {
+bool stringsArePermutations(const string& s1, const string& s2) {
+    if (s1.size() != s2.size()) {
         return false;
     }
-    size_t count1[256];
-    size_t count2[256];
-    for (size_t i = 0; i < 256; ++i) {
-        count1[i] = 0;
-        count2[i] = 0;
+    int count1[256], count2[256];
+    for (int i = 0; i < 256; ++i) {
+        count1[i] = count2[i] = 0;
     }
-    for (size_t i = 0; i < len1; ++i) {
-        unsigned char c1 = s1[i];
-        unsigned char c2 = s2[i];
-        ++count1[(int)c1];
-        ++count2[(int)c2];
+    for (int i = 0; i < (int)s1.size(); ++i) {
+        ++count1[(int)s1[i]];
+        ++count2[(int)s2[i]];
     }
     for (int i = 0; i < 256; ++i) {
         if (count1[i] != count2[i]) {

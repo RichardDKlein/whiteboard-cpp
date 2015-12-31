@@ -16,8 +16,8 @@ void reverseStringInPlace(char* s);
 char* reverseWordsInSentence(const char* s);
 int stringCompare(const char* s1, const char* s2);
 char* stringCopy(const char* s);
-size_t stringLength(const char* s);
-bool stringsArePermutations(const char* s1, const char* s2);
+int stringLength(const char* s);
+bool stringsArePermutations(const string& s1, const string& s2);
 
 void testFindSubstring();
 void testLongestPalindromicSubstring();

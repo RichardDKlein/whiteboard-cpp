@@ -1,7 +1,8 @@
 #include "Strings.h"
+#include "../arrays/Arrays.h"
 
-pair<int, int>
-longestPalindromeWithCenter(const string& s, int center, bool lengthIsOdd);
+static Interval longestPalindromeWithCenter(const string& s,
+    int center, bool lengthIsOdd);
 
 /**
  * @brief Find the longest palindromic substring in a string.
@@ -10,51 +11,36 @@ longestPalindromeWithCenter(const string& s, int center, bool lengthIsOdd);
  * @return Pair of indices in |s| representing longest palindromic
  * substring.
  */
-pair<int, int> longestPalindromicSubstring(string s) {
-    pair<int, int> result(0, 0);
-    int resultLen = 1;
+Interval longestPalindromicSubstring(string s) {
+    Interval result(0, 0);
     int stringLen = s.size();
     for (int i = 1; i < stringLen; ++i) {
-        pair<int, int> longestOdd = longestPalindromeWithCenter(s, i, true);
-        pair<int, int> longestEven = longestPalindromeWithCenter(s, i, false);
-        int longestOddLen = longestOdd.second - longestOdd.first + 1;
-        int longestEvenLen = longestEven.second - longestEven.first + 1;
-        if (longestOddLen > resultLen) {
+        Interval longestOdd = longestPalindromeWithCenter(s, i, true);
+        Interval longestEven = longestPalindromeWithCenter(s, i, false);
+        if (longestOdd.length() > result.length()) {
             result = longestOdd;
-            resultLen = longestOddLen;
         }
-        if (longestEvenLen > resultLen) {
+        if (longestEven.length() > result.length()) {
             result = longestEven;
-            resultLen = longestEvenLen;
         }
     }
     return result;
 }
 
-/**
- * @brief Find the longest odd- or even-length palindromic substring
- * having a given center.
- *
- * @param s String of interest.
- * @param center Index in |s| of center of palindromic substring.
- * @param lengthIsOdd |true| if the palindrome length is to be odd,
- * |false| if even.
- * @return Pair of indices in |s| representing the longest such
- * palindromic substring.
- */
-pair<int, int>
-longestPalindromeWithCenter(const string& s, int center, bool lengthIsOdd) {
-    pair<int, int> result(0, 0);
-    int low = center - 1;
-    int high = lengthIsOdd ? center + 1 : center;
+static Interval longestPalindromeWithCenter(const string& s,
+    int center, bool lengthIsOdd) {
+
+    Interval result(center, center);
+    int left = center - 1;
+    int right = lengthIsOdd ? center + 1 : center;
     int stringLen = s.size();
-    while (low >= 0 && high < stringLen && s[low] == s[high]) {
-        if ((high - low + 1) > (result.second - result.first + 1)) {
-            result.first = low;
-            result.second = high;
+    while (left >= 0 && right < stringLen && s[left] == s[right]) {
+        Interval candidate(left, right);
+        if (candidate.length() > result.length()) {
+            result = candidate;
         }
-        --low;
-        ++high;
+        --left;
+        ++right;
     }
     return result;
 }
@@ -72,8 +58,8 @@ void testLongestPalindromicSubstring() {
     };
 
     for (auto& s : testStrings) {
-        pair<int, int> i = longestPalindromicSubstring(s);
-        string p = s.substr(i.first, i.second - i.first + 1);
+        Interval i = longestPalindromicSubstring(s);
+        string p = s.substr(i.left(), i.length());
         cout << "longestPalindromicSubstring(\""
              << s << "\") = \"" << p << "\"" << endl;
     }

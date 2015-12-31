@@ -16,8 +16,8 @@ struct Node {
     vector<Node*> children;
 };
 
-typedef unordered_map<string, Node*> NodeMap;
-typedef unordered_map<string, Node*>::iterator NodeMapIterator;
+using NodeMap = unordered_map<string, Node*>;
+using NodeMapIterator = NodeMap::iterator;
 
 static Node* buildFolderTree(const vector<Folder>& folders);
 static Node* createOrFindNode(NodeMap& nodeMap, const string& name);

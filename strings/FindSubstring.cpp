@@ -20,7 +20,7 @@ int findSubstring(const char* s, const char* sub) {
         }
         const char* a = s + 1;
         const char* b = sub + 1;
-        while (1) {
+        while (true) {
             if (*b == '\0') {
                 return s - s0;
             }

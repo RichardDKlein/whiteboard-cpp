@@ -23,8 +23,9 @@ public:
  * @param s String to be parsed.
  * @return Parse results.
  */
-ParseResults
-parseStringIntoWords(const set<string>& dict, const string& s) {
+ParseResults parseStringIntoWords(const set<string>& dict,
+    const string& s) {
+
     int stringLen = s.size();
     if (stringLen == 0) {
         return EMPTY_STRING;

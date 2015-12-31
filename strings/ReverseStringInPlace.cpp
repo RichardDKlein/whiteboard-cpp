@@ -1,7 +1,5 @@
 #include "Strings.h"
 
-size_t stringLength(const char* s);
-
 /**
  * @brief Reverse a string in place.
  *

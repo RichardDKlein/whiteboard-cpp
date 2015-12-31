@@ -6,7 +6,7 @@
  * @param s The string of interest.
  * @return The length of |s| (excluding terminating null).
  */
-size_t stringLength(const char* s) {
+int stringLength(const char* s) {
     const char* p = s;
     while (*p) {
         p++;
