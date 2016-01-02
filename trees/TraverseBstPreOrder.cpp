@@ -4,21 +4,21 @@
  * @brief Perform a preorder traversal of a BST.
  *
  * @param root Root node of BST.
- * @return Vector containing results of traversal.
+ * @return Vector containing preordered data.
  */
 template<typename T>
 vector<T> traverseBstPreOrder(Node<T>* root) {
-    vector<T> result;
+    vector<T> data;
     if (root == nullptr) {
-        return result;
+        return data;
     }
-    result.push_back(root->data);
+    data.push_back(root->data);
     vector<T> left = traverseBstPreOrder(root->left);
-    result.insert(result.end(), left.begin(), left.end());
+    data.insert(data.end(), left.begin(), left.end());
     vector<int> right = traverseBstPreOrder(root->right);
-    result.insert(result.end(), right.begin(), right.end());
+    data.insert(data.end(), right.begin(), right.end());
 
-    return result;
+    return data;
 }
 
 void testTraverseBstPreOrder() {

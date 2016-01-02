@@ -4,8 +4,7 @@
  * @brief Reverse the bits in an unsigned int.
  *
  * @param n The unsigned int to be reversed.
- * @return The unsigned int that results when the
- * bits of |n| are reversed.
+ * @return Copy of |n|, but with its bits reversed.
  */
 unsigned int reverseBits(unsigned int n) {
     int bitsPerInt = sizeof(n) * 8;

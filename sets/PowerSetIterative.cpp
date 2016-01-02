@@ -10,7 +10,7 @@
  */
 template<typename T>
 set<set<T>> powerSetIterative(const set<T>& s) {
-    set<set<T>> result;
+    set<set<T>> powerSet;
     unsigned int numSubsets = pow(2, s.size());
     for (unsigned int i = 0; i < numSubsets; ++i) {
         set<T> subset;
@@ -20,9 +20,9 @@ set<set<T>> powerSetIterative(const set<T>& s) {
                 subset.insert(*iter);
             }
         }
-        result.insert(subset);
+        powerSet.insert(subset);
     }
-    return result;
+    return powerSet;
 }
 
 void testPowerSetIterative() {

@@ -36,11 +36,11 @@ static vector<Folder> traverseFolderTree(Node* root);
  * are created before their children.
  */
 vector<Folder> createNestedFolders(const vector<Folder>& folders) {
-    vector<Folder> result;
+    vector<Folder> reorderedFolders;
     Node* root = buildFolderTree(folders);
-    result = traverseFolderTree(root);
+    reorderedFolders = traverseFolderTree(root);
     destroyFolderTree(root);
-    return result;
+    return reorderedFolders;
 }
 
 static Node* buildFolderTree(const vector<Folder>& folders) {
@@ -75,19 +75,19 @@ static Node* createOrFindNode(NodeMap& nodeMap, const string& name) {
 }
 
 static vector<Folder> traverseFolderTree(Node* root) {
-    vector<Folder> result;
+    vector<Folder> folders;
     if (root == nullptr) {
-        return result;
+        return folders;
     }
     Folder folder;
     folder.name = root->name;
     folder.parentName = (root->parent) ? root->parent->name : "";
-    result.push_back(folder);
+    folders.push_back(folder);
     for (const auto& child : root->children) {
-        vector<Folder> kids = traverseFolderTree(child);
-        result.insert(result.end(), kids.begin(), kids.end());
+        vector<Folder> grandkids = traverseFolderTree(child);
+        folders.insert(folders.end(), grandkids.begin(), grandkids.end());
     }
-    return result;
+    return folders;
 }
 
 static void destroyFolderTree(Node* root) {
@@ -163,10 +163,10 @@ void testCreateNestedFolders() {
         folders.push_back(folder);
     }
 
-    vector<Folder> result = createNestedFolders(folders);
+    vector<Folder> reorderedFolders = createNestedFolders(folders);
 
     cout << "Creation order:" << endl;
-    for (auto& folder : result) {
+    for (auto& folder : reorderedFolders) {
         cout << "\t" << folder.name << endl;
     }
 }

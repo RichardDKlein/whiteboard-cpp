@@ -4,20 +4,20 @@
  * @brief Perform a breadth-first traversal of a BST.
  *
  * @param root Root node of BST.
- * @return Vector containing results of traversal.
+ * @return Vector containing data in breadth-first order.
  */
 template<typename T>
 vector<T> traverseBstBreadthFirst(Node<T>* root) {
-    vector<T> result;
+    vector<T> data;
     if (root == nullptr) {
-        return result;
+        return data;
     }
     queue<Node<T>*> q;
     q.push(root);
     while (!q.empty()) {
         Node<T>* node = q.front();
         q.pop();
-        result.push_back(node->data);
+        data.push_back(node->data);
         if (node->left) {
             q.push(node->left);
         }
@@ -25,7 +25,7 @@ vector<T> traverseBstBreadthFirst(Node<T>* root) {
             q.push(node->right);
         }
     }
-    return result;
+    return data;
 }
 
 void testTraverseBstBreadthFirst() {

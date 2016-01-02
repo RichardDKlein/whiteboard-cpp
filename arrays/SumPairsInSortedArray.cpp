@@ -11,7 +11,7 @@ typedef pair<int, int> Pair;
  * @return A vector of pairs that sum to the specified value.
  */
 vector<Pair> sumPairsInSortedArray(vector<int> v, int sum) {
-    vector<Pair> result;
+    vector<Pair> pairs;
     int left = 0;
     int right = v.size() - 1;
     while (left < right) {
@@ -24,12 +24,12 @@ vector<Pair> sumPairsInSortedArray(vector<int> v, int sum) {
             ++left;
         } else {
             Pair p(v1, v2);
-            result.push_back(p);
+            pairs.push_back(p);
             ++left;
             --right;
         }
     }
-    return result;
+    return pairs;
 }
 
 void testSumPairsInSortedArray() {

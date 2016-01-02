@@ -14,9 +14,8 @@ static Interval nextCandidate(LocationLists& locLists);
  */
 template<typename T>
 Interval shortestClosure(vector<T> needles, vector<T> haystack) {
+    Interval shortest(0, haystack.size() - 1);
     LocationLists locLists = buildLocationLists(needles, haystack);
-    int haystackLen = haystack.size();
-    Interval shortest(0, haystackLen - 1);
     for (;;) {
         Interval candidate = nextCandidate(locLists);
         if (!candidate.valid()) {
@@ -31,16 +30,12 @@ Interval shortestClosure(vector<T> needles, vector<T> haystack) {
 
 template<typename T>
 static LocationLists buildLocationLists(
-    const vector<T>& needles, const vector<T>& haystack) {
+        const vector<T>& needles, const vector<T>& haystack) {
 
-    int numNeedles = needles.size();
-    int haystackLen = haystack.size();
-
-    LocationLists locLists(numNeedles);
-    for (int i = 0; i < numNeedles; ++i) {
-        T needle = needles[i];
-        for (int j = 0; j < haystackLen; ++j) {
-            if (haystack[j] == needle) {
+    LocationLists locLists(needles.size());
+    for (int i = 0; i < needles.size(); ++i) {
+        for (int j = 0; j < haystack.size(); ++j) {
+            if (haystack[j] == needles[i]) {
                 locLists[i].push_back(j);
             }
         }
@@ -52,7 +47,6 @@ static Interval nextCandidate(LocationLists& locLists) {
     int min = INT_MAX;
     int max = -1;
     LocationList* minLocList;
-
     for (auto& locList : locLists) {
         if (locList.empty()) {
             return Interval(-1, -1);

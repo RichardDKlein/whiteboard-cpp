@@ -4,20 +4,20 @@
  * @brief Perform an inorder traversal of a BST.
  *
  * @param root Root node of BST.
- * @return Vector containing results of traversal.
+ * @return Vector containing inordered data.
  */
 template<typename T>
 vector<T> traverseBstInOrder(Node<T>* root) {
-    vector<T> result;
+    vector<T> data;
     if (root == nullptr) {
-        return result;
+        return data;
     }
-    result = traverseBstInOrder(root->left);
-    result.push_back(root->data);
+    data = traverseBstInOrder(root->left);
+    data.push_back(root->data);
     vector<T> right = traverseBstInOrder(root->right);
-    result.insert(result.end(), right.begin(), right.end());
+    data.insert(data.end(), right.begin(), right.end());
 
-    return result;
+    return data;
 }
 
 void testTraverseBstInOrder() {

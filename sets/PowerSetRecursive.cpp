@@ -9,22 +9,22 @@
  */
 template<typename T>
 set<set<T>> powerSetRecursive(const set<T>& s) {
-    set<set<T>> result;
+    set<set<T>> powerSet;
     if (s.empty()) {
         set<T> emptySet;
-        result.insert(emptySet);
-        return result;
+        powerSet.insert(emptySet);
+        return powerSet;
     }
     set<T> rem = s;
     T first = *rem.begin();
     rem.erase(rem.begin());
     set<set<T>> remPowerSet = powerSetRecursive(rem);
-    result = remPowerSet;
+    powerSet = remPowerSet;
     for (auto subset : remPowerSet) {
         subset.insert(first);
-        result.insert(subset);
+        powerSet.insert(subset);
     }
-    return result;
+    return powerSet;
 }
 
 void testPowerSetRecursive() {

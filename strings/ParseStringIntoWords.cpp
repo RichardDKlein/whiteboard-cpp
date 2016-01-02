@@ -21,7 +21,7 @@ public:
  *
  * @param dict Dictionary of legal words.
  * @param s String to be parsed.
- * @return Parse results.
+ * @return Constituent words (if parse successful).
  */
 ParseResults parseStringIntoWords(const set<string>& dict,
     const string& s) {

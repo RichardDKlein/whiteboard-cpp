@@ -9,9 +9,9 @@
  */
 char* reverseWordsInSentence(const char* s) {
     size_t len = stringLength(s);
-    char* result = new char[len + 1];
-    result[len] = '\0';
-    char* r = result;
+    char* rev = new char[len + 1];
+    rev[len] = '\0';
+    char* r = rev;
     while (*s != '\0') {
         if (*s == ' ') {
             *r++ = *s++;
@@ -25,7 +25,7 @@ char* reverseWordsInSentence(const char* s) {
             *r++ = *p;
         }
     }
-    return result;
+    return rev;
 }
 
 void testReverseWordsInSentence() {

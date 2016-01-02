@@ -22,7 +22,7 @@ public:
             aux_.push(front);
         }
 
-        T result = main_.front();
+        T top = main_.front();
         main_.pop();
 
         while (!aux_.empty()) {
@@ -30,7 +30,7 @@ public:
             aux_.pop();
             main_.push(front);
         }
-        return result;
+        return top;
     }
 };
 

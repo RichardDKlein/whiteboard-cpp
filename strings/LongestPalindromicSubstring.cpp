@@ -12,37 +12,36 @@ static Interval longestPalindromeWithCenter(const string& s,
  * substring.
  */
 Interval longestPalindromicSubstring(string s) {
-    Interval result(0, 0);
+    Interval longest(0, 0);
     int stringLen = s.size();
     for (int i = 1; i < stringLen; ++i) {
         Interval longestOdd = longestPalindromeWithCenter(s, i, true);
         Interval longestEven = longestPalindromeWithCenter(s, i, false);
-        if (longestOdd.length() > result.length()) {
-            result = longestOdd;
+        if (longestOdd.length() > longest.length()) {
+            longest = longestOdd;
         }
-        if (longestEven.length() > result.length()) {
-            result = longestEven;
+        if (longestEven.length() > longest.length()) {
+            longest = longestEven;
         }
     }
-    return result;
+    return longest;
 }
 
 static Interval longestPalindromeWithCenter(const string& s,
     int center, bool lengthIsOdd) {
 
-    Interval result(center, center);
+    Interval longest(center, center);
     int left = center - 1;
     int right = lengthIsOdd ? center + 1 : center;
-    int stringLen = s.size();
-    while (left >= 0 && right < stringLen && s[left] == s[right]) {
+    while (left >= 0 && right < (int)s.size() && s[left] == s[right]) {
         Interval candidate(left, right);
-        if (candidate.length() > result.length()) {
-            result = candidate;
+        if (candidate.length() > longest.length()) {
+            longest = candidate;
         }
         --left;
         ++right;
     }
-    return result;
+    return longest;
 }
 
 void testLongestPalindromicSubstring() {

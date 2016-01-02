@@ -9,24 +9,24 @@
  */
 template<typename T>
 vector<T> mergeTwoSortedArrays(vector<T>& v1, vector<T>& v2) {
-    vector<T> result;
+    vector<T> merged;
     for (;;) {
         if (v1.empty()) {
-            result.insert(result.end(), v2.begin(), v2.end());
-            return result;
+            merged.insert(merged.end(), v2.begin(), v2.end());
+            return merged;
         }
         if (v2.empty()) {
-            result.insert(result.end(), v1.begin(), v1.end());
-            return result;
+            merged.insert(merged.end(), v1.begin(), v1.end());
+            return merged;
         }
         if (v1.front() < v2.front()) {
-            result.push_back(v1.front());
+            merged.push_back(v1.front());
             v1.erase(v1.begin());
         }
-        result.push_back(v2.front());
+        merged.push_back(v2.front());
         v2.erase(v2.begin());
     }
-    return result;
+    return merged;
 }
 
 void testMergeTwoSortedArrays() {

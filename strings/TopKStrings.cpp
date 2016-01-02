@@ -30,40 +30,40 @@ vector<Entry> topKStrings(const vector<string>& v, int k) {
 }
 
 static Tally tallyStrings(const vector<string>& v) {
-    Tally result;
+    Tally tally;
     for (const auto& s : v) {
-        ++result[s];
+        ++tally[s];
     }
-    return result;
+    return tally;
 }
 
 static MinHeap buildMinHeap(const Tally& tally, int k) {
-    MinHeap result;
+    MinHeap minHeap;
     int count = 0;
     int min = -1;
     TallyIterator iter = tally.cbegin();
     while (iter != tally.end()) {
         Entry entry = *iter++;
         if (entry.second > min) {
-            result.push(entry);
+            minHeap.push(entry);
             ++count;
             if (count > k) {
-                result.pop();
-                min = result.top().second;
+                minHeap.pop();
+                min = minHeap.top().second;
                 --count;
             }
         }
     }
-    return result;
+    return minHeap;
 }
 
 static vector<Entry> extractResults(MinHeap& heap) {
-    vector<Entry> result(heap.size());
+    vector<Entry> entries(heap.size());
     for (int i = heap.size() - 1; i >= 0; --i) {
-        result[i] = heap.top();
+        entries[i] = heap.top();
         heap.pop();
     }
-    return result;
+    return entries;
 }
 
 void testTopKStrings() {

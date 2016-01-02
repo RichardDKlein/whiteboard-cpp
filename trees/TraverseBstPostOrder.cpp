@@ -4,20 +4,20 @@
  * @brief Perform a postorder traversal of a BST.
  *
  * @param root Root node of BST.
- * @return Vector containing results of traversal.
+ * @return Vector containing postordered data.
  */
 template<typename T>
 vector<T> traverseBstPostOrder(Node<T>* root) {
-    vector<T> result;
+    vector<T> data;
     if (root == nullptr) {
-        return result;
+        return data;
     }
-    result = traverseBstPostOrder(root->left);
+    data = traverseBstPostOrder(root->left);
     vector<T> right = traverseBstPostOrder(root->right);
-    result.insert(result.end(), right.begin(), right.end());
-    result.push_back(root->data);
+    data.insert(data.end(), right.begin(), right.end());
+    data.push_back(root->data);
 
-    return result;
+    return data;
 }
 
 void testTraverseBstPostOrder() {

@@ -11,17 +11,17 @@ typedef pair<int, int> Pair;
  * @return A vector of pairs that sum to the specified value.
  */
 vector<Pair> sumPairsInUnsortedArray(vector<int> v, int sum) {
-    vector<Pair> result;
+    vector<Pair> pairs;
     set<int> seen;
     for (auto& v1: v) {
         int v2 = sum - v1;
         if (seen.count(v2) > 0) {
             Pair p(v1, v2);
-            result.push_back(p);
+            pairs.push_back(p);
         }
         seen.insert(v1);
     }
-    return result;
+    return pairs;
 }
 
 void testSumPairsInUnsortedArray() {
