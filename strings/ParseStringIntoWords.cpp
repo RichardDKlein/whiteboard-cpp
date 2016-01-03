@@ -13,7 +13,7 @@ public:
 
 #define EMPTY_VECTOR vector<string>()
 #define FAILURE ParseResults(false, EMPTY_VECTOR)
-#define EMPTY_STRING ParseResults(true, EMPTY_VECTOR)
+#define SUCCESS_EMPTY_STRING ParseResults(true, EMPTY_VECTOR)
 
 /**
  * @brief Parse a string containing no whitespace into its
@@ -23,20 +23,19 @@ public:
  * @param s String to be parsed.
  * @return Constituent words (if parse successful).
  */
-ParseResults parseStringIntoWords(const set<string>& dict,
-    const string& s) {
+ParseResults parseStringIntoWords(const string& s,
+    const set<string>& dict) {
 
-    int stringLen = s.size();
-    if (stringLen == 0) {
-        return EMPTY_STRING;
+    if (s == "") {
+        return SUCCESS_EMPTY_STRING;
     }
-    for (int i = 0; i < stringLen; ++i) {
+    for (int i = 0; i < (int)s.size(); ++i) {
         string firstWord = s.substr(0, i + 1);
         if (dict.count(firstWord) == 0) {
             continue;
         }
         string rem = s.substr(i + 1, string::npos);
-        ParseResults remParse = parseStringIntoWords(dict, rem);
+        ParseResults remParse = parseStringIntoWords(rem, dict);
         if (!remParse.success()) {
             return FAILURE;
         }
@@ -76,7 +75,7 @@ void testParseStringIntoWords() {
     };
 
     for (const auto& s : testStrings) {
-        ParseResults parse = parseStringIntoWords(dict, s);
+        ParseResults parse = parseStringIntoWords(s, dict);
         cout << "parseStringIntoWords(\"" << s << "\"):" << endl;
         cout << "{" << endl;
         for (const auto& word : parse.words()) {

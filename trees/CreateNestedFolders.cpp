@@ -6,12 +6,12 @@
 using namespace std;
 
 struct Folder {
-    string name;
+    string folderName;
     string parentName;
 };
 
 struct Node {
-    string name;
+    string folderName;
     Node* parent;
     vector<Node*> children;
 };
@@ -20,7 +20,7 @@ using NodeMap = unordered_map<string, Node*>;
 using NodeMapIterator = NodeMap::iterator;
 
 static Node* buildFolderTree(const vector<Folder>& folders);
-static Node* createOrFindNode(NodeMap& nodeMap, const string& name);
+static Node* createOrFindNode(NodeMap& nodeMap, const string& folderName);
 static void destroyFolderTree(Node* root);
 static vector<Folder> traverseFolderTree(Node* root);
 
@@ -36,19 +36,18 @@ static vector<Folder> traverseFolderTree(Node* root);
  * are created before their children.
  */
 vector<Folder> createNestedFolders(const vector<Folder>& folders) {
-    vector<Folder> reorderedFolders;
+    vector<Folder> nested;
     Node* root = buildFolderTree(folders);
-    reorderedFolders = traverseFolderTree(root);
+    nested = traverseFolderTree(root);
     destroyFolderTree(root);
-    return reorderedFolders;
+    return nested;
 }
 
 static Node* buildFolderTree(const vector<Folder>& folders) {
     Node* root = nullptr;
     NodeMap nodeMap;
-    NodeMapIterator iter;
     for (const auto& folder : folders) {
-        Node* folderNode = createOrFindNode(nodeMap, folder.name);
+        Node* folderNode = createOrFindNode(nodeMap, folder.folderName);
         if (folder.parentName == "") {
             folderNode->parent = nullptr;
             root = folderNode;
@@ -61,13 +60,13 @@ static Node* buildFolderTree(const vector<Folder>& folders) {
     return root;
 }
 
-static Node* createOrFindNode(NodeMap& nodeMap, const string& name) {
+static Node* createOrFindNode(NodeMap& nodeMap, const string& folderName) {
     Node* node;
-    NodeMapIterator iter = nodeMap.find(name);
+    NodeMapIterator iter = nodeMap.find(folderName);
     if (iter == nodeMap.end()) {
         node = new Node;
-        node->name = name;
-        nodeMap[name] = node;
+        node->folderName = folderName;
+        nodeMap[folderName] = node;
     } else {
         node = iter->second;
     }
@@ -79,11 +78,11 @@ static vector<Folder> traverseFolderTree(Node* root) {
     if (root == nullptr) {
         return folders;
     }
-    Folder folder;
-    folder.name = root->name;
-    folder.parentName = (root->parent) ? root->parent->name : "";
-    folders.push_back(folder);
-    for (const auto& child : root->children) {
+    Folder rootFolder;
+    rootFolder.folderName = root->folderName;
+    rootFolder.parentName = (root->parent) ? root->parent->folderName : "";
+    folders.push_back(rootFolder);
+    for (auto& child : root->children) {
         vector<Folder> grandkids = traverseFolderTree(child);
         folders.insert(folders.end(), grandkids.begin(), grandkids.end());
     }
@@ -94,7 +93,7 @@ static void destroyFolderTree(Node* root) {
     if (root == nullptr) {
         return;
     }
-    for (const auto& child : root->children) {
+    for (auto& child : root->children) {
         destroyFolderTree(child);
     }
 }
@@ -158,7 +157,7 @@ void testCreateNestedFolders() {
     vector<Folder> folders;
     for (int i = numFolders - 1; i >=0; --i) {
         Folder folder;
-        folder.name = folderNames[i];
+        folder.folderName = folderNames[i];
         folder.parentName = parentNames[i];
         folders.push_back(folder);
     }
@@ -167,6 +166,6 @@ void testCreateNestedFolders() {
 
     cout << "Creation order:" << endl;
     for (auto& folder : reorderedFolders) {
-        cout << "\t" << folder.name << endl;
+        cout << "\t" << folder.folderName << endl;
     }
 }

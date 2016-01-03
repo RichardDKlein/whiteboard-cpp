@@ -9,12 +9,11 @@ struct GreaterThan {
 };
 
 using Tally = unordered_map<string, int>;
-using TallyIterator = Tally::const_iterator;
 using MinHeap = priority_queue<Entry, vector<Entry>, GreaterThan>;
 
-static Tally tallyStrings(const vector<string>& v);
+static Tally doTally(const vector<string>& v);
 static MinHeap buildMinHeap(const Tally& tally, int k);
-static vector<Entry> extractResults(MinHeap& heap);
+static vector<Entry> extractResults(MinHeap& minHeap);
 
 /**
  * @brief Find the |k| most frequently occurring strings in some text.
@@ -24,12 +23,12 @@ static vector<Entry> extractResults(MinHeap& heap);
  * @return The |k| most frequently occurring strings, and their counts.
  */
 vector<Entry> topKStrings(const vector<string>& v, int k) {
-    Tally tally = tallyStrings(v);
-    MinHeap heap = buildMinHeap(tally, k);
-    return extractResults(heap);
+    Tally tally = doTally(v);
+    MinHeap minHeap = buildMinHeap(tally, k);
+    return extractResults(minHeap);
 }
 
-static Tally tallyStrings(const vector<string>& v) {
+static Tally doTally(const vector<string>& v) {
     Tally tally;
     for (const auto& s : v) {
         ++tally[s];
@@ -41,27 +40,26 @@ static MinHeap buildMinHeap(const Tally& tally, int k) {
     MinHeap minHeap;
     int count = 0;
     int min = -1;
-    TallyIterator iter = tally.cbegin();
-    while (iter != tally.end()) {
-        Entry entry = *iter++;
-        if (entry.second > min) {
-            minHeap.push(entry);
-            ++count;
-            if (count > k) {
-                minHeap.pop();
-                min = minHeap.top().second;
-                --count;
-            }
+    for (auto& entry : tally) {
+        if (entry.second <= min) {
+            continue;
         }
+        minHeap.push(entry);
+        ++count;
+        if (count > k) {
+            minHeap.pop();
+            --count;
+        }
+        min = minHeap.top().second;
     }
     return minHeap;
 }
 
-static vector<Entry> extractResults(MinHeap& heap) {
-    vector<Entry> entries(heap.size());
-    for (int i = heap.size() - 1; i >= 0; --i) {
-        entries[i] = heap.top();
-        heap.pop();
+static vector<Entry> extractResults(MinHeap& minHeap) {
+    vector<Entry> entries(minHeap.size());
+    for (int i = minHeap.size() - 1; i >= 0; --i) {
+        entries[i] = minHeap.top();
+        minHeap.pop();
     }
     return entries;
 }

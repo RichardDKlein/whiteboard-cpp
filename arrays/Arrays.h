@@ -18,7 +18,7 @@ public:
     int left() {return left_;}
     int right() {return right_;}
     int length() {return right_ - left_ + 1;}
-    bool valid() {return left_ > 0 && right_ > 0 && right_ >= left_;}
+    bool valid() {return left_ >= 0 && right_ >= 0 && right_ >= left_;}
 };
 
 int histogramWater(const vector<int>& v);
