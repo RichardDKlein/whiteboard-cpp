@@ -15,10 +15,10 @@ vector<string> permutationsOfString(const string& s) {
         return perms;
     }
     char firstChar = s[0];
-    string rem = s.substr(1);
+    string rem = s.substr(1, string::npos);
     vector<string> remPerms = permutationsOfString(rem);
     for (auto& remPerm : remPerms) {
-        for (size_t i = 0; i <= rem.length(); ++i) {
+        for (size_t i = 0; i <= remPerm.size(); ++i) {
             string perm = insertCharAt(remPerm, firstChar, i);
             perms.push_back(perm);
         }
@@ -28,7 +28,7 @@ vector<string> permutationsOfString(const string& s) {
 
 string insertCharAt(string s, char c, size_t index) {
     string prefix = s.substr(0, index);
-    string suffix = s.substr(index);
+    string suffix = s.substr(index, string::npos);
     return prefix + c + suffix;
 }
 

@@ -7,22 +7,24 @@
  * @param s The sentence of interest.
  * @return A copy of |s| with each word reversed.
  */
-char* reverseWordsInSentence(const char* s) {
-    size_t len = stringLength(s);
-    char* rev = new char[len + 1];
-    rev[len] = '\0';
-    char* r = rev;
-    while (*s != '\0') {
-        if (*s == ' ') {
-            *r++ = *s++;
+string reverseWordsInSentence(const string& s) {
+    string rev(s.size(), ' ');
+    int i = 0;
+    while (i < (int)s.size()) {
+        if (s[i] == ' ') {
+            rev[i] = s[i];
+            ++i;
             continue;
         }
-        const char* tmp = s;
-        while (*s != ' ' && *s != '\0') {
-            s++;
+        int iBeginWord = i;
+        while (i < (int)s.size() && s[i] != ' ') {
+            ++i;
         }
-        for (const char* p = s - 1; p >= tmp; p--) {
-            *r++ = *p;
+        int iEndWord = i - 1;
+        int j = iBeginWord;
+        int k = iEndWord;
+        while (j <= iEndWord) {
+            rev[j++] = s[k--];
         }
     }
     return rev;
@@ -41,10 +43,9 @@ void testReverseWordsInSentence() {
 
     int numTestStrings = sizeof(testStrings) / sizeof(char*);
     for (int i = 0; i < numTestStrings; ++i) {
-        const char* s = testStrings[i];
-        char* r = reverseWordsInSentence(s);
+        string s = testStrings[i];
+        string r = reverseWordsInSentence(s);
             cout << "reverseWordsInSentence(\"" << s
                  << "\") = \"" << r << "\"" << endl;
-        delete[] r;
     }
 }

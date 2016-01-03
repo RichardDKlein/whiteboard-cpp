@@ -13,14 +13,14 @@ int findSubstring(const char* s, const char* sub) {
         return 0;
     }
     const char* s0 = s;
-    while (*s != '\0') {
+    while (*s) {
         if (*s != *sub) {
             ++s;
             continue;
         }
         const char* a = s + 1;
         const char* b = sub + 1;
-        while (true) {
+        for (;;) {
             if (*b == '\0') {
                 return s - s0;
             }

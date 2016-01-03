@@ -6,13 +6,17 @@
  * @param s The string to be reversed.
  */
 void reverseStringInPlace(char* s) {
-    size_t len = stringLength(s);
-    char* beg = s;
-    char* end = s + len - 1;
-    while (beg < end) {
-        char tmp = *beg;
-        *beg++ = *end;
-        *end-- = tmp;
+    char* left = s;
+    while (*s) {
+        ++s;
+    }
+    char* right = s - 1;
+    while (left < right) {
+        char tmp = *left;
+        *left = *right;
+        *right = tmp;
+        ++left;
+        --right;
     }
 }
 

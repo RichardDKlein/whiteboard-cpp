@@ -7,10 +7,10 @@
  * @return A copy of |s|.
  */
 char* stringCopy(const char* s) {
-    size_t len = stringLength(s);
+    int len = stringLength(s);
     char* copy = new char[len + 1];
-    // copy terminating null
-    for (size_t i = 0; i < len + 1; ++i) {
+    copy[len] = '\0';
+    for (int i = 0; i < len; ++i) {
         copy[i] = s[i];
     }
     return copy;

@@ -13,20 +13,12 @@ bool stringsArePermutations(const string& s1, const string& s2) {
     if (s1.size() != s2.size()) {
         return false;
     }
-    int count1[256], count2[256];
-    for (int i = 0; i < 256; ++i) {
-        count1[i] = count2[i] = 0;
-    }
+    multiset<char> seen1, seen2;
     for (int i = 0; i < (int)s1.size(); ++i) {
-        ++count1[(int)s1[i]];
-        ++count2[(int)s2[i]];
+        seen1.insert(s1[i]);
+        seen2.insert(s2[i]);
     }
-    for (int i = 0; i < 256; ++i) {
-        if (count1[i] != count2[i]) {
-            return false;
-        }
-    }
-    return true;
+    return seen1 == seen2;
 }
 
 void testStringsArePermutations() {
@@ -38,12 +30,14 @@ void testStringsArePermutations() {
         "Hello, world",
         "Hello, world!",
         "!dlrow ,olleH",
-        "!dlroW ,olleH"
+        "!dlroW ,olleH",
+        "aabbb",
+        "aaabb"
     };
 
     int numTestStrings = sizeof(testStrings) / sizeof(char*);
     for (int i = 0; i < numTestStrings; ++i) {
-        for (int j = i + 1; j < numTestStrings; ++j) {
+        for (int j = i; j < numTestStrings; ++j) {
             const char* s1 = testStrings[i];
             const char* s2 = testStrings[j];
             bool p = stringsArePermutations(s1, s2);
