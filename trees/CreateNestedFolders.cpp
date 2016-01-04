@@ -20,7 +20,7 @@ using NodeMap = unordered_map<string, Node*>;
 using NodeMapIterator = NodeMap::iterator;
 
 static Node* buildFolderTree(const vector<Folder>& folders);
-static Node* createOrFindNode(NodeMap& nodeMap, const string& folderName);
+static Node* findOrCreate(NodeMap& nodeMap, const string& folderName);
 static void destroyFolderTree(Node* root);
 static vector<Folder> traverseFolderTree(Node* root);
 
@@ -36,9 +36,8 @@ static vector<Folder> traverseFolderTree(Node* root);
  * are created before their children.
  */
 vector<Folder> createNestedFolders(const vector<Folder>& folders) {
-    vector<Folder> nested;
     Node* root = buildFolderTree(folders);
-    nested = traverseFolderTree(root);
+    vector<Folder> nested = traverseFolderTree(root);
     destroyFolderTree(root);
     return nested;
 }
@@ -47,20 +46,20 @@ static Node* buildFolderTree(const vector<Folder>& folders) {
     Node* root = nullptr;
     NodeMap nodeMap;
     for (const auto& folder : folders) {
-        Node* folderNode = createOrFindNode(nodeMap, folder.folderName);
+        Node* folderNode = findOrCreate(nodeMap, folder.folderName);
         if (folder.parentName == "") {
-            folderNode->parent = nullptr;
             root = folderNode;
+            folderNode->parent = nullptr;
             continue;
         }
-        Node* parentNode = createOrFindNode(nodeMap, folder.parentName);
+        Node* parentNode = findOrCreate(nodeMap, folder.parentName);
         folderNode->parent = parentNode;
         parentNode->children.push_back(folderNode);
     }
     return root;
 }
 
-static Node* createOrFindNode(NodeMap& nodeMap, const string& folderName) {
+static Node* findOrCreate(NodeMap& nodeMap, const string& folderName) {
     Node* node;
     NodeMapIterator iter = nodeMap.find(folderName);
     if (iter == nodeMap.end()) {

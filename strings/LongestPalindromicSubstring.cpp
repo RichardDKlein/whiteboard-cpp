@@ -33,12 +33,7 @@ static Interval longestPalindromeWithCenter(const string& s,
     int left = center;
     int right = lengthIsOdd ? center + 1 : center;
     while (left >= 0 && right < (int)s.size() && s[left] == s[right]) {
-        Interval candidate(left, right);
-        if (candidate.length() > longest.length()) {
-            longest = candidate;
-        }
-        --left;
-        ++right;
+        longest = Interval(left--, right++);
     }
     return longest;
 }

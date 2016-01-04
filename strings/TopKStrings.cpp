@@ -38,30 +38,26 @@ static Tally doTally(const vector<string>& v) {
 
 static MinHeap buildMinHeap(const Tally& tally, int k) {
     MinHeap minHeap;
-    int count = 0;
     int min = -1;
     for (auto& entry : tally) {
-        if (entry.second <= min) {
-            continue;
+        if (entry.second > min) {
+            minHeap.push(entry);
+            if ((int)minHeap.size() > k) {
+                minHeap.pop();
+            }
+            min = minHeap.top().second;
         }
-        minHeap.push(entry);
-        ++count;
-        if (count > k) {
-            minHeap.pop();
-            --count;
-        }
-        min = minHeap.top().second;
     }
     return minHeap;
 }
 
 static vector<Entry> extractResults(MinHeap& minHeap) {
-    vector<Entry> entries(minHeap.size());
-    for (int i = minHeap.size() - 1; i >= 0; --i) {
-        entries[i] = minHeap.top();
+    vector<Entry> results(minHeap.size());
+    for (int i = results.size() - 1; i >= 0; --i) {
+        results[i] = minHeap.top();
         minHeap.pop();
     }
-    return entries;
+    return results;
 }
 
 void testTopKStrings() {
