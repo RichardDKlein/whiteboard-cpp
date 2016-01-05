@@ -7,9 +7,10 @@
  * @return Copy of |n|, but with its bits reversed.
  */
 unsigned int reverseBits(unsigned int n) {
-    int bitsPerInt = sizeof(n) * 8;
+    int numBits = sizeof(n) * 8;
+    int numShifts = numBits - 1;
     int rev = 0;
-    for (int i = 0; i < bitsPerInt - 1; ++i) {
+    for (int i = 0; i < numShifts; ++i) {
         rev |= n & 1;
         rev <<= 1;
         n >>= 1;

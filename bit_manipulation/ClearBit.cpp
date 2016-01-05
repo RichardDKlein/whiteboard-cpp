@@ -4,11 +4,11 @@
  * @brief Clears the specified bit in an unsigned int.
  *
  * @param n The unsigned int.
- * @param b The bit # to clear (where 0 = the LSB).
+ * @param bit The bit # to clear (where 0 = the LSB).
  * @return The unsigned int after clearing the bit.
  */
-unsigned int clearBit(unsigned int n, int b) {
-    return n & ~(1 << b);
+unsigned int clearBit(unsigned int n, int bit) {
+    return n & ~(1 << bit);
 }
 
 void testClearBit() {

@@ -4,11 +4,11 @@
  * @brief Gets the specified bit in an unsigned int.
  *
  * @param n The unsigned int.
- * @param b The bit # to get (where 0 = the LSB).
+ * @param bit The bit # to get (where 0 = the LSB).
  * @return The current value (0 or 1) of the specified bit.
  */
-int getBit(unsigned int n, int b) {
-    return n & (1 << b) ? 1 : 0;
+int getBit(unsigned int n, int bit) {
+    return n & (1 << bit) ? 1 : 0;
 }
 
 void testGetBit() {

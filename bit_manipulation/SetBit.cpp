@@ -4,11 +4,11 @@
  * @brief Sets the specified bit in an unsigned int.
  *
  * @param n The unsigned int.
- * @param b The bit # to set (where 0 is the LSB).
+ * @param bit The bit # to set (where 0 is the LSB).
  * @return The unsigned int after setting the bit.
  */
-unsigned int setBit(unsigned int n, int b) {
-    return n | (1 << b);
+unsigned int setBit(unsigned int n, int bit) {
+    return n | (1 << bit);
 }
 
 void testSetBit() {

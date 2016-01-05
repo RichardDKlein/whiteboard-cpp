@@ -4,11 +4,11 @@
  * @brief Toggles the specified bit in an unsigned int.
  *
  * @param n The unsigned int.
- * @param b The bit # to toggle (where 0 = the LSB).
+ * @param bit The bit # to toggle (where 0 = the LSB).
  * @return The unsigned int after toggling the bit.
  */
-unsigned int toggleBit(unsigned int n, int b) {
-    return n ^ (1 << b);
+unsigned int toggleBit(unsigned int n, int bit) {
+    return n ^ (1 << bit);
 }
 
 void testToggleBit() {
