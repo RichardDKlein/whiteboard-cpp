@@ -8,13 +8,13 @@
  */
 template<typename T>
 bool isBst(Node<T>* root) {
-    vector<T> inorder = traverseBstInOrder(root);
-    int prev = INT_MIN;
-    for (auto& curr : inorder) {
-        if (curr <= prev) {
+    vector<T> data = traverseBstInOrder(root);
+    if (data.size() < 2) {
+        return true;
+    }
+    for (int i = 1; i < data.size(); ++i) {
+        if (data[i] <= data[i - 1]) {
             return false;
-        } else {
-            prev = curr;
         }
     }
     return true;

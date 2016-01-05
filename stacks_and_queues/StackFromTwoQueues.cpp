@@ -17,20 +17,19 @@ public:
             return T();
         }
         while (main_.size() > 1) {
-            T& front = main_.front();
+            T front = main_.front();
             main_.pop();
             aux_.push(front);
         }
-
-        T top = main_.front();
+        T result = main_.front();
         main_.pop();
 
         while (!aux_.empty()) {
-            T& front = aux_.front();
+            T front = aux_.front();
             aux_.pop();
             main_.push(front);
         }
-        return top;
+        return result;
     }
 };
 

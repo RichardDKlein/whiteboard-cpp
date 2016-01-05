@@ -8,24 +8,22 @@
  */
 template<typename T>
 Node<T>* createBstFromSortedArray(const vector<T>& v) {
-    int count = v.size();
-    if (count == 0) {
+    if (v.empty()) {
         return nullptr;
     }
-    int mid = (count - 1) / 2;
+    int mid = (v.size() - 1) / 2;
     vector<T> left;
     for (int i = 0; i < mid; ++i) {
         left.push_back(v[i]);
     }
     vector<T> right;
-    for (int i = mid + 1; i < count; ++i) {
+    for (int i = mid + 1; i < v.size(); ++i) {
         right.push_back(v[i]);
     }
     Node<T>* root = new Node<T>;
     root->data = v[mid];
     root->left = createBstFromSortedArray(left);
     root->right = createBstFromSortedArray(right);
-
     return root;
 }
 

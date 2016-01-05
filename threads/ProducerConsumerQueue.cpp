@@ -16,23 +16,23 @@ private:
     condition_variable notEmpty_;
 public:
     ProducerConsumerQueue(int capacity) : capacity_(capacity) {}
-
-    void put(T item) {
+    void push(const T& item) {
         unique_lock<mutex> lock(mutex_);
-        notFull_.wait(lock,
-            [this](){return queue_.size() < capacity_;});
+        notFull_.wait(lock, [this](){
+            return queue_.size() < capacity_;
+        });
         queue_.push(item);
         notEmpty_.notify_all();
     }
-
-    T get() {
+    T pop() {
         unique_lock<mutex> lock(mutex_);
-        notEmpty_.wait(lock,
-            [this](){return !queue_.empty();});
-        T item = queue_.front();
+        notEmpty_.wait(lock, [this](){
+            return !queue_.empty();
+        });
+        T front = queue_.front();
         queue_.pop();
         notFull_.notify_all();
-        return item;
+        return front;
     }
 };
 
@@ -63,7 +63,7 @@ void testProducerConsumerQueue() {
 
 static void consumer(int id, ProducerConsumerQueue<int>* jobQueue) {
     for (int i = 0; i < 10; ++i) {
-        int job = jobQueue->get();
+        int job = jobQueue->pop();
         cout << "Consumer " << id << " consumed " << job << endl;
         this_thread::sleep_for(chrono::milliseconds(250));
     }
@@ -72,7 +72,7 @@ static void consumer(int id, ProducerConsumerQueue<int>* jobQueue) {
 static void producer(int id, ProducerConsumerQueue<int>* jobQueue) {
     for (int i = 0; i < 10; ++i) {
         int job = (id * 100) + i;
-        jobQueue->put(job);
+        jobQueue->push(job);
         cout << "Producer " << id << " produced " << job << endl;
         this_thread::sleep_for(chrono::milliseconds(100));
     }

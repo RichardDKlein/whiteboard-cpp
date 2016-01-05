@@ -4,31 +4,31 @@ using namespace std;
 
 class Singleton {
 private:
-    static Singleton* m_instance;
+    static Singleton* instance_;
     Singleton() {
         // construction logic
     }
 public:
-    static Singleton* getInstance() {
-        if (m_instance == nullptr) {
-            m_instance = new Singleton();
+    static Singleton* instance() {
+        if (instance_ == nullptr) {
+            instance_ = new Singleton();
         }
-        return m_instance;
+        return instance_;
     }
 };
 
-Singleton* Singleton::m_instance = nullptr;
+Singleton* Singleton::instance_ = nullptr;
 
 void testSingleton() {
     cout << endl;
     cout << "Test Singleton:" << endl;
     cout << "===============" << endl;
 
-    Singleton* instance1 = Singleton::getInstance();
-    Singleton* instance2 = Singleton::getInstance();
+    Singleton* instance1 = Singleton::instance();
+    Singleton* instance2 = Singleton::instance();
 
-    cout << "1st time: Singleton::getInstance() = "
+    cout << "1st time: Singleton::instance() = "
          << instance1 << endl;
-    cout << "2nd time: Singleton::getInstance() = "
+    cout << "2nd time: Singleton::instance() = "
          << instance2 << endl;
 }

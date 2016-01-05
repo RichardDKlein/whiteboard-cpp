@@ -17,7 +17,6 @@ vector<T> traverseBstPreOrder(Node<T>* root) {
     data.insert(data.end(), left.begin(), left.end());
     vector<int> right = traverseBstPreOrder(root->right);
     data.insert(data.end(), right.begin(), right.end());
-
     return data;
 }
 

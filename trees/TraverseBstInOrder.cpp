@@ -16,7 +16,6 @@ vector<T> traverseBstInOrder(Node<T>* root) {
     data.push_back(root->data);
     vector<T> right = traverseBstInOrder(root->right);
     data.insert(data.end(), right.begin(), right.end());
-
     return data;
 }
 
