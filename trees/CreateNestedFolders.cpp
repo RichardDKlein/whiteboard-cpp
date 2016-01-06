@@ -17,7 +17,6 @@ struct Node {
 };
 
 using NodeMap = unordered_map<string, Node*>;
-using NodeMapIterator = NodeMap::iterator;
 
 static Node* buildFolderTree(const vector<Folder>& folders);
 static Node* findOrCreate(NodeMap& nodeMap, const string& folderName);
@@ -60,16 +59,16 @@ static Node* buildFolderTree(const vector<Folder>& folders) {
 }
 
 static Node* findOrCreate(NodeMap& nodeMap, const string& folderName) {
-    Node* node;
-    NodeMapIterator iter = nodeMap.find(folderName);
+    Node* folderNode;
+    NodeMap::iterator iter = nodeMap.find(folderName);
     if (iter == nodeMap.end()) {
-        node = new Node;
-        node->folderName = folderName;
-        nodeMap[folderName] = node;
+        folderNode = new Node;
+        folderNode->folderName = folderName;
+        nodeMap[folderName] = folderNode;
     } else {
-        node = iter->second;
+        folderNode = iter->second;
     }
-    return node;
+    return folderNode;
 }
 
 static vector<Folder> traverseFolderTree(Node* root) {
@@ -79,7 +78,7 @@ static vector<Folder> traverseFolderTree(Node* root) {
     }
     Folder rootFolder;
     rootFolder.folderName = root->folderName;
-    rootFolder.parentName = (root->parent) ? root->parent->folderName : "";
+    rootFolder.parentName = root->parent ? root->parent->folderName : "";
     folders.push_back(rootFolder);
     for (auto& child : root->children) {
         vector<Folder> grandkids = traverseFolderTree(child);

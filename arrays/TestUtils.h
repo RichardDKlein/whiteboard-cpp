@@ -2,6 +2,7 @@
 #define ARRAYS_TEST_UTILS_H
 
 #include <iostream>
+#include <list>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -33,6 +34,26 @@ string vectorToString(vector<T> v) {
     ostringstream oss;
     oss << "[ ";
     for (auto& t : v) {
+        oss << t << " ";
+    }
+    oss << "]";
+    return oss.str();
+}
+
+template<typename T>
+list<T> arrayToList(int count, T a[]) {
+    list<T> l;
+    for (int i = 0; i < count; ++i) {
+        l.push_back(a[i]);
+    }
+    return l;
+}
+
+template<typename T>
+string listToString(list<T> l) {
+    ostringstream oss;
+    oss << "[ ";
+    for (auto& t : l) {
         oss << t << " ";
     }
     oss << "]";

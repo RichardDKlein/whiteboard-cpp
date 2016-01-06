@@ -11,9 +11,10 @@ public:
     vector<string> words() {return words_;}
 };
 
-#define EMPTY_VECTOR vector<string>()
-#define FAILURE ParseResults(false, EMPTY_VECTOR)
-#define SUCCESS_EMPTY_STRING ParseResults(true, EMPTY_VECTOR)
+#define SUCCESS_EMPTY_STRING ParseResults(true, vector<string>())
+#define FAILURE ParseResults(false, vector<string>())
+
+using Dictionary = unordered_set<string>;
 
 /**
  * @brief Parse a string containing no whitespace into its
@@ -24,7 +25,7 @@ public:
  * @return Constituent words (if parse successful).
  */
 ParseResults parseStringIntoWords(const string& s,
-    const set<string>& dict) {
+    const Dictionary& dict) {
 
     if (s == "") {
         return SUCCESS_EMPTY_STRING;
@@ -53,7 +54,7 @@ void testParseStringIntoWords() {
     cout << "Test parseStringIntoWords():" << endl;
     cout << "============================" << endl;
 
-    set<string> dict;
+    Dictionary dict;
     dict.insert("now");
     dict.insert("is");
     dict.insert("the");

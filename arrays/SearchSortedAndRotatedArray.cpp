@@ -11,7 +11,7 @@ using namespace std;
  * does not contain |target|).
  */
 template<typename T>
-int searchSortedAndRotatedArray(const vector<T>& v, T target) {
+int searchSortedAndRotatedArray(const vector<T>& v, const T& target) {
     int left = 0;
     int right = v.size() - 1;
     while (left <= right) {

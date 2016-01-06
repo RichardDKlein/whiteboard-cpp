@@ -15,16 +15,12 @@ vector<Pair> sumPairsInSortedArray(vector<int> v, int sum) {
     int left = 0;
     int right = v.size() - 1;
     while (left < right) {
-        int v1 = v[left];
-        int v2 = v[right];
-        int s = v1 + v2;
-        if (s > sum) {
-            --right;
-        } else if (s < sum) {
+        if (v[left] + v[right] < sum) {
             ++left;
+        } else if (v[left] + v[right] > sum) {
+            --right;
         } else {
-            Pair p(v1, v2);
-            pairs.push_back(p);
+            pairs.push_back(Pair(v[left], v[right]));
             ++left;
             --right;
         }
@@ -37,7 +33,7 @@ void testSumPairsInSortedArray() {
     cout << "Test sumPairsInSortedArray():" << endl;
     cout << "=============================" << endl;
 
-    int a[] = {-2, -1, 0, 3, 5, 6, 7, 9, 13, 14};
+    int a[] = {-2, -1, 0, 3, 5, 6, 6, 7, 9, 13, 14};
 
     vector<int> v;
     for (auto n : a) {

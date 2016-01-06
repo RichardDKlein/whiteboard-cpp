@@ -11,7 +11,7 @@ static Interval longestPalindromeWithCenter(const string& s,
  * @return Pair of indices in |s| representing longest palindromic
  * substring.
  */
-Interval longestPalindromicSubstring(string s) {
+Interval longestPalindromicSubstring(const string& s) {
     Interval longest(0, 0);
     for (int i = 0; i < (int)s.size(); ++i) {
         Interval longestOdd = longestPalindromeWithCenter(s, i, true);
@@ -31,7 +31,7 @@ static Interval longestPalindromeWithCenter(const string& s,
 
     Interval longest(center, center);
     int left = center;
-    int right = lengthIsOdd ? center + 1 : center;
+    int right = lengthIsOdd ? center : center + 1;
     while (left >= 0 && right < (int)s.size() && s[left] == s[right]) {
         longest = Interval(left--, right++);
     }

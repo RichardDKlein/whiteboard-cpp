@@ -10,28 +10,24 @@
  * the histogram bars.
  */
 int histogramWater(const vector<int>& v) {
-    int count = v.size();
-    int left = 0;
-    int right = count - 1;
-
-    vector<int> leftTallest(count);
-    int leftMax = -1;
-    for (int i = left; i <= right; ++i) {
-        leftMax = max(leftMax, v[i]);
-        leftTallest[i] = leftMax;
+    vector<int> leftTallest(v.size());
+    int maxLeft = -1;
+    for (int i = 0; i < (int)v.size(); ++i) {
+        maxLeft = max(maxLeft, v[i]);
+        leftTallest[i] = maxLeft;
     }
-    vector<int> rightTallest(count);
-    int rightMax = -1;
-    for (int i = right; i >= left; --i) {
-        rightMax = max(rightMax, v[i]);
-        rightTallest[i] = rightMax;
+    vector<int> rightTallest(v.size());
+    int maxRight = -1;
+    for (int i = v.size() - 1; i >= 0; --i) {
+        maxRight = max(maxRight, v[i]);
+        rightTallest[i] = maxRight;
     }
-    vector<int> waterline(count);
-    for (int i = left; i <= right; ++i) {
+    vector<int> waterline(v.size());
+    for (int i = 0; i < (int)v.size(); ++i) {
         waterline[i] = min(leftTallest[i], rightTallest[i]);
     }
     int waterCollected = 0;
-    for (int i = left; i <= right; i++) {
+    for (int i = 0; i < (int)v.size(); ++i) {
         if (waterline[i] > v[i]) {
             waterCollected += (waterline[i] - v[i]);
         }

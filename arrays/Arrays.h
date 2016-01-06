@@ -3,7 +3,7 @@
 
 #include <climits>
 #include <list>
-#include <set>
+#include <unordered_set>
 #include <vector>
 #include "TestUtils.h"
 
@@ -25,7 +25,7 @@ int histogramWater(const vector<int>& v);
 template<typename T> vector<T> mergeTwoSortedArrays(
     vector<T>& v1, vector<T>& v2);
 template<typename T> int searchSortedAndRotatedArray(
-    const vector<T>& v, T target);
+    const vector<T>& v, const T& target);
 template<typename T> void shuffleArray(vector<T>& v);
 
 void testHistogramWater();

@@ -12,14 +12,12 @@ typedef pair<int, int> Pair;
  */
 vector<Pair> sumPairsInUnsortedArray(vector<int> v, int sum) {
     vector<Pair> pairs;
-    set<int> seen;
-    for (auto& v1: v) {
-        int v2 = sum - v1;
-        if (seen.count(v2) > 0) {
-            Pair p(v1, v2);
-            pairs.push_back(p);
+    unordered_set<int> seen;
+    for (auto& i : v) {
+        if (seen.count(sum - i) > 0) {
+            pairs.push_back(Pair(i, sum - i));
         }
-        seen.insert(v1);
+        seen.insert(i);
     }
     return pairs;
 }
@@ -29,7 +27,7 @@ void testSumPairsInUnsortedArray() {
     cout << "Test sumPairsInUnsortedArray():" << endl;
     cout << "===============================" << endl;
 
-    int a[] = {-2, -1, 0, 3, 5, 6, 7, 9, 13, 14};
+    int a[] = {-2, -1, 0, 3, 5, 6, 6, 7, 9, 13, 14};
 
     vector<int> v;
     for (auto n : a) {

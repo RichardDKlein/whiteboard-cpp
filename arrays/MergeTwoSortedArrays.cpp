@@ -8,23 +8,24 @@
  * @return The merged array.
  */
 template<typename T>
-vector<T> mergeTwoSortedArrays(vector<T>& v1, vector<T>& v2) {
+vector<T> mergeTwoSortedArrays(list<T>& v1, list<T>& v2) {
     vector<T> merged;
     for (;;) {
         if (v1.empty()) {
             merged.insert(merged.end(), v2.begin(), v2.end());
-            return merged;
+            break;
         }
         if (v2.empty()) {
             merged.insert(merged.end(), v1.begin(), v1.end());
-            return merged;
+            break;
         }
         if (v1.front() < v2.front()) {
             merged.push_back(v1.front());
-            v1.erase(v1.begin());
+            v1.pop_front();
+        } else {
+            merged.push_back(v2.front());
+            v2.pop_front();
         }
-        merged.push_back(v2.front());
-        v2.erase(v2.begin());
     }
     return merged;
 }
@@ -39,41 +40,41 @@ void testMergeTwoSortedArrays() {
     {
         int a1[] = {1, 3, 5, 7, 9};
         int a2[] = {2, 4, 6, 8, 10};
-        vector<int> v1 = arrayToVector(COUNT1, a1);
-        vector<int> v2 = arrayToVector(COUNT2, a2);
-        cout << "v1 = " << vectorToString(v1) << endl;
-        cout << "v2 = " << vectorToString(v2) << endl;
-        vector<int> merged = mergeTwoSortedArrays(v1, v2);
+        list<int> l1 = arrayToList(COUNT1, a1);
+        list<int> l2 = arrayToList(COUNT2, a2);
+        cout << "l1 = " << listToString(l1) << endl;
+        cout << "l2 = " << listToString(l2) << endl;
+        vector<int> merged = mergeTwoSortedArrays(l1, l2);
         cout << "merged = " << vectorToString(merged) << endl;
     }
     {
         int a1[] = {1, 3, 5, 7, 9};
         int a2[] = {2, 4, 6, 8, 10, 12, 14, 16};
-        vector<int> v1 = arrayToVector(COUNT1, a1);
-        vector<int> v2 = arrayToVector(COUNT2, a2);
-        cout << "v1 = " << vectorToString(v1) << endl;
-        cout << "v2 = " << vectorToString(v2) << endl;
-        vector<int> merged = mergeTwoSortedArrays(v1, v2);
+        list<int> l1 = arrayToList(COUNT1, a1);
+        list<int> l2 = arrayToList(COUNT2, a2);
+        cout << "l1 = " << listToString(l1) << endl;
+        cout << "l2 = " << listToString(l2) << endl;
+        vector<int> merged = mergeTwoSortedArrays(l1, l2);
         cout << "merged = " << vectorToString(merged) << endl;
     }
     {
         int a1[] = {1, 3, 5, 7, 9, 11, 13, 15};
         int a2[] = {2, 4, 6, 8, 10};
-        vector<int> v1 = arrayToVector(COUNT1, a1);
-        vector<int> v2 = arrayToVector(COUNT2, a2);
-        cout << "v1 = " << vectorToString(v1) << endl;
-        cout << "v2 = " << vectorToString(v2) << endl;
-        vector<int> merged = mergeTwoSortedArrays(v1, v2);
+        list<int> l1 = arrayToList(COUNT1, a1);
+        list<int> l2 = arrayToList(COUNT2, a2);
+        cout << "l1 = " << listToString(l1) << endl;
+        cout << "l2 = " << listToString(l2) << endl;
+        vector<int> merged = mergeTwoSortedArrays(l1, l2);
         cout << "merged = " << vectorToString(merged) << endl;
     }
     {
         int a1[] = {1, 2, 3, 4, 5};
         int a2[] = {1, 2, 3, 4, 5};
-        vector<int> v1 = arrayToVector(COUNT1, a1);
-        vector<int> v2 = arrayToVector(COUNT2, a2);
-        cout << "v1 = " << vectorToString(v1) << endl;
-        cout << "v2 = " << vectorToString(v2) << endl;
-        vector<int> merged = mergeTwoSortedArrays(v1, v2);
+        list<int> l1 = arrayToList(COUNT1, a1);
+        list<int> l2 = arrayToList(COUNT2, a2);
+        cout << "l1 = " << listToString(l1) << endl;
+        cout << "l2 = " << listToString(l2) << endl;
+        vector<int> merged = mergeTwoSortedArrays(l1, l2);
         cout << "merged = " << vectorToString(merged) << endl;
     }
     }

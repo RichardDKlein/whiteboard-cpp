@@ -1,21 +1,21 @@
 #include "Arrays.h"
 
-typedef pair<int, int> RowCol;
+using RowCol = pair<int, int>;
 template<typename T> using Array2d = vector<vector<T>>;
 
 /**
  * @brief Search a 2D array in which all rows
  * and columns are sorted in ascending order.
  *
- * @param v Sorted 2D array to be searched.
+ * @param a Sorted 2D array to be searched.
  * @param target The value to search for.
  * @return The (row, col) of |target|, or (-1, -1) if
- * |v| does not contain |target|.
+ * |a| does not contain |target|.
  */
 template<typename T>
-RowCol searchSorted2dArray(const Array2d<T>& v, T target) {
-    int rows = v.size();
-    int cols = v[0].size();
+RowCol searchSorted2dArray(const Array2d<T>& a, const T& target) {
+    int rows = a.size();
+    int cols = a[0].size();
 
     int top = 0;
     int bottom = rows - 1;
@@ -25,10 +25,9 @@ RowCol searchSorted2dArray(const Array2d<T>& v, T target) {
     int row = bottom;
     int col = left;
     while (row >= top && col <= right) {
-        int curr = v[row][col];
-        if (curr > target) {
+        if (a[row][col] > target) {
             --row;
-        } else if (curr < target) {
+        } else if (a[row][col] < target) {
             ++col;
         } else {
             return RowCol(row, col);
