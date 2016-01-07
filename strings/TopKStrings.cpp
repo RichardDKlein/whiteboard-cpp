@@ -30,7 +30,7 @@ vector<Entry> topKStrings(const vector<string>& v, int k) {
 
 static Tally doTally(const vector<string>& v) {
     Tally tally;
-    for (const auto& s : v) {
+    for (auto& s : v) {
         ++tally[s];
     }
     return tally;

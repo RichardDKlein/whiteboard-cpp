@@ -1,7 +1,7 @@
 #include "Strings.h"
 #include "../arrays/Arrays.h"
 
-static Interval longestPalindromeWithCenter(const string& s,
+static Interval longestAtCenter(const string& s,
     int center, bool lengthIsOdd);
 
 /**
@@ -14,8 +14,8 @@ static Interval longestPalindromeWithCenter(const string& s,
 Interval longestPalindromicSubstring(const string& s) {
     Interval longest(0, 0);
     for (int i = 0; i < (int)s.size(); ++i) {
-        Interval longestOdd = longestPalindromeWithCenter(s, i, true);
-        Interval longestEven = longestPalindromeWithCenter(s, i, false);
+        Interval longestOdd = longestAtCenter(s, i, true);
+        Interval longestEven = longestAtCenter(s, i, false);
         if (longestOdd.length() > longest.length()) {
             longest = longestOdd;
         }
@@ -26,12 +26,12 @@ Interval longestPalindromicSubstring(const string& s) {
     return longest;
 }
 
-static Interval longestPalindromeWithCenter(const string& s,
+static Interval longestAtCenter(const string& s,
     int center, bool lengthIsOdd) {
 
     Interval longest(center, center);
-    int left = center;
-    int right = lengthIsOdd ? center : center + 1;
+    int left = lengthIsOdd ? center - 1 : center;
+    int right = center + 1;
     while (left >= 0 && right < (int)s.size() && s[left] == s[right]) {
         longest = Interval(left--, right++);
     }

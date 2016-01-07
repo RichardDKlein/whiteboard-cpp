@@ -78,11 +78,13 @@ static vector<Folder> traverseFolderTree(Node* root) {
     }
     Folder rootFolder;
     rootFolder.folderName = root->folderName;
-    rootFolder.parentName = root->parent ? root->parent->folderName : "";
+    rootFolder.parentName = root->parent ?
+        root->parent->folderName : "";
     folders.push_back(rootFolder);
     for (auto& child : root->children) {
-        vector<Folder> grandkids = traverseFolderTree(child);
-        folders.insert(folders.end(), grandkids.begin(), grandkids.end());
+        vector<Folder> childFolders = traverseFolderTree(child);
+        folders.insert(folders.end(),
+            childFolders.begin(), childFolders.end());
     }
     return folders;
 }
@@ -94,6 +96,7 @@ static void destroyFolderTree(Node* root) {
     for (auto& child : root->children) {
         destroyFolderTree(child);
     }
+    delete root;
 }
 
 void testCreateNestedFolders() {
