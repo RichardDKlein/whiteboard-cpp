@@ -1,26 +1,18 @@
 #include "LinkedLists.h"
 
 /**
- * @brief Append an item to a linked list.
+ * @brief insert an item in a linked list.
  *
- * @param list Head of list.
- * @param after List node after which the item is to be inserted.
+ * @param after List node after which item is to be inserted.
  * @param data Item to be inserted.
  * @return New list node containing inserted data item.
  */
 template<typename T>
-Node<T>* insertInList(Node<T>* list, Node<T>* after, T data) {
-    Node<T>* curr = list;
-    while (curr && (curr != after)) {
-        curr = curr->next;
-    }
-    if (!curr) {
-        return nullptr;
-    }
+Node<T>* insertInList(Node<T>* after, T data) {
     Node<T>* node = new Node<T>;
     node->data = data;
-    node->next = curr->next;
-    curr->next = node;
+    node->next = after->next;
+    after->next = node;
 
     return node;
 }
@@ -39,17 +31,17 @@ void testInsertInList() {
     char g[] = "g";
     char x[] = "x";
 
-    Node<char*> list;
-    list.data = a;
-    list.next = nullptr;
-    appendToList(&list, b);
-    appendToList(&list, c);
-    Node<char*>* dNode = appendToList(&list, d);
-    appendToList(&list, e);
-    appendToList(&list, f);
-    appendToList(&list, g);
-    printList(&list);
+    Node<char*> head;
+    head.data = a;
+    head.next = nullptr;
+    appendToList(&head, b);
+    appendToList(&head, c);
+    Node<char*>* dNode = appendToList(&head, d);
+    appendToList(&head, e);
+    appendToList(&head, f);
+    appendToList(&head, g);
+    printList(&head);
 
-    insertInList(&list, dNode, x);
-    printList(&list);
+    insertInList(dNode, x);
+    printList(&head);
 }

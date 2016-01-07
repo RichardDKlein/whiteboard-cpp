@@ -1,7 +1,7 @@
 #ifndef LINKED_LISTS_H
 #define LINKED_LISTS_H
 
-#include <set>
+#include <unordered_set>
 
 using namespace std;
 
@@ -13,14 +13,13 @@ struct Node {
 
 #include "TestUtils.h"
 
-template<typename T> Node<T>* appendToList(Node<T>* list, T data);
+template<typename T> Node<T>* appendToList(Node<T>* head, T data);
 template<typename T> bool deleteFromList(Node<T>* toDelete);
-template<typename T> Node<T>* findKthToLast(Node<T>* list, int k);
-template<typename T> Node<T>* insertInList(Node<T>* list,
-    Node<T>* after, T data);
-template<typename T> bool listHasCycle(Node<T>* list);
-template<typename T> void removeDupsFromList(Node<T>* list);
-template<typename T> Node<T>* reverseList(Node<T>* list);
+template<typename T> Node<T>* findKthToLast(Node<T>* head, int k);
+template<typename T> Node<T>* insertInList(Node<T>* after, T data);
+template<typename T> bool listHasCycle(Node<T>* head);
+template<typename T> void removeDupsFromList(Node<T>* head);
+template<typename T> Node<T>* reverseList(Node<T>* head);
 
 void testAppendToList();
 void testDeleteFromList();

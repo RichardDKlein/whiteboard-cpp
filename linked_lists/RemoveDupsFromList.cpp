@@ -3,19 +3,18 @@
 /**
  * @brief Remove duplicates from a linked list.
  *
- * @param list Head of list.
+ * @param head Head of list.
  */
 template<typename T>
-void removeDupsFromList(Node<T>* list) {
-    set<T> seen;
-    Node<T>* curr = list;
+void removeDupsFromList(Node<T>* head) {
+    Node<T>* curr = head;
     Node<T>* prev = nullptr;
+    unordered_set<T> seen;
     while (curr) {
         if (seen.count(curr->data) > 0) {
-            Node<T>* tmp = curr;
             curr = curr->next;
+            delete prev->next;
             prev->next = curr;
-            delete tmp;
         } else {
             seen.insert(curr->data);
             prev = curr;
@@ -37,26 +36,26 @@ void testRemoveDupsFromList() {
     char f[] = "f";
     char g[] = "g";
 
-    Node<char*> list;
-    list.data = a;
-    list.next = nullptr;
-    appendToList(&list, b);
-    Node<char*>* cNode = appendToList(&list, c);
-    appendToList(&list, d);
-    Node<char*>* eNode = appendToList(&list, e);
-    Node<char*>* fNode = appendToList(&list, f);
-    appendToList(&list, g);
-    printList(&list);
+    Node<char*> head;
+    head.data = a;
+    head.next = nullptr;
+    appendToList(&head, b);
+    Node<char*>* cNode = appendToList(&head, c);
+    appendToList(&head, d);
+    Node<char*>* eNode = appendToList(&head, e);
+    Node<char*>* fNode = appendToList(&head, f);
+    appendToList(&head, g);
+    printList(&head);
 
-    insertInList(&list, cNode, a);
-    insertInList(&list, eNode, b);
-    insertInList(&list, fNode, d);
-    appendToList(&list, c);
-    appendToList(&list, e);
-    appendToList(&list, g);
-    printList(&list);
+    insertInList(cNode, a);
+    insertInList(eNode, b);
+    insertInList(fNode, d);
+    appendToList(&head, c);
+    appendToList(&head, e);
+    appendToList(&head, g);
+    printList(&head);
 
-    removeDupsFromList(&list);
+    removeDupsFromList(&head);
     cout << "Removing duplicates:" << endl;
-    printList(&list);
+    printList(&head);
 }

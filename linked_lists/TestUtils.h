@@ -4,8 +4,8 @@
 using namespace std;
 
 template<typename T>
-void printList(Node<T>* list) {
-    Node<T>* curr = list;
+void printList(Node<T>* head) {
+    Node<T>* curr = head;
     bool atHead = true;
     while (curr) {
         if (!atHead) {
@@ -20,8 +20,8 @@ void printList(Node<T>* list) {
 }
 
 template<typename T>
-void printList(Node<T>* list, int max) {
-    Node<T>* curr = list;
+void printList(Node<T>* head, int max) {
+    Node<T>* curr = head;
     int count = 0;
     bool atHead = true;
     while (curr && (count < max)) {

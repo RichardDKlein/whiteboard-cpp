@@ -3,13 +3,13 @@
 /**
  * @brief Reverse a linked list.
  *
- * @param list Head of list to be reversed.
+ * @param head Head of list to be reversed.
  * @return Head of reversed list.
  */
 template<typename T>
-Node<T>* reverseList(Node<T>* list) {
-    Node<T>* curr = list;
+Node<T>* reverseList(Node<T>* head) {
     Node<T>* rev = nullptr;
+    Node<T>* curr = head;
     while (curr) {
         Node<T>* tmp = curr;
         curr = curr->next;
@@ -32,18 +32,18 @@ void testReverseList() {
     char f[] = "f";
     char g[] = "g";
 
-    Node<char*> list;
-    list.data = a;
-    list.next = nullptr;
-    appendToList(&list, b);
-    appendToList(&list, c);
-    appendToList(&list, d);
-    appendToList(&list, e);
-    appendToList(&list, f);
-    appendToList(&list, g);
-    printList(&list);
+    Node<char*> head;
+    head.data = a;
+    head.next = nullptr;
+    appendToList(&head, b);
+    appendToList(&head, c);
+    appendToList(&head, d);
+    appendToList(&head, e);
+    appendToList(&head, f);
+    appendToList(&head, g);
+    printList(&head);
 
-    Node<char*>* rev = reverseList(&list);
+    Node<char*>* rev = reverseList(&head);
     printList(rev);
 
     Node<char*>* orig = reverseList(rev);

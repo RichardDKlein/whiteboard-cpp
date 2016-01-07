@@ -3,14 +3,14 @@
 /**
  * @brief Append a data item to a linked list.
  *
- * @param list Head of list.
+ * @param head Head of list.
  * @param data Data item.
  * @return New list node containing appended data item.
  */
 template<typename T>
-Node<T>* appendToList(Node<T>* list, T data) {
-    Node<T>* curr = list;
+Node<T>* appendToList(Node<T>* head, T data) {
     Node<T>* prev = nullptr;
+    Node<T>* curr = head;
     while (curr) {
         prev = curr;
         curr = curr->next;
@@ -36,26 +36,26 @@ void testAppendToList() {
     char f[] = "f";
     char g[] = "g";
 
-    Node<char*> list;
-    list.data = a;
-    list.next = nullptr;
-    printList(&list);
+    Node<char*> head;
+    head.data = a;
+    head.next = nullptr;
+    printList(&head);
 
-    appendToList(&list, b);
-    printList(&list);
+    appendToList(&head, b);
+    printList(&head);
 
-    appendToList(&list, c);
-    printList(&list);
+    appendToList(&head, c);
+    printList(&head);
 
-    appendToList(&list, d);
-    printList(&list);
+    appendToList(&head, d);
+    printList(&head);
 
-    appendToList(&list, e);
-    printList(&list);
+    appendToList(&head, e);
+    printList(&head);
 
-    appendToList(&list, f);
-    printList(&list);
+    appendToList(&head, f);
+    printList(&head);
 
-    appendToList(&list, g);
-    printList(&list);
+    appendToList(&head, g);
+    printList(&head);
 }

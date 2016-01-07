@@ -3,21 +3,21 @@
 /**
  * @brief Find the kth to last node in a linked list.
  *
- * @param list Head of list.
+ * @param head Head of list.
  * @return Kth to last node in list, or nullptr if k is too big.
  */
 template<typename T>
-Node<T>* kthToLastInList(Node<T>* list, int k) {
-    Node<T>* lead = list;
+Node<T>* kthToLastInList(Node<T>* head, int k) {
+    Node<T>* lead = head;
     int count = 0;
     while (lead && (count < k)) {
         lead = lead->next;
-        count++;
+        ++count;
     }
     if (count < k) {
         return nullptr;
     }
-    Node<T>* lag = list;
+    Node<T>* lag = head;
     while (lead) {
         lead = lead->next;
         lag = lag->next;
@@ -38,19 +38,19 @@ void testKthToLastInList() {
     char f[] = "f";
     char g[] = "g";
 
-    Node<char*> list;
-    list.data = a;
-    list.next = nullptr;
-    appendToList(&list, b);
-    appendToList(&list, c);
-    appendToList(&list, d);
-    appendToList(&list, e);
-    appendToList(&list, f);
-    appendToList(&list, g);
-    printList(&list);
+    Node<char*> head;
+    head.data = a;
+    head.next = nullptr;
+    appendToList(&head, b);
+    appendToList(&head, c);
+    appendToList(&head, d);
+    appendToList(&head, e);
+    appendToList(&head, f);
+    appendToList(&head, g);
+    printList(&head);
 
     for (int k = 1; k <= 8; ++k) {
-        Node<char*>* kthToLastNode = kthToLastInList(&list, k);
+        Node<char*>* kthToLastNode = kthToLastInList(&head, k);
         cout << "kth to last element (k = " << k << ") is "
              << (kthToLastNode ? kthToLastNode->data : "nullptr")
              << endl;

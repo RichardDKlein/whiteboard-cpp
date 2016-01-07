@@ -35,20 +35,20 @@ void testDeleteFromList() {
     char g[] = "g";
     char x[] = "x";
 
-    Node<char*> list;
-    list.data = a;
-    list.next = nullptr;
-    appendToList(&list, b);
-    appendToList(&list, c);
-    Node<char*>* dNode = appendToList(&list, d);
-    appendToList(&list, e);
-    appendToList(&list, f);
-    appendToList(&list, g);
-    printList(&list);
+    Node<char*> head;
+    head.data = a;
+    head.next = nullptr;
+    appendToList(&head, b);
+    appendToList(&head, c);
+    Node<char*>* dNode = appendToList(&head, d);
+    appendToList(&head, e);
+    appendToList(&head, f);
+    appendToList(&head, g);
+    printList(&head);
 
-    Node<char*>* xNode = insertInList(&list, dNode, x);
-    printList(&list);
+    Node<char*>* xNode = insertInList(dNode, x);
+    printList(&head);
 
     deleteFromList(xNode);
-    printList(&list);
+    printList(&head);
 }
