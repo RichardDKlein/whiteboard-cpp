@@ -10,14 +10,14 @@
 
 using namespace std;
 
-int findSubstring(const char* s, const char* sub);
+int findSubstring(char* s, char* sub);
 vector<string> permutationsOfString(const string& s);
 void reverseStringInPlace(char* s);
-char* reverseWordsInSentence(const char* s);
-int stringCompare(const char* s1, const char* s2);
-char* stringCopy(const char* s);
-int stringLength(const char* s);
-bool stringsArePermutations(const string& s1, const string& s2);
+char* reverseWordsInSentence(char* s);
+int stringCompare(char* s1, char* s2);
+char* stringCopy(char* s);
+int stringLength(char* s);
+bool stringsArePermutations(char* s1, char* s2);
 
 void testFindSubstring();
 void testLongestPalindromicSubstring();

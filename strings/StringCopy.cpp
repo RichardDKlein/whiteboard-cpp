@@ -6,7 +6,7 @@
  * @param s The string of interest.
  * @return A copy of |s|.
  */
-char* stringCopy(const char* s) {
+char* stringCopy(char* s) {
     int len = stringLength(s);
     char* copy = new char[len + 1];
     copy[len] = '\0';
@@ -29,7 +29,7 @@ void testStringCopy() {
     };
 
     for (auto& s : testStrings) {
-        char* sCopy = stringCopy(s);
+        char* sCopy = stringCopy((char*)s);
         cout << "stringCopy(\"" << s << "\") = \""
              << sCopy << "\"" << endl;
         delete[] sCopy;

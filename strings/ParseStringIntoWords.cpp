@@ -1,18 +1,19 @@
 #include "Strings.h"
 
-class ParseResults {
+class ParseResult {
 private:
     bool success_;
     vector<string> words_;
 public:
-    ParseResults(bool success, const vector<string>& words) :
+    ParseResult(bool success, const vector<string>& words) :
         success_(success), words_(words) {}
     bool success() {return success_;}
     vector<string> words() {return words_;}
 };
 
-#define SUCCESS_EMPTY_STRING ParseResults(true, vector<string>())
-#define FAILURE ParseResults(false, vector<string>())
+#define EMPTY_VECTOR vector<string>()
+#define SUCCESS_EMPTY_STRING ParseResult(true, EMPTY_VECTOR)
+#define FAILURE ParseResult(false, EMPTY_VECTOR)
 
 using Dictionary = unordered_set<string>;
 
@@ -24,7 +25,7 @@ using Dictionary = unordered_set<string>;
  * @param s String to be parsed.
  * @return Constituent words (if parse successful).
  */
-ParseResults parseStringIntoWords(const string& s,
+ParseResult parseStringIntoWords(const string& s,
     const Dictionary& dict) {
 
     if (s == "") {
@@ -36,7 +37,7 @@ ParseResults parseStringIntoWords(const string& s,
             continue;
         }
         string rem = s.substr(i + 1, string::npos);
-        ParseResults remParse = parseStringIntoWords(rem, dict);
+        ParseResult remParse = parseStringIntoWords(rem, dict);
         if (!remParse.success()) {
             return FAILURE;
         }
@@ -44,7 +45,7 @@ ParseResults parseStringIntoWords(const string& s,
         vector<string> words;
         words.push_back(firstWord);
         words.insert(words.end(), remWords.begin(), remWords.end());
-        return ParseResults(true, words);
+        return ParseResult(true, words);
     }
     return FAILURE;
 }
@@ -76,7 +77,7 @@ void testParseStringIntoWords() {
     };
 
     for (const auto& s : testStrings) {
-        ParseResults parse = parseStringIntoWords(s, dict);
+        ParseResult parse = parseStringIntoWords(s, dict);
         cout << "parseStringIntoWords(\"" << s << "\"):" << endl;
         cout << "{" << endl;
         for (const auto& word : parse.words()) {

@@ -16,8 +16,8 @@ template<typename T>
 Interval shortestClosure(const vector<T>& haystack,
                          const vector<T>& needles) {
 
-    LocationLists locLists = buildLocationLists(haystack, needles);
     Interval shortest(0, haystack.size() - 1);
+    LocationLists locLists = buildLocationLists(haystack, needles);
     for (;;) {
         Interval candidate = nextCandidate(locLists);
         if (!candidate.valid()) {

@@ -42,7 +42,7 @@ vector<Folder> createNestedFolders(const vector<Folder>& folders) {
 }
 
 static Node* buildFolderTree(const vector<Folder>& folders) {
-    Node* root = nullptr;
+    Node* root;
     NodeMap nodeMap;
     for (const auto& folder : folders) {
         Node* folderNode = findOrCreate(nodeMap, folder.folderName);

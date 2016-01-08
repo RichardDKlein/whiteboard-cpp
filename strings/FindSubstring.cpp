@@ -8,18 +8,18 @@
  * @return Index of first occurrence of |sub| in |s|,
  * or -1 if there is no occurrence.
  */
-int findSubstring(const char* s, const char* sub) {
+int findSubstring(char* s, char* sub) {
     if (*sub == '\0') {
         return 0;
     }
-    const char* s0 = s;
+    char* s0 = s;
     while (*s) {
         if (*s != *sub) {
             ++s;
             continue;
         }
-        const char* a = s + 1;
-        const char* b = sub + 1;
+        char* a = s + 1;
+        char* b = sub + 1;
         for (;;) {
             if (*b == '\0') {
                 return s - s0;
@@ -55,7 +55,7 @@ void testFindSubstring() {
     int numTestSubstrings = sizeof(testSubstrings) / sizeof(char*);
     for (int i = 0; i < numTestSubstrings; ++i) {
         const char* sub = testSubstrings[i];
-        int index = findSubstring(testString, sub);
+        int index = findSubstring((char*)testString, (char*)sub);
         cout << "findSubstring(\"" << testString
              << "\", \"" << sub << "\") = " << index << endl;
     }

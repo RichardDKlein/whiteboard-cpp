@@ -6,7 +6,7 @@
  * @param s The string of interest.
  * @return The length of |s| (excluding terminating null).
  */
-int stringLength(const char* s) {
+int stringLength(char* s) {
     const char* p = s;
     while (*p) {
         ++p;
@@ -27,7 +27,7 @@ void testStringLength() {
     };
 
     for (auto& s : testStrings) {
-        size_t len = stringLength(s);
+        size_t len = stringLength((char*)s);
         cout << "stringLength(\"" << s << "\") = " << len << endl;
     }
 }

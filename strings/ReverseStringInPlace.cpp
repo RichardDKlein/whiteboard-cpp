@@ -33,7 +33,7 @@ void testReverseStringInPlace() {
     };
 
     for (auto& s : testStrings) {
-        char* sCopy = stringCopy(s);
+        char* sCopy = stringCopy((char*)s);
         reverseStringInPlace(sCopy);
         cout << "reverseStringInPlace(\"" << s
              << "\") = \"" << sCopy << "\"" << endl;

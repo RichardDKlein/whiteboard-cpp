@@ -32,7 +32,8 @@ static Interval longestAtCenter(const string& s,
     Interval longest(center, center);
     int left = lengthIsOdd ? center - 1 : center;
     int right = center + 1;
-    while (left >= 0 && right < (int)s.size() && s[left] == s[right]) {
+    while (left >= 0 && right < (int)s.size()
+            && s[left] == s[right]) {
         longest = Interval(left--, right++);
     }
     return longest;
