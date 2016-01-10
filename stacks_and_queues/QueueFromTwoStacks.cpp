@@ -9,10 +9,10 @@ private:
     stack<T> main_;
     stack<T> aux_;
 public:
-    void enqueue(const T& item) {
+    void push(const T& item) {
         main_.push(item);
     }
-    T dequeue() {
+    T pop() {
         if (main_.empty()) {
             return T();
         }
@@ -46,30 +46,30 @@ void testQueueFromTwoStacks() {
     char d[] = "d";
     char e[] = "e";
 
-    cout << "Enqueue a" << endl;
-    q.enqueue(a);
-    cout << "Enqueue b" << endl;
-    q.enqueue(b);
-    cout << "Enqueue c" << endl;
-    q.enqueue(c);
-    cout << "Enqueue d" << endl;
-    q.enqueue(d);
-    cout << "Enqueue e" << endl;
-    q.enqueue(e);
+    cout << "Push a" << endl;
+    q.push(a);
+    cout << "Push b" << endl;
+    q.push(b);
+    cout << "Push c" << endl;
+    q.push(c);
+    cout << "Push d" << endl;
+    q.push(d);
+    cout << "Push e" << endl;
+    q.push(e);
 
     cout << endl;
 
-    char* d1 = q.dequeue();
-    cout << "Dequeue: " << d1 << endl;
-    char* d2 = q.dequeue();
-    cout << "Dequeue: " << d2 << endl;
-    char* d3 = q.dequeue();
-    cout << "Dequeue: " << d3 << endl;
-    char* d4 = q.dequeue();
-    cout << "Dequeue: " << d4 << endl;
-    char* d5 = q.dequeue();
-    cout << "Dequeue: " << d5 << endl;
+    char* d1 = q.pop();
+    cout << "Pop: " << d1 << endl;
+    char* d2 = q.pop();
+    cout << "Pop: " << d2 << endl;
+    char* d3 = q.pop();
+    cout << "Pop: " << d3 << endl;
+    char* d4 = q.pop();
+    cout << "Pop: " << d4 << endl;
+    char* d5 = q.pop();
+    cout << "Pop: " << d5 << endl;
 
-    char* d6 = q.dequeue();
-    cout << "Dequeue: " << ((d6 == nullptr) ? "<empty>" : d6) << endl;
+    char* d6 = q.pop();
+    cout << "Pop: " << ((d6 == nullptr) ? "<empty>" : d6) << endl;
 }

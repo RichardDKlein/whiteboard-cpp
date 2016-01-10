@@ -11,8 +11,7 @@ template<typename T>
 set<set<T>> powerSetRecursive(const set<T>& s) {
     set<set<T>> powerSet;
     if (s.empty()) {
-        set<T> emptySet;
-        powerSet.insert(emptySet);
+        powerSet.insert(set<T>());
         return powerSet;
     }
     set<T> rem = s;

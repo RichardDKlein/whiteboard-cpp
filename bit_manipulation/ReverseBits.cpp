@@ -7,9 +7,9 @@
  * @return Copy of |n|, but with its bits reversed.
  */
 unsigned int reverseBits(unsigned int n) {
+    unsigned int rev = 0;
     int numBits = sizeof(n) * 8;
     int numShifts = numBits - 1;
-    int rev = 0;
     for (int i = 0; i < numShifts; ++i) {
         rev |= n & 1;
         rev <<= 1;
@@ -24,7 +24,7 @@ void testReverseBits() {
     cout << "Test reverseBits():" << endl;
     cout << "===================" << endl;
 
-    unsigned int n = 0xB77BEFDF;
+    unsigned int n = 0xB77BEFD5;
 
     printBits(n);
     n = reverseBits(n);
