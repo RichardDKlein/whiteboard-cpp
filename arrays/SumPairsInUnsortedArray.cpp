@@ -28,13 +28,11 @@ void testSumPairsInUnsortedArray() {
     cout << "===============================" << endl;
 
     int a[] = {-2, -1, 0, 3, 5, 6, 6, 7, 9, 13, 14};
+    int count = sizeof(a) / sizeof(a[0]);
 
-    vector<int> v;
-    for (auto n : a) {
-        v.push_back(n);
-        cout << n << " ";
-    }
-    cout << endl;
+    vector<int> v = arrayToVector(count, a);
+    shuffleArray(v);
+    cout << "unsorted array = " << vectorToString(v) << endl;
 
     int sum = 12;
     vector<Pair> pairs = sumPairsInUnsortedArray(v, sum);

@@ -4,32 +4,32 @@
  * @brief Compute the water collected between the bars of
  * a histogram.
  *
- * @param v An array specifying the height, in inches,
+ * @param heights An array specifying the height, in inches,
  * of each histogram bar.
  * @return The amount, in inches, of water collected between
  * the histogram bars.
  */
-int histogramWater(const vector<int>& v) {
-    vector<int> leftTallest(v.size());
+int histogramWater(const vector<int>& heights) {
+    vector<int> leftTallest(heights.size());
     int maxLeft = -1;
-    for (int i = 0; i < (int)v.size(); ++i) {
-        maxLeft = max(maxLeft, v[i]);
+    for (int i = 0; i < (int)heights.size(); ++i) {
+        maxLeft = max(maxLeft, heights[i]);
         leftTallest[i] = maxLeft;
     }
-    vector<int> rightTallest(v.size());
+    vector<int> rightTallest(heights.size());
     int maxRight = -1;
-    for (int i = v.size() - 1; i >= 0; --i) {
-        maxRight = max(maxRight, v[i]);
+    for (int i = heights.size() - 1; i >= 0; --i) {
+        maxRight = max(maxRight, heights[i]);
         rightTallest[i] = maxRight;
     }
-    vector<int> waterline(v.size());
-    for (int i = 0; i < (int)v.size(); ++i) {
+    vector<int> waterline(heights.size());
+    for (int i = 0; i < (int)heights.size(); ++i) {
         waterline[i] = min(leftTallest[i], rightTallest[i]);
     }
     int waterCollected = 0;
-    for (int i = 0; i < (int)v.size(); ++i) {
-        if (waterline[i] > v[i]) {
-            waterCollected += (waterline[i] - v[i]);
+    for (int i = 0; i < (int)heights.size(); ++i) {
+        if (waterline[i] > heights[i]) {
+            waterCollected += waterline[i] - heights[i];
         }
     }
     return waterCollected;
