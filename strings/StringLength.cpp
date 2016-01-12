@@ -7,11 +7,11 @@
  * @return The length of |s| (excluding terminating null).
  */
 int stringLength(char* s) {
-    const char* p = s;
+    char* p = s;
     while (*p) {
         ++p;
     }
-    return (p - s);
+    return p - s;
 }
 
 void testStringLength() {

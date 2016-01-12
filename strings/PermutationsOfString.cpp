@@ -1,6 +1,6 @@
 #include "Strings.h"
 
-string insertCharAt(string s, char c, size_t index);
+string insertCharAt(const string& s, char c, size_t index);
 
 /**
  * @brief Find all permutations of a string.
@@ -26,7 +26,7 @@ vector<string> permutationsOfString(const string& s) {
     return perms;
 }
 
-string insertCharAt(string s, char c, size_t index) {
+string insertCharAt(const string& s, char c, size_t index) {
     string prefix = s.substr(0, index);
     string suffix = s.substr(index, string::npos);
     return prefix + c + suffix;

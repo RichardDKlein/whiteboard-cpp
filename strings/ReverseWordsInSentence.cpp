@@ -10,7 +10,7 @@
 char* reverseWordsInSentence(char* s) {
     int len = stringLength(s);
     char* rev = new char[len + 1];
-    rev[len] = '\0';
+    rev[len] = 0;
     char* r = rev;
     while (*s) {
         if (*s == ' ') {

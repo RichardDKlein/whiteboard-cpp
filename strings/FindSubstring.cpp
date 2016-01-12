@@ -9,7 +9,7 @@
  * or -1 if there is no occurrence.
  */
 int findSubstring(char* s, char* sub) {
-    if (*sub == '\0') {
+    if (!*sub) {
         return 0;
     }
     char* s0 = s;
@@ -21,15 +21,13 @@ int findSubstring(char* s, char* sub) {
         char* a = s + 1;
         char* b = sub + 1;
         for (;;) {
-            if (*b == '\0') {
+            if (!*b) {
                 return s - s0;
             }
-            if (*a != *b) {
+            if (*a++ != *b++) {
                 ++s;
                 break;
             }
-            ++a;
-            ++b;
         }
     }
     return -1;

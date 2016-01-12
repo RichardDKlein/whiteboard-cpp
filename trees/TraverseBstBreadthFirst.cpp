@@ -12,17 +12,17 @@ vector<T> traverseBstBreadthFirst(Node<T>* root) {
     if (root == nullptr) {
         return data;
     }
-    queue<Node<T>*> q;
-    q.push(root);
-    while (!q.empty()) {
-        Node<T>* node = q.front();
-        q.pop();
+    queue<Node<T>*> nodeQueue;
+    nodeQueue.push(root);
+    while (!nodeQueue.empty()) {
+        Node<T>* node = nodeQueue.front();
+        nodeQueue.pop();
         data.push_back(node->data);
         if (node->left) {
-            q.push(node->left);
+            nodeQueue.push(node->left);
         }
         if (node->right) {
-            q.push(node->right);
+            nodeQueue.push(node->right);
         }
     }
     return data;
