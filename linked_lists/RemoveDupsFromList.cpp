@@ -7,9 +7,9 @@
  */
 template<typename T>
 void removeDupsFromList(Node<T>* head) {
-    Node<T>* curr = head;
-    Node<T>* prev = nullptr;
     unordered_set<T> seen;
+    Node<T>* prev = nullptr;
+    Node<T>* curr = head;
     while (curr) {
         if (seen.count(curr->data) > 0) {
             curr = curr->next;

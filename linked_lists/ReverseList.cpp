@@ -11,10 +11,10 @@ Node<T>* reverseList(Node<T>* head) {
     Node<T>* rev = nullptr;
     Node<T>* curr = head;
     while (curr) {
-        Node<T>* tmp = curr;
-        curr = curr->next;
-        tmp->next = rev;
-        rev = tmp;
+        Node<T>* next = curr->next;
+        curr->next = rev;
+        rev = curr;
+        curr = next;
     }
     return rev;
 }

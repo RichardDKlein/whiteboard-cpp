@@ -11,11 +11,11 @@ bool listHasCycle(Node<T>* head) {
     Node<T>* slow = head;
     Node<T>* fast = head ? head->next : nullptr;
     while (fast) {
-        slow = slow->next;
-        fast = fast->next ? fast->next->next : nullptr;
         if (fast == slow) {
             return true;
         }
+        slow = slow->next;
+        fast = fast->next ? fast->next->next : nullptr;
     }
     return false;
 }
