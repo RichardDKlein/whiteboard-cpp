@@ -11,7 +11,7 @@ private:
 public:
     static Singleton* instance() {
         if (instance_ == nullptr) {
-            instance_ = new Singleton();
+            instance_ = new Singleton;
         }
         return instance_;
     }
