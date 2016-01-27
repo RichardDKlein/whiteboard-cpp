@@ -1,6 +1,6 @@
 #include "Arrays.h"
 
-typedef pair<int, int> Pair;
+using Pair = pair<int, int>;
 
 /**
  * @brief In a sorted array, find pairs of array elements

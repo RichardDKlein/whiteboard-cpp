@@ -25,10 +25,10 @@ RowCol searchSorted2dArray(const Array2d<T>& a, const T& target) {
     int row = bottom;
     int col = left;
     while (row >= top && col <= right) {
-        if (a[row][col] > target) {
-            --row;
-        } else if (a[row][col] < target) {
+        if (a[row][col] < target) {
             ++col;
+        } else if (a[row][col] > target) {
+            --row;
         } else {
             return RowCol(row, col);
         }
