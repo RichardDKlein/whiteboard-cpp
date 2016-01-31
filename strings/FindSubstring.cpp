@@ -24,10 +24,12 @@ int findSubstring(char* s, char* sub) {
             if (!*b) {
                 return s - s0;
             }
-            if (*a++ != *b++) {
+            if (*a != *b) {
                 ++s;
                 break;
             }
+            ++a;
+            ++b;
         }
     }
     return -1;

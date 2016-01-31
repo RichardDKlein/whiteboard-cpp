@@ -19,7 +19,7 @@ Node<T>* createBstFromSortedArray(const vector<T>& v) {
         left.push_back(v[i]);
     }
     vector<T> right;
-    for (int i = mid + 1; i < v.size(); ++i) {
+    for (int i = mid + 1; i <= last; ++i) {
         right.push_back(v[i]);
     }
     Node<T>* root = new Node<T>;
