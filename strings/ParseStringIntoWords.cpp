@@ -31,7 +31,7 @@ ParseResult parseStringIntoWords(const string& s,
     if (s == "") {
         return SUCCESS_EMPTY_STRING;
     }
-    for (int i = 0; i < (int)s.size(); ++i) {
+    for (int i = 0; i < (int)s.length(); ++i) {
         string firstWord = s.substr(0, i + 1);
         if (dict.count(firstWord) == 0) {
             continue;

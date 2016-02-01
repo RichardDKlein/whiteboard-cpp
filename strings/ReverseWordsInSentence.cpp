@@ -8,8 +8,12 @@
  * @return A copy of |s| with each word reversed.
  */
 char* reverseWordsInSentence(char* s) {
-    int len = strlen(s);
-    char* rev = new char[len + 1];
+    char* p = s;
+    while (*p) {
+        ++p;
+    }
+    int len = p - s;
+    char* rev = (char*)malloc(len + 1);
     rev[len] = 0;
     char* r = rev;
     while (*s) {
@@ -46,5 +50,6 @@ void testReverseWordsInSentence() {
         char* r = reverseWordsInSentence(s);
             cout << "reverseWordsInSentence(\"" << s
                  << "\") = \"" << r << "\"" << endl;
+        free(r);
     }
 }

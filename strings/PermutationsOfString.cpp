@@ -16,7 +16,7 @@ vector<string> permutationsOfString(const string& s) {
     string rem = s.substr(1, string::npos);
     vector<string> remPerms = permutationsOfString(rem);
     for (auto& remPerm : remPerms) {
-        for (int i = 0; i <= (int)remPerm.size(); ++i) {
+        for (int i = 0; i <= (int)remPerm.length(); ++i) {
             string perm = remPerm;
             perm.insert(i, firstChar);
             perms.push_back(perm);

@@ -13,13 +13,15 @@ static Interval longestAtCenter(const string& s,
  */
 Interval longestPalindromicSubstring(const string& s) {
     Interval longest(0, 0);
-    for (int i = 0; i < (int)s.size(); ++i) {
+    for (int i = 0; i < (int)s.length(); ++i) {
         Interval longestOdd = longestAtCenter(s, i, true);
         Interval longestEven = longestAtCenter(s, i, false);
-        if (longestOdd.length() > longest.length()) {
+        if (longestOdd.valid()
+                && longestOdd.length() > longest.length()) {
             longest = longestOdd;
         }
-        if (longestEven.length() > longest.length()) {
+        if (longestEven.valid()
+                && longestEven.length() > longest.length()) {
             longest = longestEven;
         }
     }
@@ -29,10 +31,10 @@ Interval longestPalindromicSubstring(const string& s) {
 static Interval longestAtCenter(const string& s,
     int center, bool lengthIsOdd) {
 
-    Interval longest(center, center);
+    Interval longest(-1, -1);
     int left = lengthIsOdd ? center - 1 : center;
     int right = center + 1;
-    while (left >= 0 && right < (int)s.size()
+    while (left >= 0 && right < (int)s.length()
             && s[left] == s[right]) {
         longest = Interval(left--, right++);
     }
