@@ -8,7 +8,7 @@
  * @return A copy of |s| with each word reversed.
  */
 char* reverseWordsInSentence(char* s) {
-    int len = stringLength(s);
+    int len = strlen(s);
     char* rev = new char[len + 1];
     rev[len] = 0;
     char* r = rev;

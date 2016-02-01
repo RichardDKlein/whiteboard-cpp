@@ -12,9 +12,6 @@ void testStrings() {
     testPermutationsOfString();
     testReverseStringInPlace();
     testReverseWordsInSentence();
-    testStringCompare();
-    testStringCopy();
-    testStringLength();
     testStringsArePermutations();
     testTopKStrings();
 }

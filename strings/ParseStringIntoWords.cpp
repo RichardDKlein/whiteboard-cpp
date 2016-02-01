@@ -39,7 +39,7 @@ ParseResult parseStringIntoWords(const string& s,
         string rem = s.substr(i + 1, string::npos);
         ParseResult remParse = parseStringIntoWords(rem, dict);
         if (!remParse.success()) {
-            return FAILURE;
+            continue;
         }
         vector<string> remWords = remParse.words();
         vector<string> words;
@@ -71,9 +71,19 @@ void testParseStringIntoWords() {
     dict.insert("his");
     dict.insert("country");
 
+    dict.insert("cat");
+    dict.insert("cats");
+    dict.insert("rule");
+    dict.insert("and");
+    dict.insert("so");
+    dict.insert("do");
+    dict.insert("dog");
+    dict.insert("dogs");
+
     const string testStrings[] = {
         "nowisthetimeforallgoodmentocometotheaidofhiscountry",
-        "nowisthetimeforallgoodmenntocometotheaidofhiscountry"
+        "nowisthetimeforallgoodmenntocometotheaidofhiscountry",
+        "catsruleandsododogs"
     };
 
     for (const auto& s : testStrings) {

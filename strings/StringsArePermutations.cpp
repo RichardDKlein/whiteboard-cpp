@@ -1,7 +1,5 @@
 #include "Strings.h"
 
-using Tally = unordered_map<char, int>;
-
 /**
  * @brief Determine whether two strings are permutations
  * of each other.
@@ -12,15 +10,12 @@ using Tally = unordered_map<char, int>;
  * other, |false| otherwise.
  */
 bool stringsArePermutations(const string& s1, const string& s2) {
-    if (s1.size() != s2.size()) {
-        return false;
-    }
-    Tally tally1, tally2;
-    for (int i = 0; i < (int)s1.size(); ++i) {
-        ++tally1[s1[i]];
-        ++tally2[s2[i]];
-    }
-    return tally1 == tally2;
+    string s1Sorted = s1;
+    sort(s1Sorted.begin(), s1Sorted.end());
+    string s2Sorted = s2;
+    sort(s2Sorted.begin(), s2Sorted.end());
+
+    return s1Sorted == s2Sorted;
 }
 
 void testStringsArePermutations() {
