@@ -30,8 +30,8 @@ vector<Entry> topKStrings(const vector<string>& v, int k) {
 
 static Tally doTally(const vector<string>& v) {
     Tally tally;
-    for (auto& s : v) {
-        ++tally[s];
+    for (auto& word : v) {
+        ++tally[word];
     }
     return tally;
 }
@@ -42,7 +42,7 @@ static MinHeap buildMinHeap(const Tally& tally, int k) {
     for (auto& entry : tally) {
         if (entry.second > min) {
             minHeap.push(entry);
-            if ((int)minHeap.size() > k) {
+            while ((int)minHeap.size() > k) {
                 minHeap.pop();
             }
             min = minHeap.top().second;

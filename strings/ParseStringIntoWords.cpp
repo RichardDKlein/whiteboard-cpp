@@ -28,6 +28,7 @@ using Dictionary = unordered_set<string>;
 ParseResult parseStringIntoWords(const string& s,
     const Dictionary& dict) {
 
+    vector<string> words;
     if (s == "") {
         return SUCCESS_EMPTY_STRING;
     }
@@ -42,7 +43,6 @@ ParseResult parseStringIntoWords(const string& s,
             continue;
         }
         vector<string> remWords = remParse.words();
-        vector<string> words;
         words.push_back(firstWord);
         words.insert(words.end(), remWords.begin(), remWords.end());
         return ParseResult(true, words);
