@@ -12,9 +12,9 @@ void removeDupsFromList(Node<T>* head) {
     Node<T>* curr = head;
     while (curr) {
         if (seen.count(curr->data) > 0) {
-            curr = curr->next;
-            delete prev->next;
-            prev->next = curr;
+            prev->next = curr->next;
+            delete curr;
+            curr = prev->next;
         } else {
             seen.insert(curr->data);
             prev = curr;
