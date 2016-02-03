@@ -17,7 +17,8 @@ unsigned int insertBits(
     unsigned int n, unsigned int bits, int msb, int lsb) {
 
     int numBits = msb - lsb + 1;
-    unsigned int mask = ((1 << numBits) - 1) << lsb;
+    unsigned int mask = (1 << numBits) - 1;
+    mask <<= lsb;
     return (n & ~mask) | (bits << lsb);
 }
 
