@@ -13,10 +13,10 @@ struct Node {
 
 #include "TestUtils.h"
 
-template<typename T> Node<T>* appendToList(Node<T>* head, T data);
+template<typename T> Node<T>* appendToList(Node<T>* head, const T& data);
 template<typename T> bool deleteFromList(Node<T>* toDelete);
 template<typename T> Node<T>* findKthToLast(Node<T>* head, int k);
-template<typename T> Node<T>* insertInList(Node<T>* after, T data);
+template<typename T> Node<T>* insertInList(Node<T>* after, const T& data);
 template<typename T> bool listHasCycle(Node<T>* head);
 template<typename T> void removeDupsFromList(Node<T>* head);
 template<typename T> Node<T>* reverseList(Node<T>* head);

@@ -36,12 +36,12 @@ void testListHasCycle() {
     Node<char*> head;
     head.data = a;
     head.next = nullptr;
-    appendToList(&head, b);
-    Node<char*>* cNode = appendToList(&head, c);
-    appendToList(&head, d);
-    appendToList(&head, e);
-    appendToList(&head, f);
-    Node<char*>* gNode = appendToList(&head, g);
+    appendToList(&head, &b[0]);
+    Node<char*>* cNode = appendToList(&head, &c[0]);
+    appendToList(&head, &d[0]);
+    appendToList(&head, &e[0]);
+    appendToList(&head, &f[0]);
+    Node<char*>* gNode = appendToList(&head, &g[0]);
     printList(&head);
     cout << "Has cycle = "
          << (listHasCycle(&head) ? "true" : "false") << endl;

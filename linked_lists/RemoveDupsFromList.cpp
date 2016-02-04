@@ -39,20 +39,20 @@ void testRemoveDupsFromList() {
     Node<char*> head;
     head.data = a;
     head.next = nullptr;
-    appendToList(&head, b);
-    Node<char*>* cNode = appendToList(&head, c);
-    appendToList(&head, d);
-    Node<char*>* eNode = appendToList(&head, e);
-    Node<char*>* fNode = appendToList(&head, f);
-    appendToList(&head, g);
+    appendToList(&head, &b[0]);
+    Node<char*>* cNode = appendToList(&head, &c[0]);
+    appendToList(&head, &d[0]);
+    Node<char*>* eNode = appendToList(&head, &e[0]);
+    Node<char*>* fNode = appendToList(&head, &f[0]);
+    appendToList(&head, &g[0]);
     printList(&head);
 
-    insertInList(cNode, a);
-    insertInList(eNode, b);
-    insertInList(fNode, d);
-    appendToList(&head, c);
-    appendToList(&head, e);
-    appendToList(&head, g);
+    insertInList(cNode, &a[0]);
+    insertInList(eNode, &b[0]);
+    insertInList(fNode, &d[0]);
+    appendToList(&head, &c[0]);
+    appendToList(&head, &e[0]);
+    appendToList(&head, &g[0]);
     printList(&head);
 
     removeDupsFromList(&head);

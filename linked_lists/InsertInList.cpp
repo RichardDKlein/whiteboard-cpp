@@ -8,7 +8,7 @@
  * @return New list node containing inserted data item.
  */
 template<typename T>
-Node<T>* insertInList(Node<T>* after, T data) {
+Node<T>* insertInList(Node<T>* after, const T& data) {
     Node<T>* node = new Node<T>;
     node->data = data;
     node->next = after->next;
@@ -34,14 +34,14 @@ void testInsertInList() {
     Node<char*> head;
     head.data = a;
     head.next = nullptr;
-    appendToList(&head, b);
-    appendToList(&head, c);
-    Node<char*>* dNode = appendToList(&head, d);
-    appendToList(&head, e);
-    appendToList(&head, f);
-    appendToList(&head, g);
+    appendToList(&head, &b[0]);
+    appendToList(&head, &c[0]);
+    Node<char*>* dNode = appendToList(&head, &d[0]);
+    appendToList(&head, &e[0]);
+    appendToList(&head, &f[0]);
+    appendToList(&head, &g[0]);
     printList(&head);
 
-    insertInList(dNode, x);
+    insertInList(dNode, &x[0]);
     printList(&head);
 }

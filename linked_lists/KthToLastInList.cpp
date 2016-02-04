@@ -41,12 +41,12 @@ void testKthToLastInList() {
     Node<char*> head;
     head.data = a;
     head.next = nullptr;
-    appendToList(&head, b);
-    appendToList(&head, c);
-    appendToList(&head, d);
-    appendToList(&head, e);
-    appendToList(&head, f);
-    appendToList(&head, g);
+    appendToList(&head, &b[0]);
+    appendToList(&head, &c[0]);
+    appendToList(&head, &d[0]);
+    appendToList(&head, &e[0]);
+    appendToList(&head, &f[0]);
+    appendToList(&head, &g[0]);
     printList(&head);
 
     for (int k = 1; k <= 8; ++k) {

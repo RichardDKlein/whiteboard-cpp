@@ -8,7 +8,7 @@
  * @return New list node containing appended data item.
  */
 template<typename T>
-Node<T>* appendToList(Node<T>* head, T data) {
+Node<T>* appendToList(Node<T>* head, const T& data) {
     Node<T>* prev = nullptr;
     Node<T>* curr = head;
     while (curr) {
@@ -41,21 +41,21 @@ void testAppendToList() {
     head.next = nullptr;
     printList(&head);
 
-    appendToList(&head, b);
+    appendToList(&head, &b[0]);
     printList(&head);
 
-    appendToList(&head, c);
+    appendToList(&head, &c[0]);
     printList(&head);
 
-    appendToList(&head, d);
+    appendToList(&head, &d[0]);
     printList(&head);
 
-    appendToList(&head, e);
+    appendToList(&head, &e[0]);
     printList(&head);
 
-    appendToList(&head, f);
+    appendToList(&head, &f[0]);
     printList(&head);
 
-    appendToList(&head, g);
+    appendToList(&head, &g[0]);
     printList(&head);
 }
