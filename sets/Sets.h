@@ -2,6 +2,9 @@
 #define SETS_H
 
 #include <cmath>
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>
 #include <set>
 
 using namespace std;
@@ -13,5 +16,6 @@ template<typename T> set<set<T>> powerSetRecursive(const set<T>& s);
 
 void testPowerSetIterative();
 void testPowerSetRecursive();
+void testSalesTerritories();
 
 #endif // #ifndef SETS_H
