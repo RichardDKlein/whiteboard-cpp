@@ -10,7 +10,7 @@ using Pair = pair<int, int>;
  * @param sum The value to which each pair of elements should sum.
  * @return A vector of pairs that sum to the specified value.
  */
-vector<Pair> sumPairsInSortedArray(vector<int> v, int sum) {
+vector<Pair> sumPairsInSortedArray(const vector<int>& v, int sum) {
     vector<Pair> pairs;
     int left = 0;
     int right = v.size() - 1;

@@ -7,13 +7,11 @@ static int random(int min, int max);
  *
  * @param v The array to be shuffled.
  */
-template<typename T>
+template <typename T>
 void shuffleArray(vector<T>& v) {
     for (int i = 0; i < v.size() - 1; ++i) {
         int j = random(i + 1, v.size() - 1);
-        int tmp = v[i];
-        v[i] = v[j];
-        v[j] = tmp;
+        swap(v[i], v[j]);
     }
 }
 

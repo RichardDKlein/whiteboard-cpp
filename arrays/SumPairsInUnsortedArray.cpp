@@ -10,14 +10,14 @@ using Pair = pair<int, int>;
  * @param sum The value to which each pair of elements should sum.
  * @return A vector of pairs that sum to the specified value.
  */
-vector<Pair> sumPairsInUnsortedArray(vector<int> v, int sum) {
+vector<Pair> sumPairsInUnsortedArray(const vector<int>& v, int sum) {
     vector<Pair> pairs;
     unordered_set<int> seen;
-    for (auto& i : v) {
-        if (seen.count(sum - i) > 0) {
-            pairs.push_back(Pair(i, sum - i));
+    for (auto& n : v) {
+        if (seen.count(sum - n) > 0) {
+            pairs.push_back(Pair(n, sum - n));
         }
-        seen.insert(i);
+        seen.insert(n);
     }
     return pairs;
 }
