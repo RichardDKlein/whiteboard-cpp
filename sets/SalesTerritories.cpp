@@ -100,6 +100,7 @@ void testSalesTerritories() {
     cout << endl;
 
     vector<Territory> territories = salesTerritories(cityPairs);
+
     cout << "Territories = " << endl;
     for (auto& territory : territories) {
         cout << "{" << endl;

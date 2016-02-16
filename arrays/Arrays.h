@@ -1,10 +1,14 @@
 #ifndef ARRAYS_H
 #define ARRAYS_H
 
+#include <cfloat>
 #include <climits>
+#include <cmath>
 #include <list>
+#include <unordered_map>
 #include <unordered_set>
 #include <vector>
+
 #include "TestUtils.h"
 
 using namespace std;
@@ -29,6 +33,7 @@ template<typename T> int searchSortedAndRotatedArray(
 template<typename T> void shuffleArray(vector<T>& v);
 
 void testHistogramWater();
+void testLinesThruPoints();
 void testMergeTwoSortedArrays();
 void testSearchSorted2dArray();
 void testSearchSortedAndRotatedArray();

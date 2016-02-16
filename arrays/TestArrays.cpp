@@ -10,6 +10,7 @@ void testArrays() {
     printf("=============================================\n");
 
     testHistogramWater();
+    testLinesThruPoints();
     testMergeTwoSortedArrays();
     testSearchSorted2dArray();
     testSearchSortedAndRotatedArray();
