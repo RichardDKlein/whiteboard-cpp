@@ -61,19 +61,29 @@ void testProducerConsumerQueue() {
     p3.join();
 }
 
+static mutex mutex_;
+
 static void consumer(int id, ProducerConsumerQueue<int>* jobQueue) {
+	unique_lock<mutex> lock(mutex_);
+	lock.unlock();
     for (int i = 0; i < 10; ++i) {
         int job = jobQueue->pop();
+        lock.lock(); // prevent interleaving of output
         cout << "Consumer " << id << " consumed " << job << endl;
+        lock.unlock();
         this_thread::sleep_for(chrono::milliseconds(250));
     }
 }
 
 static void producer(int id, ProducerConsumerQueue<int>* jobQueue) {
+	unique_lock<mutex> lock(mutex_);
+	lock.unlock();
     for (int i = 0; i < 10; ++i) {
         int job = (id * 100) + i;
         jobQueue->push(job);
+        lock.lock(); // prevent interleaving of output
         cout << "Producer " << id << " produced " << job << endl;
+        lock.unlock();
         this_thread::sleep_for(chrono::milliseconds(100));
     }
 }
