@@ -64,7 +64,7 @@ static vector<Line> findLinesThruPairs(const vector<Point>& points) {
                 slope = DBL_MAX;
                 intercept = x1;
             } else {
-                slope = (y2 - y1) / (x2 - x1);
+                slope = double(y2 - y1) / double(x2 - x1);
                 intercept = y1 - (slope * x1);
             }
             linesThruPairs.push_back(Line(slope, intercept));

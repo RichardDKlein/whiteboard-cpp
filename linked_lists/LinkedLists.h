@@ -29,5 +29,6 @@ void testLinkedLists();
 void testListHasCycle();
 void testRemoveDupsFromList();
 void testReverseList();
+void testSalesTerritories();
 
 #endif // #ifndef LINKED_LISTS_H

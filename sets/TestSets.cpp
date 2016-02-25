@@ -11,5 +11,4 @@ void testSets() {
 
     testPowerSetIterative();
     testPowerSetRecursive();
-    testSalesTerritories();
 }

@@ -13,4 +13,5 @@ void testLinkedLists() {
     testListHasCycle();
     testRemoveDupsFromList();
     testReverseList();
+    testSalesTerritories();
 }

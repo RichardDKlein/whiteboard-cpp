@@ -64,8 +64,8 @@ void testProducerConsumerQueue() {
 static mutex mutex_;
 
 static void consumer(int id, ProducerConsumerQueue<int>* jobQueue) {
-	unique_lock<mutex> lock(mutex_);
-	lock.unlock();
+    unique_lock<mutex> lock(mutex_);
+    lock.unlock();
     for (int i = 0; i < 10; ++i) {
         int job = jobQueue->pop();
         lock.lock(); // prevent interleaving of output
@@ -76,8 +76,8 @@ static void consumer(int id, ProducerConsumerQueue<int>* jobQueue) {
 }
 
 static void producer(int id, ProducerConsumerQueue<int>* jobQueue) {
-	unique_lock<mutex> lock(mutex_);
-	lock.unlock();
+    unique_lock<mutex> lock(mutex_);
+    lock.unlock();
     for (int i = 0; i < 10; ++i) {
         int job = (id * 100) + i;
         jobQueue->push(job);
