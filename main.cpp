@@ -1,6 +1,7 @@
 void testArrays();
 void testBitManipulation();
 void testDesignPatterns();
+void testGraphs();
 void testLinkedLists();
 void testSets();
 void testStacksAndQueues();
@@ -12,6 +13,7 @@ int main(int argc, char* argv[]) {
     testArrays();
     testBitManipulation();
     testDesignPatterns();
+    testGraphs();
     testLinkedLists();
     testSets();
     testStacksAndQueues();
