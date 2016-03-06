@@ -13,12 +13,12 @@ using Territory = vector<City>;
 
 class SalesTerritories {
     struct Node {
-        City city_;
-        int territory_;
-        vector<Node*> neighbors_;
-        Node(City city) :
-            city_(city),
-            territory_(-1) {
+        City city;
+        int territory; // negative => uninitialized
+        vector<Node*> neighbors;
+        Node(City aCity) :
+            city(aCity),
+            territory(-1) {
         }
     };
     using CityMap = unordered_map<City, Node*>;
@@ -33,13 +33,14 @@ public:
 private:
     void buildCityGraph();
     void collateTerritories();
+    Node* createNode(const City& city);
     void findConnectedSubgraphs();
     Node* findOrCreateNode(const City& city);
-    void labelConnectedNodes(Node* root);
+    Node* findNode(const City& city);
+    void labelConnectedNodes(Node* root, int territory);
 
     vector<CityPair> cityPairs_;
     vector<Territory> territories_;
-    int currTerritory_;
     CityMap cityMap_;
 };
 
@@ -66,44 +67,53 @@ void SalesTerritories::buildCityGraph() {
         City city2 = cityPair.second;
         Node* node1 = findOrCreateNode(city1);
         Node* node2 = findOrCreateNode(city2);
-        node1->neighbors_.push_back(node2);
-        node2->neighbors_.push_back(node1);
+        node1->neighbors.push_back(node2);
+        node2->neighbors.push_back(node1);
     }
 }
 
 SalesTerritories::Node*
 SalesTerritories::findOrCreateNode(const City& city) {
-    Node* node;
+	Node* node;
+	return (node = findNode(city)) ? node : createNode(city);
+}
+
+SalesTerritories::Node*
+SalesTerritories::findNode(const City& city) {
     CityMap::iterator iter = cityMap_.find(city);
-    if (iter == cityMap_.end()) {
-        node = new Node(city);
-        cityMap_[city] = node;
-    } else {
-        node = iter->second;
-    }
-    return node;
+    return (iter == cityMap_.end()) ? nullptr : iter->second;
+}
+
+SalesTerritories::Node*
+SalesTerritories::createNode(const City& city) {
+	Node* node = new Node(city);
+	cityMap_[city] = node;
+	return node;
 }
 
 void SalesTerritories::findConnectedSubgraphs() {
-    currTerritory_ = 0;
+    int currTerritory = 0;
     for (auto& entry : cityMap_) {
         Node* node = entry.second;
-        if (node->territory_ < 0) {
-            labelConnectedNodes(node);
-            ++currTerritory_;
+        if (node->territory < 0) {
+            labelConnectedNodes(node, currTerritory);
+            ++currTerritory;
         }
     }
+    territories_.resize(currTerritory);
 }
 
-void SalesTerritories::labelConnectedNodes(Node* root) {
+void SalesTerritories::labelConnectedNodes(
+		Node* root, int territory) {
+	// Breadth-First Search (BFS)
     queue<Node*> nodeQueue;
     nodeQueue.push(root);
     while (!nodeQueue.empty()) {
         Node* node = nodeQueue.front();
         nodeQueue.pop();
-        node->territory_ = currTerritory_;
-        for (auto& neighbor : node->neighbors_) {
-            if (neighbor->territory_ < 0) {
+        node->territory = territory;
+        for (auto& neighbor : node->neighbors) {
+            if (neighbor->territory < 0) {
                 nodeQueue.push(neighbor);
             }
         }
@@ -111,11 +121,10 @@ void SalesTerritories::labelConnectedNodes(Node* root) {
 }
 
 void SalesTerritories::collateTerritories() {
-    territories_.resize(currTerritory_);
     for (auto& entry : cityMap_) {
         City city = entry.first;
         Node* node = entry.second;
-        territories_[node->territory_].push_back(city);
+        territories_[node->territory].push_back(city);
     }
 }
 
