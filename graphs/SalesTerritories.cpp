@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 #include <queue>
 #include <string>
 #include <unordered_map>
@@ -15,17 +16,16 @@ class SalesTerritories {
     struct Node {
         City city;
         int territory; // negative => uninitialized
-        vector<Node*> neighbors;
+        vector<shared_ptr<Node>> neighbors;
         Node(City aCity) :
             city(aCity),
             territory(-1) {
         }
     };
-    using CityMap = unordered_map<City, Node*>;
+    using CityMap = unordered_map<City, shared_ptr<Node>>;
 
 public:
     SalesTerritories(const vector<CityPair>& cityPairs);
-    virtual ~SalesTerritories();
     vector<Territory> getTerritories() {
         return territories_;
     }
@@ -33,11 +33,12 @@ public:
 private:
     void buildCityGraph();
     void collateTerritories();
-    Node* createNode(const City& city);
+    shared_ptr<Node> createNode(const City& city);
     void findConnectedSubgraphs();
-    Node* findOrCreateNode(const City& city);
-    Node* findNode(const City& city);
-    void labelConnectedNodes(Node* root, int territory);
+    shared_ptr<Node> findOrCreateNode(const City& city);
+    shared_ptr<Node> findNode(const City& city);
+    void labelConnectedNodes(const shared_ptr<Node>& root,
+        int territory);
 
     vector<CityPair> cityPairs_;
     vector<Territory> territories_;
@@ -54,47 +55,40 @@ SalesTerritories::SalesTerritories(
     collateTerritories();
 }
 
-SalesTerritories::~SalesTerritories() {
-    for (auto& entry : cityMap_) {
-        Node* node = entry.second;
-        delete node;
-    }
-}
-
 void SalesTerritories::buildCityGraph() {
     for (auto& cityPair : cityPairs_) {
         City city1 = cityPair.first;
         City city2 = cityPair.second;
-        Node* node1 = findOrCreateNode(city1);
-        Node* node2 = findOrCreateNode(city2);
+        shared_ptr<Node> node1 = findOrCreateNode(city1);
+        shared_ptr<Node> node2 = findOrCreateNode(city2);
         node1->neighbors.push_back(node2);
         node2->neighbors.push_back(node1);
     }
 }
 
-SalesTerritories::Node*
+shared_ptr<SalesTerritories::Node>
 SalesTerritories::findOrCreateNode(const City& city) {
-	Node* node;
-	return (node = findNode(city)) ? node : createNode(city);
+    shared_ptr<Node> node;
+    return (node = findNode(city)) ? node : createNode(city);
 }
 
-SalesTerritories::Node*
+shared_ptr<SalesTerritories::Node>
 SalesTerritories::findNode(const City& city) {
     CityMap::iterator iter = cityMap_.find(city);
     return (iter == cityMap_.end()) ? nullptr : iter->second;
 }
 
-SalesTerritories::Node*
+shared_ptr<SalesTerritories::Node>
 SalesTerritories::createNode(const City& city) {
-	Node* node = new Node(city);
-	cityMap_[city] = node;
-	return node;
+    shared_ptr<Node> node(new Node(city));
+    cityMap_[city] = node;
+    return node;
 }
 
 void SalesTerritories::findConnectedSubgraphs() {
     int currTerritory = 0;
     for (auto& entry : cityMap_) {
-        Node* node = entry.second;
+        shared_ptr<Node> node = entry.second;
         if (node->territory < 0) {
             labelConnectedNodes(node, currTerritory);
             ++currTerritory;
@@ -104,12 +98,12 @@ void SalesTerritories::findConnectedSubgraphs() {
 }
 
 void SalesTerritories::labelConnectedNodes(
-		Node* root, int territory) {
-	// Breadth-First Search (BFS)
-    queue<Node*> nodeQueue;
+        const shared_ptr<Node>& root, int territory) {
+    // Breadth-First Search (BFS)
+    queue<shared_ptr<Node>> nodeQueue;
     nodeQueue.push(root);
     while (!nodeQueue.empty()) {
-        Node* node = nodeQueue.front();
+        shared_ptr<Node> node = nodeQueue.front();
         nodeQueue.pop();
         node->territory = territory;
         for (auto& neighbor : node->neighbors) {
@@ -123,7 +117,7 @@ void SalesTerritories::labelConnectedNodes(
 void SalesTerritories::collateTerritories() {
     for (auto& entry : cityMap_) {
         City city = entry.first;
-        Node* node = entry.second;
+        shared_ptr<Node> node = entry.second;
         territories_[node->territory].push_back(city);
     }
 }
