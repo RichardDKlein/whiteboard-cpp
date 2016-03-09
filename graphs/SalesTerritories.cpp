@@ -13,6 +13,18 @@ using CityPair = pair<City, City>;
 using Territory = vector<City>;
 
 class SalesTerritories {
+public:
+    SalesTerritories(const vector<CityPair>& cityPairs)
+        : cityPairs_(cityPairs) {
+
+        buildCityGraph();
+        findConnectedSubgraphs();
+        collateTerritories();
+    }
+    vector<Territory> getTerritories() {
+        return territories_;
+    }
+private:
     struct Node {
         City city;
         int territory; // negative => uninitialized
@@ -24,103 +36,75 @@ class SalesTerritories {
     };
     using CityMap = unordered_map<City, shared_ptr<Node>>;
 
-public:
-    SalesTerritories(const vector<CityPair>& cityPairs);
-    vector<Territory> getTerritories() {
-        return territories_;
-    }
-
-private:
-    void buildCityGraph();
-    void collateTerritories();
-    shared_ptr<Node> createNode(const City& city);
-    void findConnectedSubgraphs();
-    shared_ptr<Node> findOrCreateNode(const City& city);
-    shared_ptr<Node> findNode(const City& city);
-    void labelConnectedNodes(const shared_ptr<Node>& root,
-        int territory);
-
     vector<CityPair> cityPairs_;
     vector<Territory> territories_;
     CityMap cityMap_;
-};
 
-SalesTerritories::SalesTerritories(
-    const vector<CityPair>& cityPairs)
-
-    : cityPairs_(cityPairs) {
-
-    buildCityGraph();
-    findConnectedSubgraphs();
-    collateTerritories();
-}
-
-void SalesTerritories::buildCityGraph() {
-    for (auto& cityPair : cityPairs_) {
-        City city1 = cityPair.first;
-        City city2 = cityPair.second;
-        shared_ptr<Node> node1 = findOrCreateNode(city1);
-        shared_ptr<Node> node2 = findOrCreateNode(city2);
-        node1->neighbors.push_back(node2);
-        node2->neighbors.push_back(node1);
-    }
-}
-
-shared_ptr<SalesTerritories::Node>
-SalesTerritories::findOrCreateNode(const City& city) {
-    shared_ptr<Node> node;
-    return (node = findNode(city)) ? node : createNode(city);
-}
-
-shared_ptr<SalesTerritories::Node>
-SalesTerritories::findNode(const City& city) {
-    CityMap::iterator iter = cityMap_.find(city);
-    return (iter == cityMap_.end()) ? nullptr : iter->second;
-}
-
-shared_ptr<SalesTerritories::Node>
-SalesTerritories::createNode(const City& city) {
-    shared_ptr<Node> node(new Node(city));
-    cityMap_[city] = node;
-    return node;
-}
-
-void SalesTerritories::findConnectedSubgraphs() {
-    int currTerritory = 0;
-    for (auto& entry : cityMap_) {
-        shared_ptr<Node> node = entry.second;
-        if (node->territory < 0) {
-            labelConnectedNodes(node, currTerritory);
-            ++currTerritory;
+    void buildCityGraph() {
+        for (auto& cityPair : cityPairs_) {
+            City city1 = cityPair.first;
+            City city2 = cityPair.second;
+            shared_ptr<Node> node1 = findOrCreateNode(city1);
+            shared_ptr<Node> node2 = findOrCreateNode(city2);
+            node1->neighbors.push_back(node2);
+            node2->neighbors.push_back(node1);
         }
     }
-    territories_.resize(currTerritory);
-}
 
-void SalesTerritories::labelConnectedNodes(
-        const shared_ptr<Node>& root, int territory) {
-    // Breadth-First Search (BFS)
-    queue<shared_ptr<Node>> nodeQueue;
-    nodeQueue.push(root);
-    while (!nodeQueue.empty()) {
-        shared_ptr<Node> node = nodeQueue.front();
-        nodeQueue.pop();
-        node->territory = territory;
-        for (auto& neighbor : node->neighbors) {
-            if (neighbor->territory < 0) {
-                nodeQueue.push(neighbor);
+    shared_ptr<Node> findOrCreateNode(const City& city) {
+        shared_ptr<Node> node;
+        return (node = findNode(city)) ? node : createNode(city);
+    }
+
+    shared_ptr<Node> findNode(const City& city) {
+        CityMap::iterator iter = cityMap_.find(city);
+        return (iter == cityMap_.end()) ? nullptr : iter->second;
+    }
+
+    shared_ptr<Node> createNode(const City& city) {
+        shared_ptr<Node> node(new Node(city));
+        cityMap_[city] = node;
+        return node;
+    }
+
+    void findConnectedSubgraphs() {
+        int currTerritory = 0;
+        for (auto& entry : cityMap_) {
+            shared_ptr<Node> node = entry.second;
+            if (node->territory < 0) {
+                labelConnectedNodes(node, currTerritory);
+                ++currTerritory;
+            }
+        }
+        territories_.resize(currTerritory);
+    }
+
+    void labelConnectedNodes(const shared_ptr<Node>& root,
+        int territory) {
+
+        // Breadth-First Search (BFS)
+        queue<shared_ptr<Node>> nodeQueue;
+        nodeQueue.push(root);
+        while (!nodeQueue.empty()) {
+            shared_ptr<Node> node = nodeQueue.front();
+            nodeQueue.pop();
+            node->territory = territory;
+            for (auto& neighbor : node->neighbors) {
+                if (neighbor->territory < 0) {
+                    nodeQueue.push(neighbor);
+                }
             }
         }
     }
-}
 
-void SalesTerritories::collateTerritories() {
-    for (auto& entry : cityMap_) {
-        City city = entry.first;
-        shared_ptr<Node> node = entry.second;
-        territories_[node->territory].push_back(city);
+    void collateTerritories() {
+        for (auto& entry : cityMap_) {
+            City city = entry.first;
+            shared_ptr<Node> node = entry.second;
+            territories_[node->territory].push_back(city);
+        }
     }
-}
+};
 
 void testSalesTerritories() {
     cout << endl;
