@@ -1,4 +1,6 @@
 #include "LinkedLists.h"
+#include "AppendToList.h"
+#include "InsertInList.h"
 
 /**
  * @brief Delete a node from a linked list,

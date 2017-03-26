@@ -1,4 +1,5 @@
 #include "Arrays.h"
+#include "ShuffleArray.h"
 
 using Pair = pair<int, int>;
 

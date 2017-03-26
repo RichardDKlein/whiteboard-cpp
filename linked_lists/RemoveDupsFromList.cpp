@@ -1,4 +1,6 @@
 #include "LinkedLists.h"
+#include "AppendToList.h"
+#include "InsertInList.h"
 
 /**
  * @brief Remove duplicates from a linked list.

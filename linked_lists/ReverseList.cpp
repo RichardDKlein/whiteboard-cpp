@@ -1,4 +1,5 @@
 #include "LinkedLists.h"
+#include "AppendToList.h"
 
 /**
  * @brief Reverse a linked list.

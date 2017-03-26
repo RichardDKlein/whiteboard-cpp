@@ -1,4 +1,5 @@
 #include "LinkedLists.h"
+#include "AppendToList.h"
 
 /**
  * @brief Determines whether a linked list contains a cycle.
