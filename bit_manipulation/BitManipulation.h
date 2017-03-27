@@ -1,6 +1,4 @@
-#ifndef BIT_MANIPULATION_H
-#define BIT_MANIPULATION_H
-
+#pragma once
 #include <iostream>
 
 using namespace std;
@@ -27,4 +25,3 @@ void testReverseBits();
 void testSetBit();
 void testToggleBit();
 
-#endif // #ifndef BIT_MANIPULATION_H

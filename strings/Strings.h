@@ -1,5 +1,4 @@
-#ifndef STRINGS_H
-#define STRINGS_H
+#pragma once
 
 #include <algorithm>
 #include <cstring>
@@ -27,5 +26,3 @@ void testReverseStringInPlace();
 void testReverseWordsInSentence();
 void testStringsArePermutations();
 void testTopKStrings();
-
-#endif // STRINGS_H

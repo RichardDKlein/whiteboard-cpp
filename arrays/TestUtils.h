@@ -1,5 +1,4 @@
-#ifndef ARRAYS_TEST_UTILS_H
-#define ARRAYS_TEST_UTILS_H
+#pragma once
 
 #include <iostream>
 #include <list>
@@ -59,5 +58,3 @@ string listToString(list<T> l) {
     oss << "]";
     return oss.str();
 }
-
-#endif // #ifndef ARRAYS_TEST_UTILS_H

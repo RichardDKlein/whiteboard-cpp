@@ -1,6 +1,2 @@
-#ifndef GRAPHS_H
-#define GRAPHS_H
-
+#pragma once
 void testSalesTerritories();
-
-#endif // #ifndef GRAPHS_H
