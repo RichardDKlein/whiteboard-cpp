@@ -18,6 +18,7 @@ private:
     int right_;
 public:
     Interval(int left, int right) : left_(left), right_(right) {}
+    Interval() : left_(0), right_(0) {}
     int left() {return left_;}
     int right() {return right_;}
     int length() {return right_ - left_ + 1;}

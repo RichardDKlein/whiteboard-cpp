@@ -32,7 +32,8 @@ void testSumPairsInUnsortedArray() {
     int count = sizeof(a) / sizeof(a[0]);
 
     vector<int> v = arrayToVector(count, a);
-    shuffleArray(v);
+    ShuffleArray<int> shuffleArray(v);
+    v = shuffleArray.shuffle();
     cout << "unsorted array = " << vectorToString(v) << endl;
 
     int sum = 12;

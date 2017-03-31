@@ -15,15 +15,15 @@ using Territory = vector<City>;
 class SalesTerritories {
 public:
     SalesTerritories(const vector<CityPair>& cityPairs)
-        : cityPairs_(cityPairs) {
+        : cityPairs_(cityPairs) {}
 
+    vector<Territory> getTerritories() {
         buildCityGraph();
         findConnectedSubgraphs();
         collateTerritories();
-    }
-    vector<Territory> getTerritories() {
         return territories_;
     }
+
 private:
     struct Node {
         City city;
@@ -52,8 +52,11 @@ private:
     }
 
     shared_ptr<Node> findOrCreateNode(const City& city) {
-        shared_ptr<Node> node;
-        return (node = findNode(city)) ? node : createNode(city);
+        shared_ptr<Node> node = findNode(city);
+        if (node == nullptr) {
+        	node = createNode(city);
+        }
+        return node;
     }
 
     shared_ptr<Node> findNode(const City& city) {
@@ -80,9 +83,9 @@ private:
     }
 
     void labelConnectedNodes(const shared_ptr<Node>& root,
-        int territory) {
+    		int territory) {
 
-        // Breadth-First Search (BFS)
+    	// Breadth-First Search (BFS)
         queue<shared_ptr<Node>> nodeQueue;
         nodeQueue.push(root);
         while (!nodeQueue.empty()) {

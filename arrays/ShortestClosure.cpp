@@ -24,7 +24,8 @@ void testShortestClosure() {
         haystack.push_back(h);
     }
 
-    Interval shortest = shortestClosure(haystack, needles);
+    ShortestClosure<int> shortestClosure(haystack, needles);
+    Interval shortest = shortestClosure.solve();
 
     cout << "needles: { ";
     for (auto& needle : needles) {

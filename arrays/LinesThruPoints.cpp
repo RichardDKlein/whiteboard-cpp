@@ -31,65 +31,65 @@ namespace std {
     };
 }
 
-using LineTally = unordered_map<Line, int>;
-
-static vector<Line> findLinesThruPairs(const vector<Point>& points);
-static LineTally tallyLinesThruPairs(const vector<Line>& linesThruPairs);
-static int countRepeatedLinesThruPairs(const LineTally& lineTally);
-
 /**
- * @brief Given a list of 2D points, find the number of
- * lines that can be drawn through at least three points.
- *
- * @param points The 2D points of interest.
- * @return The number of lines that can be drawn through
- * at least three points.
+ * Given a list of 2D points, find the number of lines
+ * that can be drawn through at least three points.
  */
-int linesThruPoints(const vector<Point>& points) {
-    vector<Line> linesThruPairs = findLinesThruPairs(points);
-    LineTally lineTally = tallyLinesThruPairs(linesThruPairs);
-    return countRepeatedLinesThruPairs(lineTally);
-}
+class LinesThruPoints {
+private:
+	vector<Point> points_;
+	vector<Line> linesThruPairs_;
+	unordered_map<Line, int> lineTally_;
+	int count_;
 
-static vector<Line> findLinesThruPairs(const vector<Point>& points) {
-    vector<Line> linesThruPairs;
-    for (size_t i = 0; i < points.size(); ++i) {
-        for (size_t j = i + 1; j < points.size(); ++j) {
-            int x1 = points[i].x;
-            int y1 = points[i].y;
-            int x2 = points[j].x;
-            int y2 = points[j].y;
-            double slope, intercept;
-            if (x1 == x2) {
-                slope = DBL_MAX;
-                intercept = x1;
-            } else {
-                slope = double(y2 - y1) / double(x2 - x1);
-                intercept = y1 - (slope * x1);
-            }
-            linesThruPairs.push_back(Line(slope, intercept));
-        }
-    }
-    return linesThruPairs;
-}
+public:
+	LinesThruPoints(const vector<Point>& points) :
+		points_(points),
+		count_(0)
+	{}
 
-static LineTally tallyLinesThruPairs(const vector<Line>& linesThruPairs) {
-    unordered_map<Line, int> lineTally;
-    for (auto& line : linesThruPairs) {
-        ++lineTally[line];
-    }
-    return lineTally;
-}
+	int solve() {
+		findLinesThruPairs();
+		tallyLinesThruPairs();
+		countRepeatedLinesThruPairs();
+		return count_;
+	}
 
-static int countRepeatedLinesThruPairs(const LineTally& lineTally) {
-    int count = 0;
-    for (auto& entry : lineTally) {
-        if (entry.second > 1) {
-            ++count;
-        }
-    }
-    return count;
-}
+private:
+	void findLinesThruPairs() {
+	    for (size_t i = 0; i < points_.size(); ++i) {
+	        for (size_t j = i + 1; j < points_.size(); ++j) {
+	            int x1 = points_[i].x;
+	            int y1 = points_[i].y;
+	            int x2 = points_[j].x;
+	            int y2 = points_[j].y;
+	            double slope, intercept;
+	            if (x1 == x2) {
+	                slope = DBL_MAX;
+	                intercept = x1;
+	            } else {
+	                slope = double(y2 - y1) / double(x2 - x1);
+	                intercept = y1 - (slope * x1);
+	            }
+	            linesThruPairs_.push_back(Line(slope, intercept));
+	        }
+	    }
+	}
+
+	void tallyLinesThruPairs() {
+	    for (auto& line : linesThruPairs_) {
+	        ++lineTally_[line];
+	    }
+	}
+
+	void countRepeatedLinesThruPairs() {
+	    for (auto& entry : lineTally_) {
+	        if (entry.second > 1) {
+	            ++count_;
+	        }
+	    }
+	}
+};
 
 void testLinesThruPoints() {
     cout << endl;
@@ -132,7 +132,8 @@ void testLinesThruPoints() {
     }
     cout << endl;
 
-    int numLines = linesThruPoints(points);
+    LinesThruPoints linesThruPoints(points);
+    int numLines = linesThruPoints.solve();
 
     cout << "Number of lines = " << numLines << endl;
 }

@@ -10,94 +10,91 @@ struct Folder {
     string parentName;
 };
 
-struct Node {
-    string folderName;
-    Node* parent;
-    vector<Node*> children;
-};
-
-using NodeMap = unordered_map<string, Node*>;
-
-static Node* buildFolderTree(const vector<Folder>& folders);
-static Node* findOrCreate(NodeMap& nodeMap, const string& folderName);
-static void destroyFolderTree(Node* root);
-static vector<Folder> traverseFolderTree(Node* root);
-
 /**
- * @brief Create a tree of nested folders.
- *
- * @param folders List of folder specs for the folders to be created.
- * The folder specs are not in any particular order. Each folder spec
- * consists of the folder's name and its parent's name. The root folder
- * has a parent name of "".
- *
- * @return Copy of |folders|, but in creation order, so that parents
- * are created before their children.
+ * Given a list of folders and subfolders in no particular order,
+ * reorder the list so that it is in a valid creation order, i.e.
+ * so that parents are created before their children.
  */
-vector<Folder> createNestedFolders(const vector<Folder>& folders) {
-    Node* root = buildFolderTree(folders);
-    vector<Folder> nested = traverseFolderTree(root);
-    destroyFolderTree(root);
-    return nested;
-}
+class CreateNestedFolders {
+	struct Node {
+	    string folderName;
+	    Node* parent;
+	    vector<Node*> children;
+	};
+	using NodeMap = unordered_map<string, Node*>;
 
-static Node* buildFolderTree(const vector<Folder>& folders) {
-    Node* root;
-    NodeMap nodeMap;
-    for (const auto& folder : folders) {
-        Node* folderNode = findOrCreate(nodeMap, folder.folderName);
-        if (folder.parentName == "") {
-            root = folderNode;
-            folderNode->parent = nullptr;
-            continue;
-        }
-        Node* parentNode = findOrCreate(nodeMap, folder.parentName);
-        folderNode->parent = parentNode;
-        parentNode->children.push_back(folderNode);
-    }
-    return root;
-}
+private:
+	vector<Folder> folders_;
+	NodeMap nodeMap_;
+	Node* root_;
+	vector<Folder> nested_;
 
-static Node* findOrCreate(NodeMap& nodeMap, const string& folderName) {
-    Node* folderNode;
-    NodeMap::iterator iter = nodeMap.find(folderName);
-    if (iter == nodeMap.end()) {
-        folderNode = new Node;
-        folderNode->folderName = folderName;
-        nodeMap[folderName] = folderNode;
-    } else {
-        folderNode = iter->second;
-    }
-    return folderNode;
-}
+public:
+	CreateNestedFolders(const vector<Folder>& folders) : folders_(folders) {}
 
-static vector<Folder> traverseFolderTree(Node* root) {
-    vector<Folder> folders;
-    if (root == nullptr) {
-        return folders;
-    }
-    Folder rootFolder;
-    rootFolder.folderName = root->folderName;
-    rootFolder.parentName = root->parent ?
-        root->parent->folderName : "";
-    folders.push_back(rootFolder);
-    for (auto& child : root->children) {
-        vector<Folder> childFolders = traverseFolderTree(child);
-        folders.insert(folders.end(),
-            childFolders.begin(), childFolders.end());
-    }
-    return folders;
-}
+	vector<Folder> solve() {
+		buildFolderTree();
+		nested_ = traverseFolderTree(root_);
+		destroyFolderTree(root_);
+		return nested_;
+	}
 
-static void destroyFolderTree(Node* root) {
-    if (root == nullptr) {
-        return;
-    }
-    for (auto& child : root->children) {
-        destroyFolderTree(child);
-    }
-    delete root;
-}
+private:
+	void buildFolderTree() {
+	    for (const auto& folder : folders_) {
+	        Node* folderNode = findOrCreate(folder.folderName);
+	        if (folder.parentName == "") {
+	            root_ = folderNode;
+	            folderNode->parent = nullptr;
+	            continue;
+	        }
+	        Node* parentNode = findOrCreate(folder.parentName);
+	        folderNode->parent = parentNode;
+	        parentNode->children.push_back(folderNode);
+	    }
+	}
+
+	Node* findOrCreate(const string& folderName) {
+	    Node* folderNode;
+	    NodeMap::iterator iter = nodeMap_.find(folderName);
+	    if (iter == nodeMap_.end()) {
+	        folderNode = new Node;
+	        folderNode->folderName = folderName;
+	        nodeMap_[folderName] = folderNode;
+	    } else {
+	        folderNode = iter->second;
+	    }
+	    return folderNode;
+	}
+
+	vector<Folder> traverseFolderTree(Node* root) {
+		vector<Folder> folders;
+	    if (root == nullptr) {
+	        return folders;
+	    }
+	    Folder rootFolder;
+	    rootFolder.folderName = root->folderName;
+	    rootFolder.parentName = root->parent ?
+	        root->parent->folderName : "";
+	    folders.push_back(rootFolder);
+	    for (auto& child : root->children) {
+	        vector<Folder> childFolders = traverseFolderTree(child);
+	        folders.insert(folders.end(),
+	            childFolders.begin(), childFolders.end());
+	    }
+	    return folders;
+	}
+
+	void destroyFolderTree(Node* root) {
+	    if (root == nullptr) {
+	        return;
+	    }
+	    for (auto& child : root->children) {
+	        destroyFolderTree(child);
+	    }
+	    delete root;
+	}
+};
 
 void testCreateNestedFolders() {
     cout << endl;
@@ -163,7 +160,8 @@ void testCreateNestedFolders() {
         folders.push_back(folder);
     }
 
-    vector<Folder> reorderedFolders = createNestedFolders(folders);
+    CreateNestedFolders createNestedFolders(folders);
+    vector<Folder> reorderedFolders = createNestedFolders.solve();
 
     cout << "Creation order:" << endl;
     for (auto& folder : reorderedFolders) {

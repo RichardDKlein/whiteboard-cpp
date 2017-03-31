@@ -13,8 +13,9 @@ void testShuffleArray() {
     }
 
     cout << "Unshuffled deck = " << vectorToString(deck) << endl;
+    ShuffleArray<int> shuffleArray(deck);
     for (int i = 0; i < 10; i++) {
-        shuffleArray(deck);
+        deck = shuffleArray.shuffle();
         cout << "Shuffled   deck = "
              << vectorToString(deck) << endl;
     }

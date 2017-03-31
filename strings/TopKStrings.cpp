@@ -1,64 +1,66 @@
 #include "Strings.h"
 
 using Entry = pair<string, int>;
-
-struct GreaterThan {
-    bool operator()(const Entry& lhs, const Entry& rhs) {
-        return lhs.second > rhs.second;
-    }
-};
-
-using Tally = unordered_map<string, int>;
-using MinHeap = priority_queue<Entry, vector<Entry>, GreaterThan>;
-
-static Tally doTally(const vector<string>& v);
-static MinHeap buildMinHeap(const Tally& tally, int k);
-static vector<Entry> extractResults(MinHeap& minHeap);
+using Entries = vector<Entry>;
 
 /**
- * @brief Find the |k| most frequently occurring strings in some text.
- *
- * @param v The text of interest.
- * @param k Specifies the |k| in "|k| most frequently occurring".
- * @return The |k| most frequently occurring strings, and their counts.
+ * Find the 'k' most frequently occurring strings in some text,
+ * along with their counts.
  */
-vector<Entry> topKStrings(const vector<string>& v, int k) {
-    Tally tally = doTally(v);
-    MinHeap minHeap = buildMinHeap(tally, k);
-    return extractResults(minHeap);
-}
+class TopKStrings {
+	struct GreaterThan {
+	    bool operator()(const Entry& lhs, const Entry& rhs) {
+	        return lhs.second > rhs.second;
+	    }
+	};
+	using Tally = unordered_map<string, int>;
+	using MinHeap = priority_queue<Entry, vector<Entry>, GreaterThan>;
 
-static Tally doTally(const vector<string>& v) {
-    Tally tally;
-    for (auto& word : v) {
-        ++tally[word];
-    }
-    return tally;
-}
+private:
+	vector<string> v_;
+	int k_;
+	Tally tally_;
+	MinHeap minHeap_;
+	Entries results_;
 
-static MinHeap buildMinHeap(const Tally& tally, int k) {
-    MinHeap minHeap;
-    int min = -1;
-    for (auto& entry : tally) {
-        if (entry.second > min) {
-            minHeap.push(entry);
-            while ((int)minHeap.size() > k) {
-                minHeap.pop();
-            }
-            min = minHeap.top().second;
-        }
-    }
-    return minHeap;
-}
+public:
+	TopKStrings(const vector<string>& v, int k) :
+		v_(v), k_(k), results_(k) {}
 
-static vector<Entry> extractResults(MinHeap& minHeap) {
-    vector<Entry> results(minHeap.size());
-    for (int i = results.size() - 1; i >= 0; --i) {
-        results[i] = minHeap.top();
-        minHeap.pop();
-    }
-    return results;
-}
+	vector<Entry> solve() {
+		doTally();
+	    buildMinHeap();
+	    extractResults();
+	    return results_;
+	}
+
+private:
+	void doTally() {
+	    for (auto& word : v_) {
+	        ++tally_[word];
+	    }
+	}
+
+	void buildMinHeap() {
+	    int min = -1;
+	    for (auto& entry : tally_) {
+	        if (entry.second > min) {
+	            minHeap_.push(entry);
+	            while ((int)minHeap_.size() > k_) {
+	                minHeap_.pop();
+	            }
+	            min = minHeap_.top().second;
+	        }
+	    }
+	}
+
+	void extractResults() {
+	    for (int i = results_.size() - 1; i >= 0; --i) {
+	    	results_[i] = minHeap_.top();
+	        minHeap_.pop();
+	    }
+	}
+};
 
 void testTopKStrings() {
     cout << endl;
@@ -100,7 +102,8 @@ void testTopKStrings() {
     while (iss >> word) {
         v.push_back(word);
     }
-    vector<Entry> topTen = topKStrings(v, 10);
+    TopKStrings topKStrings(v, 10);
+    vector<Entry> topTen = topKStrings.solve();
 
     cout << "Top 10 words in Gettysburg Address:" << endl;
     for (int i = 0; i < 10; ++i) {

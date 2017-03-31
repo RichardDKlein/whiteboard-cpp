@@ -1,45 +1,45 @@
 #include "Strings.h"
 #include "../arrays/Arrays.h"
 
-static Interval longestAtCenter(const string& s,
-    int center, bool lengthIsOdd);
-
 /**
- * @brief Find the longest palindromic substring in a string.
- *
- * @param s String of interest.
- * @return Pair of indices in |s| representing longest palindromic
- * substring.
+ * Find the longest palindromic substring in a string.
  */
-Interval longestPalindromicSubstring(const string& s) {
-    Interval longest(0, 0);
-    for (int i = 0; i < (int)s.length(); ++i) {
-        Interval longestOdd = longestAtCenter(s, i, true);
-        Interval longestEven = longestAtCenter(s, i, false);
-        if (longestOdd.valid()
-                && longestOdd.length() > longest.length()) {
-            longest = longestOdd;
-        }
-        if (longestEven.valid()
-                && longestEven.length() > longest.length()) {
-            longest = longestEven;
-        }
-    }
-    return longest;
-}
+class LongestPalindromicSubstring {
+private:
+	string s_;
 
-static Interval longestAtCenter(const string& s,
-    int center, bool lengthIsOdd) {
+public:
+	LongestPalindromicSubstring(const string& s) : s_(s) {}
 
-    Interval longest(-1, -1);
-    int left = lengthIsOdd ? center - 1 : center;
-    int right = center + 1;
-    while (left >= 0 && right < (int)s.length()
-            && s[left] == s[right]) {
-        longest = Interval(left--, right++);
-    }
-    return longest;
-}
+	Interval solve() {
+	    Interval longest(0, 0);
+	    for (int i = 0; i < (int)s_.length(); ++i) {
+	        Interval longestOdd = longestAtCenter(i, true);
+	        Interval longestEven = longestAtCenter(i, false);
+	        if (longestOdd.valid()
+	                && longestOdd.length() > longest.length()) {
+	            longest = longestOdd;
+	        }
+	        if (longestEven.valid()
+	                && longestEven.length() > longest.length()) {
+	            longest = longestEven;
+	        }
+	    }
+	    return longest;
+	}
+
+private:
+	Interval longestAtCenter(int center, bool lengthIsOdd) {
+	    Interval longest(-1, -1);
+	    int left = lengthIsOdd ? center - 1 : center;
+	    int right = center + 1;
+	    while (left >= 0 && right < (int)s_.length()
+	            && s_[left] == s_[right]) {
+	        longest = Interval(left--, right++);
+	    }
+	    return longest;
+	}
+};
 
 void testLongestPalindromicSubstring() {
     cout << endl;
@@ -54,7 +54,8 @@ void testLongestPalindromicSubstring() {
     };
 
     for (auto& s : testStrings) {
-        Interval i = longestPalindromicSubstring(s);
+    	LongestPalindromicSubstring longestPalindromicSubstring(s);
+    	Interval i = longestPalindromicSubstring.solve();
         string p = s.substr(i.left(), i.length());
         cout << "longestPalindromicSubstring(\""
              << s << "\") = \"" << p << "\"" << endl;
