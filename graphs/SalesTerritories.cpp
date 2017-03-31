@@ -54,7 +54,7 @@ private:
     shared_ptr<Node> findOrCreateNode(const City& city) {
         shared_ptr<Node> node = findNode(city);
         if (node == nullptr) {
-        	node = createNode(city);
+            node = createNode(city);
         }
         return node;
     }
@@ -83,9 +83,9 @@ private:
     }
 
     void labelConnectedNodes(const shared_ptr<Node>& root,
-    		int territory) {
+            int territory) {
 
-    	// Breadth-First Search (BFS)
+        // Breadth-First Search (BFS)
         queue<shared_ptr<Node>> nodeQueue;
         nodeQueue.push(root);
         while (!nodeQueue.empty()) {

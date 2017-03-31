@@ -8,58 +8,58 @@ using Entries = vector<Entry>;
  * along with their counts.
  */
 class TopKStrings {
-	struct GreaterThan {
-	    bool operator()(const Entry& lhs, const Entry& rhs) {
-	        return lhs.second > rhs.second;
-	    }
-	};
-	using Tally = unordered_map<string, int>;
-	using MinHeap = priority_queue<Entry, vector<Entry>, GreaterThan>;
+    struct GreaterThan {
+        bool operator()(const Entry& lhs, const Entry& rhs) {
+            return lhs.second > rhs.second;
+        }
+    };
+    using Tally = unordered_map<string, int>;
+    using MinHeap = priority_queue<Entry, vector<Entry>, GreaterThan>;
 
 private:
-	vector<string> v_;
-	int k_;
-	Tally tally_;
-	MinHeap minHeap_;
-	Entries results_;
+    vector<string> v_;
+    int k_;
+    Tally tally_;
+    MinHeap minHeap_;
+    Entries results_;
 
 public:
-	TopKStrings(const vector<string>& v, int k) :
-		v_(v), k_(k), results_(k) {}
+    TopKStrings(const vector<string>& v, int k) :
+        v_(v), k_(k), results_(k) {}
 
-	vector<Entry> solve() {
-		doTally();
-	    buildMinHeap();
-	    extractResults();
-	    return results_;
-	}
+    vector<Entry> solve() {
+        doTally();
+        buildMinHeap();
+        extractResults();
+        return results_;
+    }
 
 private:
-	void doTally() {
-	    for (auto& word : v_) {
-	        ++tally_[word];
-	    }
-	}
+    void doTally() {
+        for (auto& word : v_) {
+            ++tally_[word];
+        }
+    }
 
-	void buildMinHeap() {
-	    int min = -1;
-	    for (auto& entry : tally_) {
-	        if (entry.second > min) {
-	            minHeap_.push(entry);
-	            while ((int)minHeap_.size() > k_) {
-	                minHeap_.pop();
-	            }
-	            min = minHeap_.top().second;
-	        }
-	    }
-	}
+    void buildMinHeap() {
+        int min = -1;
+        for (auto& entry : tally_) {
+            if (entry.second > min) {
+                minHeap_.push(entry);
+                while ((int)minHeap_.size() > k_) {
+                    minHeap_.pop();
+                }
+                min = minHeap_.top().second;
+            }
+        }
+    }
 
-	void extractResults() {
-	    for (int i = results_.size() - 1; i >= 0; --i) {
-	    	results_[i] = minHeap_.top();
-	        minHeap_.pop();
-	    }
-	}
+    void extractResults() {
+        for (int i = results_.size() - 1; i >= 0; --i) {
+            results_[i] = minHeap_.top();
+            minHeap_.pop();
+        }
+    }
 };
 
 void testTopKStrings() {

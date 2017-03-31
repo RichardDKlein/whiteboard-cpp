@@ -37,58 +37,58 @@ namespace std {
  */
 class LinesThruPoints {
 private:
-	vector<Point> points_;
-	vector<Line> linesThruPairs_;
-	unordered_map<Line, int> lineTally_;
-	int count_;
+    vector<Point> points_;
+    vector<Line> linesThruPairs_;
+    unordered_map<Line, int> lineTally_;
+    int count_;
 
 public:
-	LinesThruPoints(const vector<Point>& points) :
-		points_(points),
-		count_(0)
-	{}
+    LinesThruPoints(const vector<Point>& points) :
+        points_(points),
+        count_(0)
+    {}
 
-	int solve() {
-		findLinesThruPairs();
-		tallyLinesThruPairs();
-		countRepeatedLinesThruPairs();
-		return count_;
-	}
+    int solve() {
+        findLinesThruPairs();
+        tallyLinesThruPairs();
+        countRepeatedLinesThruPairs();
+        return count_;
+    }
 
 private:
-	void findLinesThruPairs() {
-	    for (size_t i = 0; i < points_.size(); ++i) {
-	        for (size_t j = i + 1; j < points_.size(); ++j) {
-	            int x1 = points_[i].x;
-	            int y1 = points_[i].y;
-	            int x2 = points_[j].x;
-	            int y2 = points_[j].y;
-	            double slope, intercept;
-	            if (x1 == x2) {
-	                slope = DBL_MAX;
-	                intercept = x1;
-	            } else {
-	                slope = double(y2 - y1) / double(x2 - x1);
-	                intercept = y1 - (slope * x1);
-	            }
-	            linesThruPairs_.push_back(Line(slope, intercept));
-	        }
-	    }
-	}
+    void findLinesThruPairs() {
+        for (size_t i = 0; i < points_.size(); ++i) {
+            for (size_t j = i + 1; j < points_.size(); ++j) {
+                int x1 = points_[i].x;
+                int y1 = points_[i].y;
+                int x2 = points_[j].x;
+                int y2 = points_[j].y;
+                double slope, intercept;
+                if (x1 == x2) {
+                    slope = DBL_MAX;
+                    intercept = x1;
+                } else {
+                    slope = double(y2 - y1) / double(x2 - x1);
+                    intercept = y1 - (slope * x1);
+                }
+                linesThruPairs_.push_back(Line(slope, intercept));
+            }
+        }
+    }
 
-	void tallyLinesThruPairs() {
-	    for (auto& line : linesThruPairs_) {
-	        ++lineTally_[line];
-	    }
-	}
+    void tallyLinesThruPairs() {
+        for (auto& line : linesThruPairs_) {
+            ++lineTally_[line];
+        }
+    }
 
-	void countRepeatedLinesThruPairs() {
-	    for (auto& entry : lineTally_) {
-	        if (entry.second > 1) {
-	            ++count_;
-	        }
-	    }
-	}
+    void countRepeatedLinesThruPairs() {
+        for (auto& entry : lineTally_) {
+            if (entry.second > 1) {
+                ++count_;
+            }
+        }
+    }
 };
 
 void testLinesThruPoints() {
